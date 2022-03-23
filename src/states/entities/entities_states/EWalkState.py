@@ -16,7 +16,7 @@ class EWalkState(BaseEntityState):
         self.entity.change_animation("walk")
         self.entity.flipped = flipped
         self.entity.vx = -self.entity.walk_speed
-        if self.entity.flipped:
+        if not self.entity.flipped:
             self.entity.vx *= -1
 
     def update(self, dt: float) -> None:

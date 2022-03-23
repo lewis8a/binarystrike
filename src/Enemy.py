@@ -11,14 +11,14 @@ marquezberriosk@gmail.com
 Author: Lewis Ochoa
 lewis8a@gmail.com
 
-This file contains the class Enemie.
+This file contains the class Enemy.
 """
 from typing import TypeVar
 
 from src.GameEntity import GameEntity
 
 
-class Enemie(GameEntity):
+class Enemy(GameEntity):
     def __init__(
         self,
         x: float,
