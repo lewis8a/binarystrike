@@ -56,7 +56,7 @@ FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
-    "enemie2-walk": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-walk": frames.generate_frames(TEXTURES["enemie2-walk"], 20, 34),
     "enemie2-shot": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
     "enemie2-idle": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
     "enemie2-dead": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
