@@ -8,15 +8,14 @@ from gale import input_handler
 from src import loaders
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, "quit")
-input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
-input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
-input_handler.InputHandler.set_keyboard_action(input_handler.KEY_KP_ENTER, "enter")
+#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
+#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
+#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_KP_ENTER, "enter")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_d, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_a, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
-input_handler.InputHandler.set_mouse_click_action(input_handler.MOUSE_BUTTON_1, "jump")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 400

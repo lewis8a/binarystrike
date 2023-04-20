@@ -41,7 +41,7 @@ class PlayState(BaseState):
 
         self.tilemap = self.game_level.tilemap
         if self.level == 1:
-            self.player = Player(0, settings.VIRTUAL_HEIGHT - 66, self.game_level)
+            self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 6, self.game_level)
 
         self.player.change_state("idle")
 

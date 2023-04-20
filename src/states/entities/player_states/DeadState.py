@@ -12,4 +12,5 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class DeadState(BaseEntityState):
     def enter(self) -> None:
+        print("Dead state")
         self.entity.is_dead = True

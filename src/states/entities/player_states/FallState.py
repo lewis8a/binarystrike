@@ -15,6 +15,7 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class FallState(BaseEntityState):
     def enter(self) -> None:
+        print("Fall estate")
         self.entity.change_animation("jump")
         InputHandler.register_listener(self)
 
