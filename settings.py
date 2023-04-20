@@ -57,7 +57,9 @@ pygame.mixer.init()
 # SOUNDS = {
 #     'my_sound': pygame.mixer.Sound(BASE_DIR / "assets"  / "sounds" / "my_sound.wav"),
 # }
-SOUNDS = {}
+SOUNDS = {
+    "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
+}
 
 pygame.font.init()
 

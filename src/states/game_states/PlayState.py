@@ -45,8 +45,8 @@ class PlayState(BaseState):
 
         self.player.change_state("idle")
 
-        # pygame.mixer.music.load(settings.BASE_DIR / "sounds/music_grassland.ogg")
-        # pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
+        pygame.mixer.music.play(loops=-1)
 
         def countdown_timer():
             self.timer -= 1
