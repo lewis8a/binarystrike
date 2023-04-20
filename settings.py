@@ -41,12 +41,12 @@ LevelLoader = loaders.TmxLevelLoader
 
 TEXTURES = {
     "tiles": pygame.image.load(BASE_DIR / "graphics" / "tilesets" / "Tileset.png"),
-    "khan-attack": pygame.image.load(BASE_DIR / "graphics" / "khanlockwood" / "kl2" / "Tileset.png"),
-    "khan-attack": pygame.image.load(BASE_DIR / "graphics" / "khanlockwood" / "kl2" / "Tileset.png"),
+    "khan": pygame.image.load(BASE_DIR / "graphics" / "characters" / "enemies" / "enemie_2.png"),
 }
 
 FRAMES = {
     "tiles": frames.generate_frames(TEXTURES["tiles"], 16, 16),
+    "khan": frames.generate_frames(TEXTURES["khan"], 72, 72),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level{i}" for i in range(1, NUM_LEVELS + 1)}
