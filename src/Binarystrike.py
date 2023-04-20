@@ -12,7 +12,7 @@ class Binarystrike(Game, InputListener):
         self.state_machine = StateMachine({
             "play": game_states.PlayState,
         })
-        self.state_machine.change("start")
+        self.state_machine.change("play")
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:

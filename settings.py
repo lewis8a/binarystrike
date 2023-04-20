@@ -40,8 +40,8 @@ BASE_DIR = pathlib.Path(__file__).parent
 LevelLoader = loaders.TmxLevelLoader
 
 TEXTURES = {
-    "tiles": pygame.image.load(BASE_DIR / "graphics" / "tilesets" / "Tileset.png"),
-    "khan": pygame.image.load(BASE_DIR / "graphics" / "characters" / "enemies" / "enemie_2.png"),
+    "tiles": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "Tileset.png"),
+    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie_2.png"),
 }
 
 FRAMES = {
