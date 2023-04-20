@@ -14,6 +14,7 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class IdleState(BaseEntityState):
     def enter(self) -> None:
+        print("Idle")
         self.entity.vx = 0
         self.entity.vy = 0
         self.entity.change_animation("idle")

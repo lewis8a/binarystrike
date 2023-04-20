@@ -37,8 +37,8 @@ class Player(GameEntity):
             },
             animation_defs={
                 "idle": {"frames": [0]},
-                "walk": {"frames": [2, 3, 4, 5, 6, 7, 8, 9], "interval": 0.1},
-                "jump": {"frames": [26, 27, 28, 29, 30, 31, 32, 33], "interval": 0.05},
+                "walk": {"frames": [2, 3, 4, 5, 6, 7, 8, 9], "interval": 0.15},
+                "jump": {"frames": [26, 27, 29, 30, 32], "interval": 0.15},
             },
         )
         self.score = 0
