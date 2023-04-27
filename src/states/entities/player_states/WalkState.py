@@ -48,4 +48,5 @@ class WalkState(BaseEntityState):
             elif input_data.released and self.entity.vx >= 0:
                 self.entity.change_state("idle")
         elif input_id == "jump" and input_data.pressed:
+            self.entity.double_jump = False
             self.entity.change_state("jump")
