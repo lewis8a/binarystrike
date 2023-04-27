@@ -25,7 +25,7 @@ class Player(GameEntity):
             x,
             y,
             20,
-            23,
+            34,
             "khan",
             game_level,
             states={
