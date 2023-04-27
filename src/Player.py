@@ -42,3 +42,4 @@ class Player(GameEntity):
             },
         )
         self.score = 0
+        self.double_jump = False

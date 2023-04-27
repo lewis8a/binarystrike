@@ -51,3 +51,8 @@ class FallState(BaseEntityState):
                 self.entity.flipped = False
             elif input_data.released and self.entity.vx >= 0:
                 self.entity.vx = 0
+        
+        elif input_id == "jump" and input_data.pressed:
+            if not self.entity.double_jump:
+                self.entity.change_state("jump")
+                self.entity.double_jump = True

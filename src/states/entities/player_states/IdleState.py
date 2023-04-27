@@ -17,6 +17,7 @@ class IdleState(BaseEntityState):
         print("Idle")
         self.entity.vx = 0
         self.entity.vy = 0
+        self.entity.double_jump = False
         self.entity.change_animation("idle")
         InputHandler.register_listener(self)
 
