@@ -58,7 +58,7 @@ class TmxLevelLoader:
             for i in range(self.height):
                 line = [s for s in data[i].split(",") if len(s) > 0]
                 for j in range(self.width):
-                    frame_index = int(line[j]) - self.first_ids["tiles"]
+                    frame_index = int(line[j]) - self.first_ids["level_1"]
                     tilemap.set_new_tile(i, j, frame_index)
 
         level.tilemap = tilemap
@@ -75,7 +75,7 @@ class TmxLevelLoader:
                     if value == 0:
                         continue
 
-                    frame_index = value - self.first_ids["tiles"]
+                    frame_index = value - self.first_ids["level_1"]
 
                     level.add_item(
                         {

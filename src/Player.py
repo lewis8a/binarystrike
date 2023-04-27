@@ -24,8 +24,8 @@ class Player(GameEntity):
         super().__init__(
             x,
             y,
-            40,
-            46,
+            20,
+            23,
             "khan",
             game_level,
             states={
