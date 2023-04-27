@@ -22,8 +22,8 @@ VIRTUAL_WIDTH = 300
 VIRTUAL_HEIGHT = 192
 
 # Size of our actual window
-WINDOW_WIDTH = VIRTUAL_WIDTH * 2.4
-WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.4
+WINDOW_WIDTH = VIRTUAL_WIDTH * 3
+WINDOW_HEIGHT = VIRTUAL_HEIGHT * 3
 
 PLAYER_SPEED = 80
 
@@ -40,12 +40,12 @@ LevelLoader = loaders.TmxLevelLoader
 
 TEXTURES = {
     "tiles": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
-    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_2.png"),
+    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
 }
 
 FRAMES = {
     "tiles": frames.generate_frames(TEXTURES["tiles"], 16, 16),
-    "khan": frames.generate_frames(TEXTURES["khan"], 20, 23),
+    "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}
