@@ -32,6 +32,9 @@ class JumpState(BaseEntityState):
 
         if self.entity.handle_tilemap_collision_on_top():
             self.entity.vy = 0
+        
+        if not self.entity.check_floor_on_jump():
+            self.entity.change_state("fall")
 
         if self.entity.vy >= 0:
             self.entity.change_state("fall")

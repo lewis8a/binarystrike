@@ -149,10 +149,25 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         collision_rect = self.get_collision_rect()
 
         # Row for the center of the player
-        i = self.tilemap.to_i(collision_rect.centery)
+        i = self.tilemap.to_i(collision_rect.bottom - 8)
         # Left and right columns
         left = self.tilemap.to_j(collision_rect.left)
         right = self.tilemap.to_j(collision_rect.right)
         return self.tilemap.check_solidness_on(
             i + 1, left, GameObject.TOP
         ) or self.tilemap.check_solidness_on(i + 1, right, GameObject.TOP)
+    
+    def check_floor_on_jump(self) -> bool:
+        """
+        Check whether the entity is on a solid tile.
+        """
+        collision_rect = self.get_collision_rect()
+
+        # Row for the center of the player
+        i = self.tilemap.to_i(collision_rect.top + 4)
+        # Left and right columns
+        left = self.tilemap.to_j(collision_rect.left)
+        right = self.tilemap.to_j(collision_rect.right)
+        return self.tilemap.check_solidness_on(
+            i + 1, left, GameObject.TOP
+        ) or self.tilemap.check_solidness_on(i, right, GameObject.TOP)

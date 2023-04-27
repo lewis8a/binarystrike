@@ -18,7 +18,7 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_a, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
 
 # Size we want to emulate
-VIRTUAL_WIDTH = 400
+VIRTUAL_WIDTH = 300
 VIRTUAL_HEIGHT = 192
 
 # Size of our actual window
@@ -39,16 +39,16 @@ BASE_DIR = pathlib.Path(__file__).parent
 LevelLoader = loaders.TmxLevelLoader
 
 TEXTURES = {
-    "tiles": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "Tileset.png"),
-    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie_2.png"),
+    "tiles": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
+    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
 }
 
 FRAMES = {
     "tiles": frames.generate_frames(TEXTURES["tiles"], 16, 16),
-    "khan": frames.generate_frames(TEXTURES["khan"], 72, 72),
+    "khan": frames.generate_frames(TEXTURES["khan"], 40, 46),
 }
 
-TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level{i}" for i in range(1, NUM_LEVELS + 1)}
+TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}
 
 pygame.mixer.init()
 
@@ -57,7 +57,7 @@ pygame.mixer.init()
 #     'my_sound': pygame.mixer.Sound(BASE_DIR / "assets"  / "sounds" / "my_sound.wav"),
 # }
 SOUNDS = {
-    "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
+    "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
 }
 
 pygame.font.init()
