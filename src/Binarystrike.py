@@ -10,9 +10,10 @@ from src.states import game_states
 class Binarystrike(Game, InputListener):
     def init(self) -> None:
         self.state_machine = StateMachine({
+            "start": game_states.StartState,
             "play": game_states.PlayState,
         })
-        self.state_machine.change("play")
+        self.state_machine.change("start")
         InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:

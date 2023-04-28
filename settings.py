@@ -9,8 +9,8 @@ from src import loaders
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, "quit")
 #input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
-#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
-#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_KP_ENTER, "enter")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_KP_ENTER, "enter")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_d, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
@@ -57,6 +57,7 @@ pygame.mixer.init()
 #     'my_sound': pygame.mixer.Sound(BASE_DIR / "assets"  / "sounds" / "my_sound.wav"),
 # }
 SOUNDS = {
+    "menu": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "menu.ogg"),
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
 }
 
@@ -66,4 +67,7 @@ pygame.font.init()
 # FONTS = {
 #     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
 # }
-FONTS = {}
+FONTS = {
+    "small": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 8),
+    "medium": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 16),
+}
