@@ -17,7 +17,7 @@ class JumpState(BaseEntityState):
     def enter(self) -> None:
         print("JumpState")
         self.entity.change_animation("jump")
-        self.entity.vy = -settings.GRAVITY / 1.75
+        self.entity.vy = -250
         InputHandler.register_listener(self)
         # settings.SOUNDS["jump"].play()
 
