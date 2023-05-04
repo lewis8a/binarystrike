@@ -39,7 +39,10 @@ class Player(GameEntity):
             },
             animation_defs={
                 "idle": {"frames": [0]},
+                "idle-up": {"frames": [1]},
                 "walk": {"frames": [2, 3, 4, 5, 6, 7, 8, 9], "interval": 0.06},
+                "walk-up": {"frames": [10, 11, 12, 13, 14, 15, 16, 17], "interval": 0.06},
+                "walk-down": {"frames": [18, 19, 20, 21, 22, 23, 24, 25], "interval": 0.06},
                 "jump": {"frames": [26, 27, 29, 30, 32], "interval": 0.08},
             },
         )

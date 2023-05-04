@@ -15,6 +15,10 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_ri
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_d, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_a, "move_left")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_UP, "look_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_w, "look_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "look_down")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_s, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
 
 # Size we want to emulate
