@@ -23,7 +23,7 @@ VIRTUAL_HEIGHT = 192
 
 # Size of our actual window
 WINDOW_WIDTH = VIRTUAL_WIDTH * 3
-WINDOW_HEIGHT = VIRTUAL_HEIGHT * 3
+WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.5
 
 PLAYER_SPEED = 80
 
@@ -41,11 +41,19 @@ LevelLoader = loaders.TmxLevelLoader
 TEXTURES = {
     "tiles": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
+    "enemie2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Walk.png"),
+    "enemie2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Shot_1.png"),
+    "enemie2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Idle.png"),
+    "enemie2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Dead.png"),
 }
 
 FRAMES = {
     "tiles": frames.generate_frames(TEXTURES["tiles"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
+    "enemie2-walk": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-shot": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-idle": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-dead": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}

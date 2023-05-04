@@ -88,7 +88,9 @@ class TmxLevelLoader:
                         }
                     )
 
-    def load_creatures(self, level: Any, group: ET.Element) -> None:
+    def load_enemies(self, level: Any, group: ET.Element) -> None:
+        width = 0
+        height = 0
         layer = group.find("layer")
         data = [line for line in layer.find("data").text.splitlines() if len(line) > 0]
         for i in range(self.height):
@@ -99,14 +101,18 @@ class TmxLevelLoader:
                 if value == 0:
                     continue
 
-                frame_index = value - self.first_ids["creatures"]
+                frame_index = value - self.first_ids["level_1"]
+                
+                if frame_index == 379:
+                    height = 51
+                    width = 51
 
-                level.add_creature(
+                level.add_enemie(
                     {
                         "tile_index": frame_index,
                         "x": j * self.tilewidth,
                         "y": i * self.tileheight,
-                        "width": self.tilewidth,
-                        "height": self.tileheight,
+                        "width": width,
+                        "height": height,
                     }
                 )

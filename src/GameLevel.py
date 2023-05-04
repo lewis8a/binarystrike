@@ -19,15 +19,15 @@ import pygame
 
 import settings
 from src.Camera import Camera
-from src.Creature import Creature
+from src.Enemie import Enemie
 from src.GameItem import GameItem
-from src.definitions import creatures, items
+from src.definitions import enemies, items
 
 
 class GameLevel:
     def __init__(self, num_level: int, camera: Camera) -> None:
         self.tilemap = None
-        self.creatures = []
+        self.enemies = []
         self.items = []
         self.camera = camera
         settings.LevelLoader().load(self, settings.TILEMAPS[num_level])
@@ -37,14 +37,14 @@ class GameLevel:
         definition.update(item_data)
         self.items.append(GameItem(**definition))
 
-    def add_creature(self, creature_data: Dict[str, Any]) -> None:
-        definition = creatures.CREATURES[creature_data["tile_index"]]
-        self.creatures.append(
-            Creature(
-                creature_data["x"],
-                creature_data["y"],
-                creature_data["width"],
-                creature_data["height"],
+    def add_enemie(self, enemie_data: Dict[str, Any]) -> None:
+        definition = enemies.ENEMIES[enemie_data["tile_index"]]
+        self.enemies.append(
+            Enemie(
+                enemie_data["x"],
+                enemie_data["y"],
+                enemie_data["width"],
+                enemie_data["height"],
                 self,
                 **definition,
             )
@@ -53,17 +53,17 @@ class GameLevel:
     def update(self, dt: float) -> None:
         self.tilemap.set_render_boundaries(self.camera.get_rect())
 
-        for creature in self.creatures:
+        for creature in self.enemies:
             creature.update(dt)
 
-        # Remove dead creatures
-        self.creatures = [
-            creature for creature in self.creatures if not creature.is_dead
+        # Remove dead enemies
+        self.enemies = [
+            creature for creature in self.enemies if not creature.is_dead
         ]
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)
-        for creature in self.creatures:
+        for creature in self.enemies:
             creature.render(surface)
         for item in self.items:
             if item.in_play:

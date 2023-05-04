@@ -5,6 +5,9 @@ Project: Binary Strike (Platformer)
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
 
+Author: Kevin Márquez
+marquezberriosk@gmail.com
+
 This file contains the AnimatedMixin.
 """
 from typing import Dict, Any
@@ -25,6 +28,9 @@ class AnimatedMixin:
     def change_animation(self, animation_id: str) -> None:
         new_animation = self.animations[animation_id]
         if new_animation != self.current_animation:
+            if self.multi_texture:
+                self.texture_id = self.texture_id + "-" + animation_id
+            
             self.current_animation = new_animation
             self.current_animation.reset()
             self.frame_index = self.current_animation.get_current_frame()
