@@ -45,9 +45,6 @@ class PlayState(BaseState):
 
         self.player.change_state("idle")
 
-        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
-        pygame.mixer.music.play(loops=-1)
-
         def countdown_timer():
             self.timer -= 1
 
@@ -66,7 +63,7 @@ class PlayState(BaseState):
 
     def update(self, dt: float) -> None:
         if self.player.is_dead:
-            self.state_machine.change("play")
+            self.state_machine.change("begin")
             # pygame.mixer.music.stop()
             # pygame.mixer.music.unload()
             # settings.SOUNDS["game_over"].stop()
@@ -136,25 +133,25 @@ class PlayState(BaseState):
         self.player.render(world_surface)
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
 
-        # render_text(
-        #     surface,
-        #     f"Score: {self.player.score}",
-        #     settings.FONTS["small"],
-        #     5,
-        #     5,
-        #     (255, 255, 255),
-        #     shadowed=True,
-        # )
+        render_text(
+            surface,
+            f"Score: {self.player.score}",
+            settings.FONTS["small"],
+            5,
+            5,
+            (255, 255, 255),
+            shadowed=True,
+        )
 
-        # render_text(
-        #     surface,
-        #     f"Time: {self.timer}",
-        #     settings.FONTS["small"],
-        #     settings.VIRTUAL_WIDTH - 60,
-        #     5,
-        #     (255, 255, 255),
-        #     shadowed=True,
-        # )
+        render_text(
+            surface,
+            f"Time: {1000}",
+            settings.FONTS["small"],
+            settings.VIRTUAL_WIDTH - 80,
+            5,
+            (255, 255, 255),
+            shadowed=True,
+        )
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         pass

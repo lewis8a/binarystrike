@@ -28,9 +28,10 @@ class TmxLevelLoader:
         self.width = None
         self.tilewidth = None
         self.tileheight = None
+        self.num_level = None
         self.first_ids = {}
 
-    def load(self, level: Any, level_path: Path) -> None:
+    def load(self, level: Any, level_path: Path, num_level:int) -> None:
         tree = ET.parse(f"{level_path}.{self.FILE_EXT}")
         root = tree.getroot()
 
@@ -38,7 +39,7 @@ class TmxLevelLoader:
         self.height = int(root.attrib["height"])
         self.tilewidth = int(root.attrib["tilewidth"])
         self.tileheight = int(root.attrib["tileheight"])
-
+        self.num_level = str(num_level)
         for tileset in root.findall("tileset"):
             name = Path(tileset.attrib["source"]).stem
             self.first_ids[name] = int(tileset.attrib["firstgid"])
@@ -49,7 +50,6 @@ class TmxLevelLoader:
 
     def load_tilemap(self, level: Any, group: ET.Element) -> None:
         tilemap = Tilemap(self.height, self.width, self.tilewidth, self.tileheight)
-
         for layer in group.findall("layer"):
             tilemap.create_layer()
             data = [
@@ -58,8 +58,8 @@ class TmxLevelLoader:
             for i in range(self.height):
                 line = [s for s in data[i].split(",") if len(s) > 0]
                 for j in range(self.width):
-                    frame_index = int(line[j]) - self.first_ids["level_1"]
-                    tilemap.set_new_tile(i, j, frame_index)
+                    frame_index = int(line[j]) - self.first_ids["level_"+self.num_level]
+                    tilemap.set_new_tile(i, j, frame_index,self.num_level)
 
         level.tilemap = tilemap
 
@@ -75,7 +75,7 @@ class TmxLevelLoader:
                     if value == 0:
                         continue
 
-                    frame_index = value - self.first_ids["level_1"]
+                    frame_index = value - self.first_ids["level_"+self.num_level]
 
                     level.add_item(
                         {
