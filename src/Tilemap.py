@@ -38,7 +38,7 @@ class Tilemap:
         layer = [[None for _ in range(self.cols)] for _ in range(self.rows)]
         self.layers.append(layer)
 
-    def set_new_tile(self, i: int, j: int, frame_index: int) -> None:
+    def set_new_tile(self, i: int, j: int, frame_index: int, num_level:str) -> None:
         """
         Set a new tile in the position (i, j) of the current (the last added) layer
         """
@@ -47,7 +47,7 @@ class Tilemap:
             tile_def["solidness"] if tile_def is not None else Tile.DEFAULT_SOLIDNESS
         )
         self.layers[-1][i][j] = Tile(
-            i, j, self.tilewidth, self.tileheight, frame_index, solidness
+            i, j, self.tilewidth, self.tileheight, frame_index, solidness,num_level
         )
 
     def set_render_boundaries(self, render_rect: pygame.Rect) -> None:

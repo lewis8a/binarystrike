@@ -30,7 +30,7 @@ class GameLevel:
         self.creatures = []
         self.items = []
         self.camera = camera
-        settings.LevelLoader().load(self, settings.TILEMAPS[num_level])
+        settings.LevelLoader().load(self, settings.TILEMAPS[num_level], num_level)
 
     def add_item(self, item_data: Dict[str, Any]) -> None:
         definition = items.ITEMS[item_data["item_name"]][item_data["frame_index"]]

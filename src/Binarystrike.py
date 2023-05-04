@@ -11,6 +11,7 @@ class Binarystrike(Game, InputListener):
     def init(self) -> None:
         self.state_machine = StateMachine({
             "start": game_states.StartState,
+            "begin": game_states.BeginState,
             "play": game_states.PlayState,
         })
         self.state_machine.change("start")
