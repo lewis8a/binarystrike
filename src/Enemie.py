@@ -35,6 +35,7 @@ class Enemie(GameEntity):
             height,
             definition["texture_id"],
             True,
+            True,
             game_level,
             states={
                 state_name: lambda sm: state_class(self, sm)
@@ -43,5 +44,4 @@ class Enemie(GameEntity):
             animation_defs=definition["animation_defs"],
         )
         self.walk_speed = definition["walk_speed"]
-        self.flipped = True
         self.state_machine.change(definition["first_state"], self.flipped)

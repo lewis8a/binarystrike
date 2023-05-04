@@ -28,6 +28,7 @@ class Player(GameEntity):
             34,
             "khan",
             False,
+            False,
             game_level,
             states={
                 "idle": lambda sm: player_states.IdleState(self, sm),
