@@ -1,6 +1,6 @@
 """
-ISPPJ1 2023
-Study Case: Super Martian (Platformer)
+PVG 2023
+Project: Binary Strike (Platformer)
 
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
@@ -15,7 +15,6 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class WalkState(BaseEntityState):
     def enter(self, direction: str) -> None:
-        print("Walk")
         self.entity.flipped = direction == "left"
         self.entity.vx = settings.PLAYER_SPEED
         if self.entity.flipped:

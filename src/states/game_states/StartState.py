@@ -14,7 +14,7 @@ import pygame
 
 from gale.animation import Animation
 from gale.input_handler import InputHandler, InputData
-from gale.state_machine import BaseState
+from gale.state import BaseState
 from gale.text import Text, render_text
 from gale.timer import Timer
 

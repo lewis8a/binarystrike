@@ -1,6 +1,6 @@
 """
-ISPPJ1 2023
-Study Case: Super Martian (Platformer)
+PVG 2023
+Project: Binary Strike (Platformer)
 
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
@@ -14,7 +14,6 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class IdleState(BaseEntityState):
     def enter(self) -> None:
-        print("Idle")
         self.entity.vx = 0
         self.entity.vy = 0
         self.entity.double_jump = False

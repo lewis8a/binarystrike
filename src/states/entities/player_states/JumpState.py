@@ -1,6 +1,6 @@
 """
-ISPPJ1 2023
-Study Case: Super Martian (Platformer)
+PVG 2023
+Project: Binary Strike (Platformer)
 
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
@@ -15,7 +15,6 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class JumpState(BaseEntityState):
     def enter(self) -> None:
-        print("JumpState")
         self.entity.change_animation("jump")
         self.entity.vy = -250
         InputHandler.register_listener(self)

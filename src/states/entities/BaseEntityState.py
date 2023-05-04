@@ -1,6 +1,6 @@
 """
-ISPPJ1 2023
-Study Case: Super Martian (Platformer)
+PVG 2023
+Project: Binary Strike (Platformer)
 
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
@@ -9,7 +9,7 @@ This file contains the base class BaseEntityState.
 """
 from typing import TypeVar
 
-from gale.state_machine import BaseState, StateMachine
+from gale.state import BaseState, StateMachine
 
 
 class BaseEntityState(BaseState):

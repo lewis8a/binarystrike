@@ -1,6 +1,6 @@
 """
-ISPPJ1 2023
-Study Case: Super Martian (Platformer)
+PVG 2023
+Project: Binary Strike (Platformer)
 
 This module contains all of the player states.
 """

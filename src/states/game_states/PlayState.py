@@ -15,7 +15,7 @@ from typing import Dict, Any
 import pygame
 
 from gale.input_handler import InputHandler, InputData
-from gale.state_machine import BaseState
+from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
 
@@ -41,7 +41,7 @@ class PlayState(BaseState):
 
         self.tilemap = self.game_level.tilemap
         if self.level == 1:
-            self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 6, self.game_level)
+            self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
 
         self.player.change_state("idle")
 
@@ -66,7 +66,7 @@ class PlayState(BaseState):
 
     def update(self, dt: float) -> None:
         if self.player.is_dead:
-            pass
+            self.state_machine.change("play")
             # pygame.mixer.music.stop()
             # pygame.mixer.music.unload()
             # settings.SOUNDS["game_over"].stop()
