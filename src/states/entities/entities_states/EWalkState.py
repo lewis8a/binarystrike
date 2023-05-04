@@ -5,13 +5,13 @@ Project: Binary Strike (Platformer)
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
 
-This file contains the class SnailWalkState.
+This file contains the class EWalkState.
 """
 from src.GameObject import GameObject
 from src.states.entities.BaseEntityState import BaseEntityState
 
 
-class SnailWalkState(BaseEntityState):
+class EWalkState(BaseEntityState):
     def enter(self, flipped: bool) -> None:
         self.entity.change_animation("walk")
         self.entity.flipped = flipped

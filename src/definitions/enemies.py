@@ -9,7 +9,7 @@ This file contains the definition for creatures.
 """
 from typing import Dict, Any
 
-from src.states.entities import creatures_states
+from src.states.entities import entities_states
 
 ENEMIES: Dict[int, Dict[str, Any]] = {
     379: {
@@ -21,7 +21,7 @@ ENEMIES: Dict[int, Dict[str, Any]] = {
             "idle": {"frames": [0, 1, 2, 3, 4, 5, 6, 7 ,8], "interval": 0.25},
             "dead": {"frames": [0, 1, 2, 3], "interval": 0.25},
         },
-        "states": {"walk": creatures_states.SnailWalkState},
+        "states": {"walk": entities_states.EWalkState},
         "first_state": "walk",
     },
 }

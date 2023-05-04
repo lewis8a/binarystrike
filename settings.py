@@ -64,10 +64,6 @@ TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS
 
 pygame.mixer.init()
 
-# Register your sound from the sounds folder, for instance:
-# SOUNDS = {
-#     'my_sound': pygame.mixer.Sound(BASE_DIR / "assets"  / "sounds" / "my_sound.wav"),
-# }
 SOUNDS = {
     "menu": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "menu.ogg"),
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
@@ -75,10 +71,6 @@ SOUNDS = {
 
 pygame.font.init()
 
-# Register your fonts from the fonts folder, for instance:
-# FONTS = {
-#     'small': pygame.font.Font(BASE_DIR / "assets"  / "fonts" / "font.ttf", 8)
-# }
 FONTS = {
     "small": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 8),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "font.ttf", 16),
