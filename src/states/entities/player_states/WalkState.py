@@ -50,6 +50,11 @@ class WalkState(BaseEntityState):
                 self.entity.change_animation("walk-up")
             else:
                 self.entity.change_animation("walk")
+        elif input_id == "look_down":
+            if input_data.pressed:
+                self.entity.change_animation("walk-down")
+            else:
+                self.entity.change_animation("walk")
         elif input_id == "jump" and input_data.pressed:
             self.entity.double_jump = False
             self.entity.change_state("jump")
