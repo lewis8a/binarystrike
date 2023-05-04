@@ -39,7 +39,7 @@ class TmxLevelLoader:
         self.height = int(root.attrib["height"])
         self.tilewidth = int(root.attrib["tilewidth"])
         self.tileheight = int(root.attrib["tileheight"])
-        self.num_level = str(num_level)
+        self.num_level = int(num_level)
         for tileset in root.findall("tileset"):
             name = Path(tileset.attrib["source"]).stem
             self.first_ids[name] = int(tileset.attrib["firstgid"])
@@ -58,7 +58,7 @@ class TmxLevelLoader:
             for i in range(self.height):
                 line = [s for s in data[i].split(",") if len(s) > 0]
                 for j in range(self.width):
-                    frame_index = int(line[j]) - self.first_ids["level_"+self.num_level]
+                    frame_index = int(line[j]) - self.first_ids[f"level_{self.num_level}"]
                     tilemap.set_new_tile(i, j, frame_index,self.num_level)
 
         level.tilemap = tilemap
@@ -75,7 +75,7 @@ class TmxLevelLoader:
                     if value == 0:
                         continue
 
-                    frame_index = value - self.first_ids["level_"+self.num_level]
+                    frame_index = value - self.first_ids[f"level_{self.num_level}"]
 
                     level.add_item(
                         {

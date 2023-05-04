@@ -27,7 +27,7 @@ class Tile(GameObject):
         height: int,
         frame_index: int,
         soliness: Dict[str, bool],
-        num_level:str,
+        num_level:int,
     ) -> None:
         self.i = i
         self.j = j
@@ -36,7 +36,7 @@ class Tile(GameObject):
             self.i * height,
             width,
             height,
-            "tile_"+num_level,
+            f"tile_{num_level}",
             frame_index,
             soliness,
         )

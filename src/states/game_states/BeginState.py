@@ -64,7 +64,7 @@ class BeginState(BaseState):
             # Then, animate the text going disapear
             self.display_text = False
             Timer.tween(
-               2,
+               0.5,
                [(self, {"transition_alpha": 0})],
                # We are ready to play
                on_finish=lambda: self.state_machine.change(
