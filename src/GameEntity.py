@@ -30,6 +30,8 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         width: float,
         height: float,
         texture_id: str,
+        multi_texture: bool,
+        flipped: bool,
         game_level: TypeVar("GameLevel"),
         states: Dict[str, BaseState],
         animation_defs: Dict[str, Dict[str, Any]],
@@ -41,6 +43,7 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         self.vx: float = 0
         self.vy: float = 0
         self.texture_id = texture_id
+        self.multi_texture = multi_texture
         self.frame_index = -1
         self.game_level = game_level
         self.tilemap = self.game_level.tilemap
@@ -48,7 +51,7 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         self.current_animation = None
         self.animations = {}
         self.generate_animations(animation_defs)
-        self.flipped = False
+        self.flipped = flipped
         self.is_dead = False
 
     def change_state(

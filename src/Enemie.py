@@ -11,14 +11,14 @@ marquezberriosk@gmail.com
 Author: Lewis Ochoa
 lewis8a@gmail.com
 
-This file contains the class Creature.
+This file contains the class Enemie.
 """
 from typing import TypeVar
 
 from src.GameEntity import GameEntity
 
 
-class Creature(GameEntity):
+class Enemie(GameEntity):
     def __init__(
         self,
         x: float,
@@ -34,6 +34,8 @@ class Creature(GameEntity):
             width,
             height,
             definition["texture_id"],
+            True,
+            True,
             game_level,
             states={
                 state_name: lambda sm: state_class(self, sm)

@@ -34,5 +34,10 @@ class IdleState(BaseEntityState):
         elif input_id == "move_right" and input_data.pressed:
             self.entity.flipped = True
             self.entity.change_state("walk", "right")
+        elif input_id == "look_up":
+            if input_data.pressed:
+                self.entity.change_animation("idle-up")
+            else:
+                self.entity.change_animation("idle")
         elif input_id == "jump" and input_data.pressed:
             self.entity.change_state("jump")

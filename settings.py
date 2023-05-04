@@ -15,6 +15,10 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_ri
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_d, "move_right")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_a, "move_left")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_UP, "look_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_w, "look_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "look_down")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_s, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
 
 # Size we want to emulate
@@ -23,7 +27,7 @@ VIRTUAL_HEIGHT = 192
 
 # Size of our actual window
 WINDOW_WIDTH = VIRTUAL_WIDTH * 3
-WINDOW_HEIGHT = VIRTUAL_HEIGHT * 3
+WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.5
 
 PLAYER_SPEED = 80
 
@@ -42,12 +46,20 @@ TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
+    "enemie2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Walk.png"),
+    "enemie2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Shot_1.png"),
+    "enemie2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Idle.png"),
+    "enemie2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Dead.png"),
 }
 
 FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
+    "enemie2-walk": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-shot": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-idle": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "enemie2-dead": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}
