@@ -26,7 +26,7 @@ from src.GameLevel import GameLevel
 
 class BeginState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
-        self.level = enter_params.get("level", 2)
+        self.level = enter_params.get("level", 1)
         self.score = enter_params.get("score", 0)
         self.transition_alpha = 255
         self.display_text = True

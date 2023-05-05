@@ -38,11 +38,16 @@ class Tilemap:
         layer = [[None for _ in range(self.cols)] for _ in range(self.rows)]
         self.layers.append(layer)
 
-    def set_new_tile(self, i: int, j: int, frame_index: int, num_level:str) -> None:
+    def set_new_tile(self, i: int, j: int, frame_index: int, num_level:int) -> None:
         """
         Set a new tile in the position (i, j) of the current (the last added) layer
         """
-        tile_def = tiles.TILES.get(frame_index)
+        if num_level == 1:
+            tile_def = tiles.TILES_1.get(frame_index)
+        elif num_level == 2:
+            tile_def = tiles.TILES_2.get(frame_index)
+        elif num_level == 3:
+            tile_def = tiles.TILES_3.get(frame_index)
         solidness = (
             tile_def["solidness"] if tile_def is not None else Tile.DEFAULT_SOLIDNESS
         )
