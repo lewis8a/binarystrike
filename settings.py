@@ -46,20 +46,20 @@ TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
-    "enemie2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Walk.png"),
-    "enemie2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Shot_1.png"),
-    "enemie2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Idle.png"),
-    "enemie2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemie2" / "Dead.png"),
+    "Enemy2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Walk.png"),
+    "Enemy2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot_1.png"),
+    "Enemy2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
+    "Enemy2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
 }
 
 FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
-    "enemie2-walk": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
-    "enemie2-shot": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
-    "enemie2-idle": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
-    "enemie2-dead": frames.generate_frames(TEXTURES["enemie2-walk"], 51, 51),
+    "Enemy2-walk": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
+    "Enemy2-shot": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
+    "Enemy2-idle": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
+    "Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}

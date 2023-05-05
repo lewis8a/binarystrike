@@ -11,9 +11,9 @@ from typing import Dict, Any
 
 from src.states.entities import entities_states
 
-ENEMIES: Dict[int, Dict[str, Any]] = {
+Enemies: Dict[int, Dict[str, Any]] = {
     379: {
-        "texture_id": "enemie2",
+        "texture_id": "Enemy2",
         "walk_speed": 15,
         "animation_defs": {
             "walk": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.25},
