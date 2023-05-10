@@ -7,7 +7,7 @@ from gale.state import StateMachine
 from src.states import game_states
 
 
-class Binarystrike(Game, InputListener):
+class Binarystrike(Game):
     def init(self) -> None:
         self.state_machine = StateMachine({
             "start": game_states.StartState,
@@ -15,7 +15,6 @@ class Binarystrike(Game, InputListener):
             "play": game_states.PlayState,
         })
         self.state_machine.change("start")
-        InputHandler.register_listener(self)
 
     def update(self, dt: float) -> None:
         self.state_machine.update(dt)
@@ -26,5 +25,5 @@ class Binarystrike(Game, InputListener):
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if (input_id == 'quit' and input_data.pressed):
             self.quit()
-        #else:
-        #    self.state_machine.on_input(input_id, input_data)
+        else:
+            self.state_machine.on_input(input_id, input_data)

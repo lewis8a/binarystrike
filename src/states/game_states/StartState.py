@@ -13,7 +13,7 @@ This file contains the class StartState.
 import pygame
 
 from gale.animation import Animation
-from gale.input_handler import InputHandler, InputData
+from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import Text, render_text
 from gale.timer import Timer
@@ -38,14 +38,12 @@ class StartState(BaseState):
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )
 
-        InputHandler.register_listener(self)
         pygame.mixer.music.load(settings.BASE_DIR / "assets/music/menu.ogg")
         pygame.mixer.music.play(loops=-1)
 
     def exit(self) -> None:
         pygame.mixer.music.stop()
         pygame.mixer.music.unload()
-        InputHandler.unregister_listener(self)
 
     def render(self, surface: pygame.Surface) -> None:
         surface.fill((0, 0, 0))
