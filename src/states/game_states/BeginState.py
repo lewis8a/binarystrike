@@ -48,14 +48,17 @@ class BeginState(BaseState):
         if self.level == 1:
             self.player = Player(0, settings.VIRTUAL_HEIGHT - 66, self.game_level)
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
+            pygame.mixer.music.set_volume(0.3)
             pygame.mixer.music.play(loops=-1)
         elif self.level == 2:
             self.player = Player(16 * 2, 16 * 2, self.game_level)
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
+            pygame.mixer.music.set_volume(0.3)
             pygame.mixer.music.play(loops=-1)
         elif self.level == 3:
             self.player = Player(16 * 2, 16 * 5, self.game_level)
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
+            pygame.mixer.music.set_volume(0.3)
             pygame.mixer.music.play(loops=-1)
 
         self.player.score = enter_params.get("score", 0)

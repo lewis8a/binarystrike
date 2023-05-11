@@ -91,6 +91,7 @@ SOUNDS = {
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
     "level2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
     "level3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level3.ogg"),
+    "gun": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "gun" / "gun5_shoot.wav"),
 }
 
 pygame.font.init()
