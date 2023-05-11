@@ -33,7 +33,6 @@ class PlayState(BaseState):
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
-        print(self.camera.x, self.camera.y, self.camera.width, self.camera.height)
         self.game_level = enter_params.get("game_level")
 
         if self.game_level is None:

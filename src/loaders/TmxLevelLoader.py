@@ -104,14 +104,14 @@ class TmxLevelLoader:
                 frame_index = value - self.first_ids["level_1"]
                 
                 if frame_index == 379:
-                    height = 51
-                    width = 51
+                    height = 34
+                    width = 20
 
                 level.add_Enemy(
                     {
                         "tile_index": frame_index,
                         "x": j * self.tilewidth,
-                        "y": i * self.tileheight,
+                        "y": (i-1) * self.tileheight,
                         "width": width,
                         "height": height,
                     }

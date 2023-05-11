@@ -42,21 +42,20 @@ class EWalkState(BaseEntityState):
 
         # Avoid falling
         can_fall = False
-
         if self.entity.vx > 0:
             # Snail row
-            row = int(self.entity.tilemap.to_i(self.entity.y))
+            row = int(self.entity.tilemap.to_i(self.entity.y + 25))
             # Col of the right side of the snail
-            col = int(self.entity.tilemap.to_j(self.entity.x + self.entity.width))
+            col = int(self.entity.tilemap.to_j(self.entity.x + self.entity.width + 10))
 
             can_fall = not self.entity.tilemap.check_solidness_on(
                 row + 1, col, GameObject.TOP
             )
         elif self.entity.vx < 0:
             # Snail row
-            row = int(self.entity.tilemap.to_i(self.entity.y))
+            row = int(self.entity.tilemap.to_i(self.entity.y + 25))
             # Col of the left side of the snail
-            col = int(self.entity.tilemap.to_j(self.entity.x))
+            col = int(self.entity.tilemap.to_j(self.entity.x - 5))
 
             can_fall = not self.entity.tilemap.check_solidness_on(
                 row + 1, col, GameObject.TOP
