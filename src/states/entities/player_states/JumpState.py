@@ -52,6 +52,3 @@ class JumpState(BaseEntityState):
                 self.entity.flipped = False
             elif input_data.released and self.entity.vx >= 0:
                 self.entity.vx = 0
-        
-        elif input_id == "shoot" and input_data.pressed:
-            print("Shoot")

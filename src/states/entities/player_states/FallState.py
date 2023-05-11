@@ -11,11 +11,12 @@ from gale.input_handler import InputHandler, InputData
 
 import settings
 from src.states.entities.BaseEntityState import BaseEntityState
-
+from src.Projectile import Projectile
 
 class FallState(BaseEntityState):
     def enter(self) -> None:
         self.entity.change_animation("jump")
+        self.looking = ""
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
@@ -56,5 +57,34 @@ class FallState(BaseEntityState):
                 self.entity.change_state("jump")
                 self.entity.double_jump = True
         
+        elif input_id == "look_up":
+            if input_data.pressed:
+                self.looking = "up"
+            
+        elif input_id == "look_down":
+            if input_data.pressed:
+                self.looking = "down"
+            
         elif input_id == "shoot" and input_data.pressed:
-            print("Shoot")
+            bullet = ""
+            if self.looking == "up":
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y,
+                                    8, 8, 0, -settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.looking == "down":
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y + self.entity.height,
+                                    8, 8, 0, settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.entity.flipped:
+                bullet = Projectile(self.entity.x,
+                                    self.entity.y + self.entity.height/2 - 4,
+                                    8, 8, -settings.PROJECTILE_SPEED, 0,
+                                    self.entity.play_state.camera)
+            else:
+                bullet = Projectile(self.entity.x + self.entity.width/4,
+                                    self.entity.y + self.entity.height/5,
+                                    8, 8, settings.PROJECTILE_SPEED, 0,
+                                    self.entity.play_state.camera)
+            self.entity.play_state.bullets.append(bullet)

@@ -135,7 +135,6 @@ class PlayState(BaseState):
         #         key_object.in_play = True
 
     def render(self, surface: pygame.Surface) -> None:
-        print(len(self.bullets))
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
         self.player.render(world_surface)
