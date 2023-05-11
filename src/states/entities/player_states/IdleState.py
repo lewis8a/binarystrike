@@ -12,6 +12,7 @@ from gale.input_handler import InputHandler, InputData
 from src.states.entities.BaseEntityState import BaseEntityState
 from src.Projectile import Projectile
 
+import settings
 
 class IdleState(BaseEntityState):
     def enter(self) -> None:
@@ -48,19 +49,21 @@ class IdleState(BaseEntityState):
                 if self.entity.flipped == True:
                     bullet = Projectile(self.entity.x + self.entity.width/4,
                                         self.entity.y,
-                                        8, 8, 0, -100,
+                                        8, 8, 0, -settings.PROJECTILE_SPEED,
                                         self.entity.play_state.camera)
                 else:
                     bullet = Projectile(self.entity.x + self.entity.width/2.5,
                                         self.entity.y,
-                                        8, 8, 0, -100,
+                                        8, 8, 0, -settings.PROJECTILE_SPEED,
                                         self.entity.play_state.camera)
             elif self.entity.flipped == True:
                 bullet = Projectile(self.entity.x,
                                     self.entity.y + self.entity.height/4,
-                                    8, 8, -100, 0, self.entity.play_state.camera)
+                                    8, 8, -settings.PROJECTILE_SPEED, 0,
+                                    self.entity.play_state.camera)
             else:
                 bullet = Projectile(self.entity.x + self.entity.width/1.5,
                                     self.entity.y + self.entity.height/4,
-                                    8, 8, 100, 0, self.entity.play_state.camera)
+                                    8, 8, settings.PROJECTILE_SPEED, 0,
+                                    self.entity.play_state.camera)
             self.entity.play_state.bullets.append(bullet)
