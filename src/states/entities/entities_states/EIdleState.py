@@ -17,7 +17,7 @@ from src.states.entities.IAEnemies import IAEnemies
 from src.definitions import enemies
 
 
-class EIdleState(BaseEntityState):
+class EIdleState(BaseEntityState, IAEnemies):
     def enter(self, flipped: bool) -> None:
         self.entity.vx = 0
         self.entity.vy = 0
@@ -29,9 +29,9 @@ class EIdleState(BaseEntityState):
 
     def update(self, dt: float) -> None:
         p = random.rand()
-        if 0 < p < 0.6:
-            self.entity.state_machine.change("walk", self.entity.flipped)
+        if p < 0.05:
+            self.entity.change_state("walk", self.entity.flipped)
         else:
             p = random.rand()
-            if 0.2 < p < 0.6:
+            if 0.1 < p < 0.125:
                 self.entity.flipped = not self.entity.flipped 

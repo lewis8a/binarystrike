@@ -28,6 +28,10 @@ class Enemy(GameEntity):
         game_level: TypeVar("GameLevel"),
         **definition
     ) -> None:
+        ss = {
+            "idle": lambda sm: definition["states"]["idle"](self, sm),
+            "walk": lambda sm: definition["states"]["walk"](self, sm),
+        }
         super().__init__(
             x,
             y,
@@ -37,11 +41,13 @@ class Enemy(GameEntity):
             True,
             True,
             game_level,
-            states={
-                state_name: lambda sm: state_class(self, sm)
-                for state_name, state_class in definition["states"].items()
-            },
+            states = ss,
+            # states={
+            #     state_name: lambda sm: state_class(self, sm)
+            #     for state_name, state_class in definition["states"].items()
+            # },
             animation_defs=definition["animation_defs"],
         )
+        self.texture_base = definition["texture_id"]
         self.walk_speed = definition["walk_speed"]
         self.state_machine.change(definition["first_state"], self.flipped)

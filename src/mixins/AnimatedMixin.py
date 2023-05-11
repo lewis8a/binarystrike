@@ -29,7 +29,7 @@ class AnimatedMixin:
         new_animation = self.animations[animation_id]
         if new_animation != self.current_animation:
             if self.multi_texture:
-                self.texture_id = self.texture_id + "-" + animation_id
+                self.texture_id = self.texture_base + "-" + animation_id
             
             self.current_animation_id = animation_id
             self.current_animation = new_animation
