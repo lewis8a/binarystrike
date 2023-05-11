@@ -5,6 +5,9 @@ Project: Binary Strike (Platformer)
 Author: Alejandro Mujica
 alejandro.j.mujic4@gmail.com
 
+Author: Kevin Márquez
+marquezberriosk@gmail.com
+
 This file contains the class IdleState for player.
 """
 from gale.input_handler import InputHandler, InputData

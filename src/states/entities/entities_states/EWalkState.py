@@ -8,6 +8,8 @@ alejandro.j.mujic4@gmail.com
 This file contains the class EWalkState.
 """
 
+from numpy import random
+
 from src.states.entities.BaseEntityState import BaseEntityState
 from src.states.entities.IAEnemies import IAEnemies
 
@@ -21,6 +23,14 @@ class EWalkState(BaseEntityState, IAEnemies):
             self.entity.vx *= -1
 
     def update(self, dt: float) -> None:
-        if self.check_boundary():
-            self.entity.vx *= -1
-            self.entity.flipped = not self.entity.flipped
+        p = random.rand()
+        if 0 < p < 0.1:
+            self.entity.state_machine.change("idle", self.entity.flipped)
+        elif 0.2 <= p < 0.3:
+            print("Cambiando a shoot")
+        elif 0.5 <= p <= 0.6:
+            print("Persigo")
+        else:
+            if self.check_boundary():
+                self.entity.vx *= -1
+                self.entity.flipped = not self.entity.flipped

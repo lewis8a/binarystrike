@@ -21,7 +21,10 @@ Enemies: Dict[int, Dict[str, Any]] = {
             "idle": {"frames": [0, 1, 2, 3, 4, 5, 6, 7 ,8], "interval": 0.25},
             "dead": {"frames": [0, 1, 2, 3], "interval": 0.25},
         },
-        "states": {"walk": entities_states.EWalkState},
+        "states": {
+            "walk": entities_states.EWalkState,
+            "idle": entities_states.EIdleState,
+            },
         "first_state": "walk",
     },
 }
