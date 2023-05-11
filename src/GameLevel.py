@@ -53,13 +53,11 @@ class GameLevel:
     def update(self, dt: float) -> None:
         self.tilemap.set_render_boundaries(self.camera.get_rect())
 
-        for enemy in self.enemies:
-            enemy.update(dt)
-
-        # Remove dead Enemies
-        self.enemies = [
-            enemy for enemy in self.enemies if not enemy.is_dead
-        ]
+        for i in range(len(self.enemies) - 1, -1, -1):
+            if not self.enemies[i].is_dead:
+                self.enemies[i].update(dt)
+            else:
+                del self.enemies[i]
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)

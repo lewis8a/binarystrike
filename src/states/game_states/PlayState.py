@@ -90,17 +90,21 @@ class PlayState(BaseState):
                 self.tilemap.height - settings.VIRTUAL_HEIGHT,
             ),
         )
-
-        self.game_level.update(dt)
-
+        
         for i in range(len(self.bullets) - 1, -1, -1):
-            for enemy in self.enemies:
+            for enemy in self.game_level.enemies:
                 if self.bullets[i].collides(enemy):
                     self.bullets[i].in_play = False
+                    enemy.is_dead = True
+                    self.player.score += 150
+                    #play sound deading 
             if self.bullets[i].in_play:
                 self.bullets[i].update(dt)
             else:
                 del self.bullets[i]
+
+        self.game_level.update(dt)
+
 
         # for item in self.game_level.items:
         #     if not item.in_play or not item.collidable:
