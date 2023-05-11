@@ -88,7 +88,7 @@ class TmxLevelLoader:
                         }
                     )
 
-    def load_Enemies(self, level: Any, group: ET.Element) -> None:
+    def load_enemies(self, level: Any, group: ET.Element) -> None:
         width = 0
         height = 0
         layer = group.find("layer")
@@ -107,7 +107,7 @@ class TmxLevelLoader:
                     height = 34
                     width = 20
 
-                level.add_Enemy(
+                level.add_enemy(
                     {
                         "tile_index": frame_index,
                         "x": j * self.tilewidth,

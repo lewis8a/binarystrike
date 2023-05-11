@@ -153,7 +153,7 @@ class PlayState(BaseState):
 
         render_text(
             surface,
-            f"Time: {1000}",
+            f"Time: {self.timer}",
             settings.FONTS["small"],
             settings.VIRTUAL_WIDTH - 80,
             5,
