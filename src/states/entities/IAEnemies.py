@@ -1,0 +1,57 @@
+"""
+PVG 2023
+Project: Binary Strike (Platformer)
+
+Author: Alejandro Mujica
+alejandro.j.mujic4@gmail.com
+
+Author: Kevin Márquez
+marquezberriosk@gmail.com
+
+This file contains the base class IAEnemies.
+"""
+
+from src.GameObject import GameObject
+
+class IAEnemies():
+    def __init__(self) -> None:
+        pass
+
+    def check_boundary(self) -> bool:
+        world_width = self.entity.tilemap.width
+
+        if self.entity.x + self.entity.width >= world_width:
+            self.entity.x = world_width - self.entity.width
+            return True
+        elif self.entity.x <= 0:
+            self.entity.x = 0
+            return True
+
+        if (
+            self.entity.handle_tilemap_collision_on_left()
+            or self.entity.handle_tilemap_collision_on_right()
+        ):
+            return True
+
+        # Avoid falling
+        can_fall = False
+        if self.entity.vx > 0:
+            # Snail row
+            row = int(self.entity.tilemap.to_i(self.entity.y + 25))
+            # Col of the right side of the snail
+            col = int(self.entity.tilemap.to_j(self.entity.x + self.entity.width + 10))
+
+            can_fall = not self.entity.tilemap.check_solidness_on(
+                row + 1, col, GameObject.TOP
+            )
+        elif self.entity.vx < 0:
+            # Snail row
+            row = int(self.entity.tilemap.to_i(self.entity.y + 25))
+            # Col of the left side of the snail
+            col = int(self.entity.tilemap.to_j(self.entity.x - 5))
+
+            can_fall = not self.entity.tilemap.check_solidness_on(
+                row + 1, col, GameObject.TOP
+            )
+
+        return can_fall

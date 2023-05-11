@@ -1,3 +1,16 @@
+"""
+PVG 2023
+Project: Binary Strike (Platformer)
+
+Author: Alejandro Mujica
+alejandro.j.mujic4@gmail.com
+
+Author: Kevin Márquez
+marquezberriosk@gmail.com
+
+This file contains the constants definitions for setup an other things.
+"""
+
 import pathlib
 
 import pygame
