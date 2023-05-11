@@ -16,7 +16,10 @@ from src.Projectile import Projectile
 class FallState(BaseEntityState):
     def enter(self) -> None:
         self.entity.change_animation("jump")
-        self.looking = ""
+        self.looking_up = False
+        self.looking_down = False
+        self.looking_left = False
+        self.looking_right = True
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
@@ -42,15 +45,19 @@ class FallState(BaseEntityState):
             if input_data.pressed:
                 self.entity.vx = -settings.PLAYER_SPEED
                 self.entity.flipped = True
+                self.looking_left = True
             elif input_data.released and self.entity.vx <= 0:
                 self.entity.vx = 0
+                self.looking_left = False
 
         elif input_id == "move_right":
             if input_data.pressed:
                 self.entity.vx = settings.PLAYER_SPEED
                 self.entity.flipped = False
+                self.looking_right = True
             elif input_data.released and self.entity.vx >= 0:
                 self.entity.vx = 0
+                self.looking_right = False
         
         elif input_id == "jump" and input_data.pressed:
             if not self.entity.double_jump:
@@ -59,25 +66,49 @@ class FallState(BaseEntityState):
         
         elif input_id == "look_up":
             if input_data.pressed:
-                self.looking = "up"
+                self.looking_up = True
+            else:
+                self.looking_up = False
             
         elif input_id == "look_down":
             if input_data.pressed:
-                self.looking = "down"
+                self.looking_down = True
+            else:
+                self.looking_down = False
             
         elif input_id == "shoot" and input_data.pressed:
             bullet = ""
-            if self.looking == "up":
+            if self.looking_up and self.looking_left: # Up and letf
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y,
+                                    8, 8, -settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.looking_up and self.looking_right: # Up and right
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y + self.entity.height,
+                                    8, 8, settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.looking_down and self.looking_left: # Down and left
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y,
+                                    8, 8, -settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.looking_down and self.looking_right: # Down and right
+                bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
+                                    self.entity.y + self.entity.height,
+                                    8, 8, settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
+                                    self.entity.play_state.camera)
+            elif self.looking_up:
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,
                                     8, 8, 0, -settings.PROJECTILE_SPEED,
                                     self.entity.play_state.camera)
-            elif self.looking == "down":
+            elif self.looking_down:
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y + self.entity.height,
                                     8, 8, 0, settings.PROJECTILE_SPEED,
                                     self.entity.play_state.camera)
-            elif self.entity.flipped:
+            elif self.looking_left:
                 bullet = Projectile(self.entity.x,
                                     self.entity.y + self.entity.height/2 - 4,
                                     8, 8, -settings.PROJECTILE_SPEED, 0,
