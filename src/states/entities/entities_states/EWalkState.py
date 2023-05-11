@@ -16,6 +16,7 @@ from src.states.entities.IAEnemies import IAEnemies
 
 class EWalkState(BaseEntityState, IAEnemies):
     def enter(self, flipped: bool) -> None:
+        print("Entrando en walk")
         self.entity.change_animation("walk")
         self.entity.flipped = flipped
         self.entity.vx = -self.entity.walk_speed
@@ -24,12 +25,9 @@ class EWalkState(BaseEntityState, IAEnemies):
 
     def update(self, dt: float) -> None:
         p = random.rand()
-        if 0 < p < 0.1:
+        if 0 < p < 0.05:
+            print("Cambiando a Iddle")
             self.entity.state_machine.change("idle", self.entity.flipped)
-        elif 0.2 <= p < 0.3:
-            print("Cambiando a shoot")
-        elif 0.5 <= p <= 0.6:
-            print("Persigo")
         else:
             if self.check_boundary():
                 self.entity.vx *= -1

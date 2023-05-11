@@ -13,6 +13,9 @@ This file contains the class IdleState for Entities.
 from numpy import random
 
 from src.states.entities.BaseEntityState import BaseEntityState
+from src.states.entities.IAEnemies import IAEnemies
+from src.definitions import enemies
+
 
 class EIdleState(BaseEntityState):
     def enter(self, flipped: bool) -> None:
@@ -22,17 +25,13 @@ class EIdleState(BaseEntityState):
         self.entity.change_animation("idle")
 
     def exit(self) -> None:
-        pass
+        self.entity.vx = enemies.Enemies[379]["walk_speed"]
 
     def update(self, dt: float) -> None:
         p = random.rand()
-        if 0 < p < 0.3:
+        if 0 < p < 0.6:
             self.entity.state_machine.change("walk", self.entity.flipped)
-        elif 0.3 <= p < 0.5:
-            print("Cambiando a shoot")
-        elif 0.5 <= p <= 0.6:
-            print("Persigo")
         else:
             p = random.rand()
-            if 0.2 < p < 0.3:
+            if 0.2 < p < 0.6:
                 self.entity.flipped = not self.entity.flipped 
