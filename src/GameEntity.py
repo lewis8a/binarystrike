@@ -49,6 +49,7 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         self.tilemap = self.game_level.tilemap
         self.state_machine = StateMachine(states)
         self.current_animation = None
+        self.current_animation_id = ""
         self.animations = {}
         self.generate_animations(animation_defs)
         self.flipped = flipped

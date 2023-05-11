@@ -58,3 +58,5 @@ class WalkState(BaseEntityState):
         elif input_id == "jump" and input_data.pressed:
             self.entity.double_jump = False
             self.entity.change_state("jump")
+        elif input_id == "shoot" and input_data.pressed:
+            print("Shoot")

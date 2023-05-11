@@ -31,6 +31,7 @@ class AnimatedMixin:
             if self.multi_texture:
                 self.texture_id = self.texture_id + "-" + animation_id
             
+            self.current_animation_id = animation_id
             self.current_animation = new_animation
             self.current_animation.reset()
             self.frame_index = self.current_animation.get_current_frame()

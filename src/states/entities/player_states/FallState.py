@@ -55,3 +55,6 @@ class FallState(BaseEntityState):
             if not self.entity.double_jump:
                 self.entity.change_state("jump")
                 self.entity.double_jump = True
+        
+        elif input_id == "shoot" and input_data.pressed:
+            print("Shoot")

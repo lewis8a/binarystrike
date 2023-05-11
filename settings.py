@@ -20,6 +20,7 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_w, "look_up")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_s, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_f, "shoot")
 
 # Size we want to emulate
 VIRTUAL_WIDTH = 300
@@ -46,6 +47,7 @@ TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
+    "bullet1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Bullet1.png"),
     "Enemy2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Walk.png"),
     "Enemy2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot_1.png"),
     "Enemy2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
@@ -60,6 +62,7 @@ FRAMES = {
     "Enemy2-shot": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
     "Enemy2-idle": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
     "Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-walk"], 51, 51),
+    "bullet1": frames.generate_frames(TEXTURES["bullet1"], 8, 8),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}

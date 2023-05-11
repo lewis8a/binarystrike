@@ -33,7 +33,7 @@ class PlayState(BaseState):
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
-        
+        print(self.camera.x, self.camera.y, self.camera.width, self.camera.height)
         self.game_level = enter_params.get("game_level")
 
         if self.game_level is None:
@@ -44,6 +44,10 @@ class PlayState(BaseState):
             self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
 
         self.player.change_state("idle")
+        self.player.play_state = self
+
+        self.bullets = []
+        self.enemies = []
 
         def countdown_timer():
             self.timer -= 1
@@ -90,9 +94,14 @@ class PlayState(BaseState):
 
         self.game_level.update(dt)
 
-        # for creature in self.game_level.creatures:
-        #     if self.player.collides(creature):
-        #         self.player.change_state("dead")
+        for i in range(len(self.bullets) - 1, -1, -1):
+            for enemy in self.enemies:
+                if self.bullets[i].collides(enemy):
+                    self.bullets[i].in_play = False
+            if self.bullets[i].in_play:
+                self.bullets[i].update(dt)
+            else:
+                del self.bullets[i]
 
         # for item in self.game_level.items:
         #     if not item.in_play or not item.collidable:
@@ -126,9 +135,12 @@ class PlayState(BaseState):
         #         key_object.in_play = True
 
     def render(self, surface: pygame.Surface) -> None:
+        print(len(self.bullets))
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
         self.player.render(world_surface)
+        for bullet in self.bullets:
+            bullet.render(world_surface)
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
 
         render_text(
