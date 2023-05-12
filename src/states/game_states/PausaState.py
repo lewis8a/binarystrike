@@ -17,12 +17,21 @@ import pygame
 from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import render_text
+from gale.timer import Timer
 
 import settings
 
 
 class PausaState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
+        self.finish_tween = False
+        self.circle = 0
+        self.transition_alpha = 0
+        # A surface that supports alpha for the screen
+        self.screen_alpha_surface = pygame.Surface(
+            (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
+        )        
+        
         self.timer = enter_params.get("timer")
         self.level = enter_params.get("level")
         self.camera = enter_params.get("camera")
@@ -30,11 +39,24 @@ class PausaState(BaseState):
         self.bullets = enter_params.get("bullets")
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
+        
         # Entry sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
         # Pause music
         settings.SOUNDS["pause"].play()
+
+        def arrive():
+            self.finish_tween = True
+
+        Timer.tween(
+            1,
+            [
+                (self, {"transition_alpha": 175}),
+                (self, {"circle": max(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT)})
+            ],
+            on_finish=arrive
+        )
 
     def exit(self) -> None:
         # Detener música de pausa
@@ -42,7 +64,6 @@ class PausaState(BaseState):
         # Exit sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
-        pass
 
     def update(self, dt: float) -> None:
         pass
@@ -53,6 +74,7 @@ class PausaState(BaseState):
         self.player.render(world_surface)
         for bullet in self.bullets:
             bullet.render(world_surface)
+        
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
 
         render_text(
@@ -74,6 +96,26 @@ class PausaState(BaseState):
             (255, 255, 255),
             shadowed=True,
         )
+
+        pygame.draw.circle(
+            self.screen_alpha_surface,
+            (0, 0, 0, self.transition_alpha),
+            (settings.WINDOW_WIDTH / 2, settings.WINDOW_HEIGHT / 2),
+            self.circle,
+        )
+
+        if self.finish_tween:
+            render_text(
+                self.screen_alpha_surface,
+                "Pause",
+                settings.FONTS["title_medium"],
+                settings.VIRTUAL_WIDTH/2 - 25,
+                settings.VIRTUAL_HEIGHT/2 - 10,
+                (255, 255, 255),
+                shadowed=True,
+            )
+
+        surface.blit(self.screen_alpha_surface, (0, 0))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "pause" and input_data.pressed:

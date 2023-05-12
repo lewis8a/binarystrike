@@ -144,6 +144,7 @@ class PlayState(BaseState):
         self.player.render(world_surface)
         for bullet in self.bullets:
             bullet.render(world_surface)
+
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
 
         render_text(
