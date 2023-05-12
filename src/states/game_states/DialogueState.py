@@ -57,7 +57,7 @@ class DialogueState(BaseState):
             self.font1 = settings.FONTS["large"]
             self.font2 = settings.FONTS["text_small"]
             self.font3 = settings.FONTS["text_small"]
-            self.timeEnd = 10
+            self.timeEnd = 2
 
         def arrive_after():
             # Then, animate the text going disapear
