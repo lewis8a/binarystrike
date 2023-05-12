@@ -44,6 +44,9 @@ class DialogueState(BaseState):
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
 
+        # Set the volumne for this sounds
+        settings.SOUNDS["menu_play"].set_volume(0.3)
+
         # Initial position and text to display
         if self.oldState == "init":
             self.dialogue = "intro"
@@ -52,6 +55,8 @@ class DialogueState(BaseState):
             self.font1 = settings.FONTS["title_large"]
             self.font2 = settings.FONTS["title_medium"]
             self.font3 = settings.FONTS["title_medium"]
+            settings.SOUNDS["menu_play"].stop()
+            settings.SOUNDS["menu_play"].play()
             self.timeEnd = 1
         elif self.oldState == "start" and self.newState == "begin":
             self.dialogue = "predialogue"
@@ -60,7 +65,7 @@ class DialogueState(BaseState):
             self.font1 = settings.FONTS["large"]
             self.font2 = settings.FONTS["text_small"]
             self.font3 = settings.FONTS["text_small"]
-            self.timeEnd = 10
+            self.timeEnd = 1
         elif self.oldState == "start" and self.newState == "credits":
             # Play Menu Music
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/credits.ogg")

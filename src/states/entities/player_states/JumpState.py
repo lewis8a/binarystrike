@@ -27,6 +27,7 @@ class JumpState(BaseEntityState):
         self.entity.vy = -settings.GRAVITY / 2
         InputHandler.register_listener(self)
         randomJumpSound = random.randint(1,4)
+        settings.SOUNDS[f"jump{randomJumpSound}"].set_volume(0.3)
         settings.SOUNDS[f"jump{randomJumpSound}"].stop()
         settings.SOUNDS[f"jump{randomJumpSound}"].play()
 
