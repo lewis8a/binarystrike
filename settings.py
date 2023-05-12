@@ -24,7 +24,7 @@ from gale import input_handler
 from src import loaders
 
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, "quit")
-#input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_p, "pause")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "enter")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_KP_ENTER, "enter")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
@@ -94,6 +94,7 @@ pygame.mixer.init()
 
 SOUNDS = {
     "menu": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "menu.ogg"),
+    "menu-play": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_play.mp3"),
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
     "level2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
     "level3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level3.ogg"),

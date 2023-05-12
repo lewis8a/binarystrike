@@ -15,7 +15,7 @@ lewis8a@gmail.com
 import pygame
 
 from gale.game import Game
-from gale.input_handler import InputData, InputHandler, InputListener
+from gale.input_handler import InputData
 from gale.state import StateMachine
 
 from src.states import game_states
@@ -24,9 +24,10 @@ from src.states import game_states
 class Binarystrike(Game):
     def init(self) -> None:
         self.state_machine = StateMachine({
-            "start": game_states.StartState,
             "begin": game_states.BeginState,
             "play": game_states.PlayState,
+            "pause": game_states.PausaState,
+            "start": game_states.StartState,
         })
         self.state_machine.change("start")
 

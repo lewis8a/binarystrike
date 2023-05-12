@@ -33,21 +33,20 @@ class PlayState(BaseState):
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
-        self.game_level = enter_params.get("game_level")
-
-        if self.game_level is None:
-            self.game_level = GameLevel(self.level, self.camera)
+        self.game_level = enter_params.get("game_level", GameLevel(self.level, self.camera))
+        self.bullets = enter_params.get("bullets", [])
 
         self.tilemap = self.game_level.tilemap
+
         if self.level == 1:
-            self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
-
-        self.player.change_state("idle")
+            if hasattr(self.player, "play_state"):
+                delattr(self.player, "play_state")
+            else:
+                self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
+                self.player.change_state("idle")
+                self.game_level.player = self.player
+            
         self.player.play_state = self
-        self.game_level.player = self.player
-
-        self.bullets = []
-        self.enemies = []
 
         def countdown_timer():
             self.timer -= 1
@@ -167,13 +166,12 @@ class PlayState(BaseState):
         )
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        pass
-        # if input_id == "pause" and input_data.pressed:
-        #     self.state_machine.change(
-        #         "pause",
-        #         level=self.level,
-        #         camera=self.camera,
-        #         game_level=self.game_level,
-        #         player=self.player,
-        #         timer=self.timer,
-        #     )
+        if input_id == "pause" and input_data.pressed:
+            self.state_machine.change(
+                "pause",
+                timer = self.timer,
+                level = self.level,
+                camera = self.camera,
+                game_level = self.game_level,
+                bullets = self.bullets,
+            )
