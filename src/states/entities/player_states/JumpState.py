@@ -24,7 +24,7 @@ from src.states.entities.BaseEntityState import BaseEntityState
 class JumpState(BaseEntityState):
     def enter(self) -> None:
         self.entity.change_animation("jump")
-        self.entity.vy = -250
+        self.entity.vy = -settings.GRAVITY / 2
         InputHandler.register_listener(self)
         randomJumpSound = random.randint(1,4)
         settings.SOUNDS[f"jump{randomJumpSound}"].stop()

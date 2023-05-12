@@ -66,7 +66,7 @@ class FallState(BaseEntityState):
                 self.looking_right = False
         
         elif input_id == "jump" and input_data.pressed:
-            if not self.entity.double_jump:
+            if not self.entity.double_jump and self.entity.vy <= 0:
                 self.entity.change_state("jump")
                 self.entity.double_jump = True
         
