@@ -90,40 +90,40 @@ class FallState(BaseEntityState):
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,
                                     8, 8, -settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_up and self.looking_right: # Up and right
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y + self.entity.height,
                                     8, 8, settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_down and self.looking_left: # Down and left
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,
                                     8, 8, -settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_down and self.looking_right: # Down and right
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y + self.entity.height,
                                     8, 8, settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_up:
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,
                                     8, 8, 0, -settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_down:
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y + self.entity.height,
                                     8, 8, 0, settings.PROJECTILE_SPEED,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_left:
                 bullet = Projectile(self.entity.x,
                                     self.entity.y + self.entity.height/2 - 4,
                                     8, 8, -settings.PROJECTILE_SPEED, 0,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             else:
                 bullet = Projectile(self.entity.x + self.entity.width/4,
                                     self.entity.y + self.entity.height/5,
                                     8, 8, settings.PROJECTILE_SPEED, 0,
-                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             self.entity.play_state.bullets.append(bullet)

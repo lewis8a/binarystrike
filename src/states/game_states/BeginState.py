@@ -103,7 +103,7 @@ class BeginState(BaseState):
 
         render_text(
             surface,
-            f"Time: {1000}",
+            f"Time: {settings.TIME}",
             settings.FONTS["small"],
             settings.VIRTUAL_WIDTH - 80,
             5,
