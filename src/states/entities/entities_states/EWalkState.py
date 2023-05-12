@@ -31,8 +31,9 @@ class EWalkState(BaseEntityState, IAEnemies):
     def update(self, dt: float) -> None:
         p = random.rand()
         if 0 < p < 0.05:
-            print("Cambiando a Iddle")
             self.entity.change_state("idle", self.entity.flipped)
+        if 3 < p < 3.125:
+            self.entity.change_state("shoot", self.entity.flipped)
         else:
             if self.check_boundary():
                 self.entity.vx *= -1

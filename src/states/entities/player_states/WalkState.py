@@ -74,31 +74,31 @@ class WalkState(BaseEntityState):
                     bullet = Projectile(self.entity.x,
                                         self.entity.y + self.entity.height/3,
                                         8, 8, -settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
-                                        self.entity.play_state.camera)
+                                        settings.TEXTURES["bullet1"], self.entity.play_state.camera)
                 else:
                     bullet = Projectile(self.entity.x + self.entity.width/1.5,
                                         self.entity.y + self.entity.height/3.5,
                                         8, 8, settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
-                                        self.entity.play_state.camera)
+                                        settings.TEXTURES["bullet1"], self.entity.play_state.camera)
             elif self.entity.current_animation_id == "walk-down":
                 if self.entity.flipped == True:
                     bullet = Projectile(self.entity.x,
                                         self.entity.y + self.entity.height/3,
                                         8, 8, -settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
-                                        self.entity.play_state.camera)
+                                        settings.TEXTURES["bullet1"], self.entity.play_state.camera)
                 else:
                     bullet = Projectile(self.entity.x + self.entity.width/1.5,
                                         self.entity.y + self.entity.height/3,
                                         8, 8, settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
-                                        self.entity.play_state.camera)
+                                        settings.TEXTURES["bullet1"], self.entity.play_state.camera)
             elif self.entity.flipped == True:
                 bullet = Projectile(self.entity.x,
                                     self.entity.y + self.entity.height/4,
                                     8, 8, -settings.PROJECTILE_SPEED, 0,
-                                    self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
             else:
                 bullet = Projectile(self.entity.x + self.entity.width/1.5,
                                     self.entity.y + self.entity.height/4,
                                     8, 8, settings.PROJECTILE_SPEED, 0,
-                                    self.entity.play_state.camera)
+                                    settings.TEXTURES["bullet1"], self.entity.play_state.camera)
             self.entity.play_state.bullets.append(bullet)

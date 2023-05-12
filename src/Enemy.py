@@ -31,6 +31,7 @@ class Enemy(GameEntity):
         ss = {
             "idle": lambda sm: definition["states"]["idle"](self, sm),
             "walk": lambda sm: definition["states"]["walk"](self, sm),
+            "shoot": lambda sm: definition["states"]["shoot"](self, sm),
         }
         super().__init__(
             x,

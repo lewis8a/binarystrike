@@ -44,6 +44,7 @@ class PlayState(BaseState):
 
         self.player.change_state("idle")
         self.player.play_state = self
+        self.game_level.player = self.player
 
         self.bullets = []
         self.enemies = []
