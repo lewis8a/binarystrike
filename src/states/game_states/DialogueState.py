@@ -101,6 +101,7 @@ class DialogueState(BaseState):
     
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "enter" and input_data.pressed:
+            Timer.clear()
             self.state_machine.change(
                    self.newState, previous = self.oldState, next = self.newState, part = self.part
                )

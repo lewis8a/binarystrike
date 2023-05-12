@@ -43,8 +43,9 @@ VIRTUAL_HEIGHT = 192
 
 # Size of our actual window
 pygame.init()
-WINDOW_WIDTH = pygame.display.Info().current_w
-WINDOW_HEIGHT = pygame.display.Info().current_h
+
+WINDOW_WIDTH = VIRTUAL_WIDTH * 3 # pygame.display.Info().current_w
+WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.5 #pygame.display.Info().current_h
 
 # Basic game settings
 PLAYER_SPEED = 80
