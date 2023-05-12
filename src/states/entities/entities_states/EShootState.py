@@ -38,8 +38,11 @@ class EShootState(BaseEntityState, IAEnemies):
         self.entity.vx = enemies.Enemies[379]["walk_speed"]
 
     def update(self, dt: float) -> None:
-        if not self.shot and self.entity.frame_index > 1:
+        if not self.shot and self.entity.frame_index > 1 and self.entity.x - self.player.x < 300:
             self.shot = True
+            randomJumpSound = random.randint(1,4)
+            settings.SOUNDS[f"gun{randomJumpSound}"].stop()
+            settings.SOUNDS[f"gun{randomJumpSound}"].play()
             vx, vy = self.speed_to_shoot()
             bullet = Projectile(self.entity.x,
                                 self.entity.y + self.entity.height/3,
