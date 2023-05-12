@@ -26,6 +26,11 @@ class EShootState(BaseEntityState, IAEnemies):
         self.entity.vy = 0
         self.entity.flipped = flipped
         self.player = self.entity.game_level.player
+        dif_x = self.player.x - self.entity.x
+        if dif_x > 0 and self.entity.flipped:
+            self.entity.flipped = not self.entity.flipped
+        elif dif_x < 0 and not self.entity.flipped:
+            self.entity.flipped = not self.entity.flipped
         self.shot = False
         self.entity.change_animation("shoot")
 
@@ -56,5 +61,5 @@ class EShootState(BaseEntityState, IAEnemies):
         ey = self.entity.y + self.entity.height/3
 
         dif_x = px - ex
-        dif_y = ey - py
-        return (dif_x*2, dif_y*1.5)
+        dif_y = py - ey
+        return (dif_x*1.25, dif_y*1.15)
