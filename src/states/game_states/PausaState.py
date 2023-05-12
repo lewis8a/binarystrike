@@ -70,7 +70,7 @@ class PausaState(BaseState):
         # Registering for entries
         InputHandler.register_listener(self.player.state_machine.current)
 
-        # Detener música de pausa
+        # Stop music
         pygame.mixer.music.unload()
         pygame.mixer.music.stop()
         # Exit sound

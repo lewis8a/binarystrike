@@ -35,6 +35,11 @@ class StartState(BaseState):
         pygame.mixer.music.load(settings.BASE_DIR / "assets/music/menu.ogg")
         pygame.mixer.music.play(loops=-1)
 
+        # Set the volumne for this sounds
+        settings.SOUNDS["menu_select"].set_volume(0.3)
+        settings.SOUNDS["menu_play"].set_volume(0.3)
+        settings.SOUNDS["menu_enter"].set_volume(0.3)
+
     def exit(self) -> None:
         # Stop Menu Music
         pygame.mixer.music.stop()
@@ -53,10 +58,10 @@ class StartState(BaseState):
         )
 
         # Bynary Strike Logo
-        logo = pygame.transform.scale(settings.TEXTURES["binary_strike"],(120,120))
+        logo = pygame.transform.scale(settings.TEXTURES["binary_strike"],(180,120))
         surface.blit(
             logo,
-            (settings.VIRTUAL_WIDTH // 3.5,
+            (settings.VIRTUAL_WIDTH // 5,
             settings.VIRTUAL_HEIGHT // 16),
         )
 
@@ -170,7 +175,7 @@ class StartState(BaseState):
         )
     
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id in ("move_left") and input_data.pressed:
+        if input_id in ("move_left") and input_data.pressed:    
             if self.current_menu_item == 3:
                 self.current_menu_item = 2
                 settings.SOUNDS["menu_select"].stop()

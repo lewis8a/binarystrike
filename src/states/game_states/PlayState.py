@@ -36,6 +36,7 @@ class PlayState(BaseState):
         self.game_level = enter_params.get("game_level", GameLevel(self.level, self.camera))
         self.bullets = enter_params.get("bullets", [])
         self.pos_music = enter_params.get("pos_music", 0.0)
+        pygame.mixer.music.set_volume(0.3)
 
         self.tilemap = self.game_level.tilemap
 
@@ -48,7 +49,6 @@ class PlayState(BaseState):
                 self.game_level.player = self.player
             
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
-            pygame.mixer.music.set_volume(0.3)
         elif self.level == 2:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
@@ -58,7 +58,6 @@ class PlayState(BaseState):
                 self.game_level.player = self.player
             
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
-            pygame.mixer.music.set_volume(0.3)
         elif self.level == 3:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
@@ -67,7 +66,6 @@ class PlayState(BaseState):
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
-            pygame.mixer.music.set_volume(0.3)
             
         pygame.mixer.music.play(loops=-1, start=self.pos_music)
         
@@ -86,6 +84,7 @@ class PlayState(BaseState):
 
     def exit(self) -> None:
         Timer.clear()
+        # Stop music
         pygame.mixer.music.unload()
         pygame.mixer.music.stop()
 
