@@ -8,6 +8,9 @@ alejandro.j.mujic4@gmail.com
 Author: Kevin Márquez
 marquezberriosk@gmail.com
 
+Author: Lewis Ochoa
+lewis8a@gmail.com
+
 This file contains the constants definitions for setup an other things.
 """
 
@@ -67,7 +70,7 @@ TEXTURES = {
     "Enemy2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Walk.png"),
     "Enemy2-shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot_1.png"),
     "Enemy2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
-    "Enemy2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
+    #"Enemy2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
 }
 
 FRAMES = {
@@ -77,7 +80,7 @@ FRAMES = {
     "Enemy2-walk": frames.generate_frames(TEXTURES["Enemy2-walk"], 20, 34),
     "Enemy2-shoot": frames.generate_frames(TEXTURES["Enemy2-shoot"], 51, 51),
     "Enemy2-idle": frames.generate_frames(TEXTURES["Enemy2-idle"], 20, 34),
-    "Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-dead"], 51, 51),
+    #"Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-dead"], 51, 51),
     "bullet1": frames.generate_frames(TEXTURES["bullet1"], 8, 8),
     "bulletenemy": frames.generate_frames(TEXTURES["bulletenemy"], 6, 4),
 }
@@ -90,6 +93,7 @@ SOUNDS = {
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
     "level2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
     "level3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level3.ogg"),
+    "gun": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "gun" / "gun5_shoot.wav"),
 }
 
 pygame.font.init()

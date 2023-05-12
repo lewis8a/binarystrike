@@ -8,6 +8,9 @@ alejandro.j.mujic4@gmail.com
 Author: Kevin Márquez
 marquezberriosk@gmail.com
 
+Author: Lewis Ochoa
+lewis8a@gmail.com
+
 This file contains the class FallState for player.
 """
 from gale.input_handler import InputHandler, InputData
@@ -81,6 +84,8 @@ class FallState(BaseEntityState):
             
         elif input_id == "shoot" and input_data.pressed:
             bullet = ""
+            settings.SOUNDS["gun"].stop()
+            settings.SOUNDS["gun"].play()
             if self.looking_up and self.looking_left: # Up and letf
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,
