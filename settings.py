@@ -105,6 +105,7 @@ pygame.mixer.init()
 # Music and sound effects
 SOUNDS = {
     "menu": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "menu.ogg"),
+    "pause": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "pause.ogg"),
     "level1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level1.ogg"),
     "level2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
     "level3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level3.ogg"),
