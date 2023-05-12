@@ -14,9 +14,13 @@ lewis8a@gmail.com
 This file contains the class DeadState for player.
 """
 
+import pygame
+import settings
+
 from numpy import random
 
-import settings
+from gale.timer import Timer
+
 from src.states.entities.BaseEntityState import BaseEntityState
 
 
@@ -26,4 +30,26 @@ class DeadState(BaseEntityState):
         settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)
         settings.SOUNDS[f"death{randomJumpSound}"].stop()
         settings.SOUNDS[f"death{randomJumpSound}"].play()
+        self.finish = False
+
+        def arrive() -> None:
+            self.finish = True
+        
+        Timer.after(0.75, arrive)
+        
+        self.entity.change_animation("dead")
         self.entity.is_dead = True
+        self.entity.vx = 0
+        self.entity.vy = 0
+    
+    def update(self, dt: float) -> None:
+        if self.finish:
+            self.entity.change_state("fall")
+    
+    def exit(self) -> None:
+        self.entity.y = 20
+        self.entity.vy = -10
+        self.entity.is_dead = False
+    
+    def render(self, surface: pygame.Surface) -> None:
+        pass

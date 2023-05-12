@@ -44,6 +44,7 @@ class Player(GameEntity):
                 "walk-up": {"frames": [10, 11, 12, 13, 14, 15, 16, 17], "interval": 0.06},
                 "walk-down": {"frames": [18, 19, 20, 21, 22, 23, 24, 25], "interval": 0.06},
                 "jump": {"frames": [26, 27, 29, 30, 32], "interval": 0.08},
+                "dead": {"frames": [34, 35, 36, 37, 38], "interval": 0.25, "loops": 0},
             },
         )
         self.score = 0
