@@ -132,10 +132,30 @@ SOUNDS = {
 # Fonts
 pygame.font.init()
 FONTS = {
-    "small": pygame.font.Font(BASE_DIR / "fonts" / "text.otf", 12),
-    "medium": pygame.font.Font(BASE_DIR / "fonts" / "text.otf",24),
+    "small": pygame.font.Font(BASE_DIR / "fonts" / "info.otf", 16),
+    "medium": pygame.font.Font(BASE_DIR / "fonts" / "info.otf",24),
+    "large": pygame.font.Font(BASE_DIR / "fonts" / "info.otf",32),
+    "text_small": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf", 16),
+    "text_medium": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",24),
+    "text_large": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",32),
     "title_small": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",16),
     "title_small_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",20),
     "title_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",24),
     "title_large": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",32),
+}
+
+# Dialogue
+DIALOGUE = {
+    "intro_0" : "ALKELE GAMES",
+    "intro_1" : "Presents",
+    "intro_2" : "",
+    "intro_3" : "",
+    "intro_4" : "",
+    "intro_5" : "",
+    "predialogue_0" : "The Beginning",
+    "predialogue_1" : "In a world where darkness threatens to devour",
+    "predialogue_2" : "everything in its path, a hero rises up to meet the",
+    "predialogue_3" : "challenge and bring the light of hope",
+    "predialogue_4" : "to those who need it most.",
+    "predialogue_5" : "We only know that his name is... Khan Lockwood",
 }
