@@ -141,6 +141,7 @@ SOUNDS = {
 # Fonts
 pygame.font.init()
 FONTS = {
+    "xs": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf", 10),
     "small": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf", 16),
     "small_medium": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf",20),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf",24),

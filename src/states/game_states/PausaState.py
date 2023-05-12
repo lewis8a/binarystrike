@@ -90,7 +90,7 @@ class PausaState(BaseState):
         render_text(
             surface,
             f"Score: {self.player.score}",
-            settings.FONTS["small"],
+            settings.FONTS["xs"],
             5,
             5,
             (255, 255, 255),
@@ -100,7 +100,7 @@ class PausaState(BaseState):
         render_text(
             surface,
             f"Time: {self.timer}",
-            settings.FONTS["small"],
+            settings.FONTS["xs"],
             settings.VIRTUAL_WIDTH - 80,
             5,
             (255, 255, 255),
