@@ -26,11 +26,14 @@ from src.GameLevel import GameLevel
 
 class DialogueState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
+        # Basic settings
         self.display_text = True
+        self.timeEnd = 0
         self.transition_alpha = 255
         self.oldState = enter_params.get("previous", "start")
         self.newState = enter_params.get("next", "start")
-
+        self.part = enter_params.get("part", "1")
+        
         # A surface that supports alpha for the screen
         self.screen_alpha_surface = pygame.Surface(
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
@@ -50,7 +53,7 @@ class DialogueState(BaseState):
             self.font2 = settings.FONTS["title_medium"]
             self.font3 = settings.FONTS["title_medium"]
             self.timeEnd = 1
-        if self.oldState == "start" and self.newState == "begin":
+        elif self.oldState == "start" and self.newState == "begin":
             self.dialogue = "predialogue"
             self.initY = 6.5
             self.margin = 25
@@ -58,6 +61,33 @@ class DialogueState(BaseState):
             self.font2 = settings.FONTS["text_small"]
             self.font3 = settings.FONTS["text_small"]
             self.timeEnd = 10
+        elif self.oldState == "start" and self.newState == "credits":
+            # Play Menu Music
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/credits.ogg")
+            pygame.mixer.music.play(loops=-1)
+            self.oldState = "credits"
+            self.newState = "dialogue"
+            self.dialogue = f"credits{self.part}"
+            self.initY = 6.5
+            self.margin = 25
+            self.font1 = settings.FONTS["title_large"]
+            self.font2 = settings.FONTS["text_medium_large"]
+            self.font3 = settings.FONTS["small_medium"]
+            self.timeEnd = 8
+        elif self.oldState == "credits" and self.newState == "dialogue" and self.part < 11:
+            self.oldState = "credits"
+            if self.part == 10:
+                self.newState = "start"
+            else:
+                self.newState = "dialogue"
+            self.part = self.part + 1
+            self.dialogue = f"credits{self.part}"
+            self.initY = 6.5
+            self.margin = 25
+            self.font1 = settings.FONTS["title_large"]
+            self.font2 = settings.FONTS["text_medium_large"]
+            self.font3 = settings.FONTS["small_medium"]
+            self.timeEnd = 8
 
         def arrive_after():
             # Then, animate the text going disapear
@@ -67,7 +97,7 @@ class DialogueState(BaseState):
                [(self, {"transition_alpha": 0})],
                # We are ready to play
                on_finish=lambda: self.state_machine.change(
-                   self.newState,
+                   self.newState, previous = self.oldState, next = self.newState, part = self.part
                ),
             )
 

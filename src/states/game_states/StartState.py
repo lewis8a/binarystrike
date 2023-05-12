@@ -13,6 +13,7 @@ This file contains the class StartState.
 import pygame
 import settings
 
+from typing import Dict, Any
 from gale.animation import Animation
 from gale.input_handler import InputData
 from gale.state import BaseState
@@ -22,7 +23,7 @@ from gale.timer import Timer
 
 class StartState(BaseState):
 
-    def enter(self) -> None:
+    def enter(self,**enter_params: Dict[str, Any]) -> None:
         # A surface that supports alpha for the screen
         self.screen_alpha_surface = pygame.Surface(
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
@@ -206,4 +207,4 @@ class StartState(BaseState):
             if self.current_menu_item == 3:
                 settings.SOUNDS["menu_enter"].stop()
                 settings.SOUNDS["menu_enter"].play()
-                #self.state_machine.change("credits")
+                self.state_machine.change("dialogue",previous="start",next="credits",part=1)
