@@ -14,15 +14,12 @@ from typing import Dict, Any
 
 import pygame
 
+from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
 
 import settings
-from src.Player import Player
-from src.Camera import Camera
-from src.GameLevel import GameLevel
-
 
 class DialogueState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
@@ -39,11 +36,6 @@ class DialogueState(BaseState):
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )
         
-        # Camera position
-        self.camera = enter_params.get(
-            "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
-        )
-
         # Initial position and text to display
         if self.oldState == "init":
             self.dialogue = "intro"
@@ -106,6 +98,12 @@ class DialogueState(BaseState):
                 self.timeEnd,
                 arrive_after
             )
+    
+    def on_input(self, input_id: str, input_data: InputData) -> None:
+        if input_id == "enter" and input_data.pressed:
+            self.state_machine.change(
+                   self.newState, previous = self.oldState, next = self.newState, part = self.part
+               )
 
     def render(self, surface: pygame.Surface) -> None:
         if self.display_text:
