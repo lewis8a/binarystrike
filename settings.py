@@ -63,6 +63,7 @@ LevelLoader = loaders.TmxLevelLoader
 
 # Textures
 TEXTURES = {
+    "background_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "backgrounds" / "0.jpg"),
     "binary_strike": pygame.image.load(BASE_DIR / "assets" / "graphics" / "logo" / "BinaryStrike.png"),
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
@@ -74,6 +75,13 @@ TEXTURES = {
     "enemy2_shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot.png"),
     "enemy2_idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
     "enemy2_dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
+    "play_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "play_btn_0.png"),
+    "play_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "play_btn_1.png"),
+    "settings_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_0.png"),
+    "settings_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_1.png"),
+    "info_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "info_btn_0.png"),
+    "info_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "info_btn_1.png"),
+    "bar": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "bar.png"),
 }
 
 # Frames
@@ -82,12 +90,12 @@ FRAMES = {
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "tile_3": frames.generate_frames(TEXTURES["tile_3"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
+    "bullet_player": frames.generate_frames(TEXTURES["bullet_player"], 8, 8),
+    "bullet_enemy": frames.generate_frames(TEXTURES["bullet_enemy"], 5, 5),
     "enemy2_walk": frames.generate_frames(TEXTURES["enemy2_walk"], 20, 34),
     "enemy2_shoot": frames.generate_frames(TEXTURES["enemy2_shoot"], 20, 34),
     "enemy2_idle": frames.generate_frames(TEXTURES["enemy2_idle"], 20, 34),
     "enemy2_dead": frames.generate_frames(TEXTURES["enemy2_dead"], 51, 51),
-    "bullet_player": frames.generate_frames(TEXTURES["bullet_player"], 8, 8),
-    "bullet_enemy": frames.generate_frames(TEXTURES["bullet_enemy"], 5, 5),
 }
 
 # Tile maps of levels
@@ -113,12 +121,21 @@ SOUNDS = {
     "jump2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_2.wav"),
     "jump3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_3.wav"),
     "jump4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_4.wav"),
+    "menu_change": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_change.mp3"),
+    "menu_character": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_character.mp3"),
+    "menu_enter": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_enter.mp3"),
+    "menu_play": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_play.mp3"),
+    "menu_return": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_return.mp3"),
+    "menu_select": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_select.mp3"),
 }
 
-#Fonts
+# Fonts
 pygame.font.init()
 FONTS = {
     "small": pygame.font.Font(BASE_DIR / "fonts" / "text.otf", 12),
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "text.otf",24),
-    "large": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",32),
+    "title_small": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",16),
+    "title_small_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",20),
+    "title_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",24),
+    "title_large": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",32),
 }

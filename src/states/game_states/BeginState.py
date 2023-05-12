@@ -40,7 +40,9 @@ class BeginState(BaseState):
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
+
         self.game_level = enter_params.get("game_level")
+        
         if self.game_level is None:
             self.game_level = GameLevel(self.level, self.camera)
 
