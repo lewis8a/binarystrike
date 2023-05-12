@@ -43,10 +43,6 @@ class Enemy(GameEntity):
             True,
             game_level,
             states = ss,
-            # states={
-            #     state_name: lambda sm: state_class(self, sm)
-            #     for state_name, state_class in definition["states"].items()
-            # },
             animation_defs=definition["animation_defs"],
         )
         self.time_to_rest = definition["time_to_rest"]

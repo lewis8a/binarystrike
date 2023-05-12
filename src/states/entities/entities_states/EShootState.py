@@ -46,7 +46,7 @@ class EShootState(BaseEntityState, IAEnemies):
             bullet = Projectile(self.entity.x,
                                 self.entity.y + self.entity.height/3,
                                 5, 5, vx, vy,
-                                settings.TEXTURES["bulletenemy"], self.entity.game_level.camera)
+                                settings.TEXTURES["bullet_enemy"], self.entity.game_level.camera)
             self.entity.game_level.enemies_bullets.append(bullet)
 
             p = random.rand()
