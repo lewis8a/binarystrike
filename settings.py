@@ -64,6 +64,7 @@ LevelLoader = loaders.TmxLevelLoader
 TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
+    "tile_3": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_3.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
     "bullet1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Bullet1.png"),
     "Enemy2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Walk.png"),
@@ -75,6 +76,7 @@ TEXTURES = {
 FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
+    "tile_3": frames.generate_frames(TEXTURES["tile_3"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
     "Enemy2-walk": frames.generate_frames(TEXTURES["Enemy2-walk"], 20, 34),
     "Enemy2-shot": frames.generate_frames(TEXTURES["Enemy2-shot"], 20, 34),
@@ -92,6 +94,14 @@ SOUNDS = {
     "level2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level2.ogg"),
     "level3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "level3.ogg"),
     "gun": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "gun" / "gun5_shoot.wav"),
+    "blood1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_1.mp3"),
+    "blood2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_2.mp3"),
+    "blood3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_3.mp3"),
+    "blood4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_4.mp3"),
+    "jump1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_1.wav"),
+    "jump2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_2.wav"),
+    "jump3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_3.wav"),
+    "jump4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_4.wav"),
 }
 
 pygame.font.init()

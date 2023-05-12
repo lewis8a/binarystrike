@@ -13,6 +13,8 @@ lewis8a@gmail.com
 
 This file contains the class JumpState for player.
 """
+from numpy import random
+
 from gale.input_handler import InputHandler, InputData
 
 import settings
@@ -24,7 +26,9 @@ class JumpState(BaseEntityState):
         self.entity.change_animation("jump")
         self.entity.vy = -250
         InputHandler.register_listener(self)
-        # settings.SOUNDS["jump"].play()
+        randomJumpSound = random.randint(1,4)
+        settings.SOUNDS[f"jump{randomJumpSound}"].stop()
+        settings.SOUNDS[f"jump{randomJumpSound}"].play()
 
     def exit(self) -> None:
         InputHandler.unregister_listener(self)
