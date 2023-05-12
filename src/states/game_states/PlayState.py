@@ -41,6 +41,7 @@ class PlayState(BaseState):
         if self.level == 1:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
+                pygame.mixer.music.unpause()
             else:
                 self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
                 self.player.change_state("idle")
@@ -167,6 +168,7 @@ class PlayState(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "pause" and input_data.pressed:
+            pygame.mixer.music.pause()
             self.state_machine.change(
                 "pause",
                 timer = self.timer,

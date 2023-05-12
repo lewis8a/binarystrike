@@ -31,15 +31,17 @@ class PausaState(BaseState):
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         # Entry sound
-        settings.SOUNDS["menu-play"].stop()
-        settings.SOUNDS["menu-play"].play()
-        # Reproducir música de pausa
+        settings.SOUNDS["menu_play"].stop()
+        settings.SOUNDS["menu_play"].play()
+        # Pause music
+        settings.SOUNDS["pause"].play()
 
     def exit(self) -> None:
         # Detener música de pausa
+        settings.SOUNDS["pause"].stop()
         # Exit sound
-        settings.SOUNDS["menu-play"].stop()
-        settings.SOUNDS["menu-play"].play()
+        settings.SOUNDS["menu_play"].stop()
+        settings.SOUNDS["menu_play"].play()
         pass
 
     def update(self, dt: float) -> None:
