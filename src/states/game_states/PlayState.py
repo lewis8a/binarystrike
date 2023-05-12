@@ -89,18 +89,18 @@ class PlayState(BaseState):
         pygame.mixer.music.stop()
 
     def update(self, dt: float) -> None:
-        if self.player.is_dead:
-            self.state_machine.change("begin")
+        #if self.player.is_dead:
+            #self.state_machine.change("begin")
             # pygame.mixer.music.stop()
             # pygame.mixer.music.unload()
             # settings.SOUNDS["game_over"].stop()
             # settings.SOUNDS["game_over"].play()
             # self.state_machine.change("game_over", self.player, self.level)
 
-        self.player.update(dt)
-    
-        if self.player.y >= self.player.tilemap.height:
+        if self.player.y >= self.player.tilemap.height and not self.player.is_dead:
             self.player.change_state("dead")
+        else:
+            self.player.update(dt)
 
         self.camera.x = max(
             0,
