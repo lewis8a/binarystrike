@@ -26,10 +26,11 @@ class Binarystrike(Game):
         self.state_machine = StateMachine({
             "begin": game_states.BeginState,
             "play": game_states.PlayState,
+            "dialogue": game_states.DialogueState,
             "pause": game_states.PausaState,
             "start": game_states.StartState,
         })
-        self.state_machine.change("start")
+        self.state_machine.change("dialogue",previous="init",next="start")
 
     def update(self, dt: float) -> None:
         self.state_machine.update(dt)

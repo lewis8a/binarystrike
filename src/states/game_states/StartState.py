@@ -39,6 +39,7 @@ class StartState(BaseState):
         pygame.mixer.music.unload()
 
     def render(self, surface: pygame.Surface) -> None:
+        # Colored Background
         surface.fill((0, 0, 0))
         
         # Background
@@ -199,7 +200,7 @@ class StartState(BaseState):
             if self.current_menu_item == 2:
                 settings.SOUNDS["menu_play"].stop()
                 settings.SOUNDS["menu_play"].play()
-                self.state_machine.change("begin")
+                self.state_machine.change("dialogue",previous="start",next="begin")
             if self.current_menu_item == 3:
                 settings.SOUNDS["menu_enter"].stop()
                 settings.SOUNDS["menu_enter"].play()
