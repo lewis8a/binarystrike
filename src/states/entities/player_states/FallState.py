@@ -93,7 +93,7 @@ class FallState(BaseEntityState):
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_up and self.looking_right: # Up and right
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
-                                    self.entity.y + self.entity.height,
+                                    self.entity.y,
                                     8, 8, settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_down and self.looking_left: # Down and left
