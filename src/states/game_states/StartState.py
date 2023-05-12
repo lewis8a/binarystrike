@@ -13,11 +13,9 @@ This file contains the class StartState.
 import pygame
 import settings
 
-from gale.animation import Animation
 from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import Text, render_text
-from gale.timer import Timer
 
 
 class StartState(BaseState):

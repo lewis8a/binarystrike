@@ -37,6 +37,7 @@ class PausaState(BaseState):
         self.camera = enter_params.get("camera")
         self.game_level = enter_params.get("game_level")
         self.bullets = enter_params.get("bullets")
+        self.pos_music = enter_params.get("pos_music")
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         
@@ -44,7 +45,9 @@ class PausaState(BaseState):
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
         # Pause music
-        settings.SOUNDS["pause"].play()
+        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/pause.ogg")
+        pygame.mixer.music.set_volume(0.8)
+        pygame.mixer.music.play(loops=-1)
 
         def arrive():
             self.finish_tween = True
@@ -60,13 +63,12 @@ class PausaState(BaseState):
 
     def exit(self) -> None:
         # Detener música de pausa
-        settings.SOUNDS["pause"].stop()
+        pygame.mixer.music.unload()
+        pygame.mixer.music.stop()
         # Exit sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
 
-    def update(self, dt: float) -> None:
-        pass
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
@@ -127,4 +129,5 @@ class PausaState(BaseState):
                 camera=self.camera,
                 game_level=self.game_level,
                 bullets=self.bullets,
+                pos_music = self.pos_music
             )
