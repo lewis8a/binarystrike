@@ -43,7 +43,7 @@ class EShootState(BaseEntityState, IAEnemies):
             vx, vy = self.speed_to_shoot()
             bullet = Projectile(self.entity.x,
                                 self.entity.y + self.entity.height/3,
-                                4, 6, vx, vy,
+                                5, 5, vx, vy,
                                 settings.TEXTURES["bulletenemy"], self.entity.game_level.camera)
             self.entity.game_level.enemies_bullets.append(bullet)
         elif self.shot:

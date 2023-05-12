@@ -82,7 +82,7 @@ FRAMES = {
     "Enemy2-idle": frames.generate_frames(TEXTURES["Enemy2-idle"], 20, 34),
     #"Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-dead"], 51, 51),
     "bullet1": frames.generate_frames(TEXTURES["bullet1"], 8, 8),
-    "bulletenemy": frames.generate_frames(TEXTURES["bulletenemy"], 6, 4),
+    "bulletenemy": frames.generate_frames(TEXTURES["bulletenemy"], 5, 5),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}
