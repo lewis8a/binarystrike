@@ -21,6 +21,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
     379: {
         "texture_id": "Enemy2",
         "walk_speed": 15,
+        "time_to_rest": 3,
         "animation_defs": {
             "walk": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.25},
             "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},

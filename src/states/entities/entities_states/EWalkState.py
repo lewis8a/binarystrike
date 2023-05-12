@@ -29,12 +29,14 @@ class EWalkState(BaseEntityState, IAEnemies):
             self.entity.vx *= -1
 
     def update(self, dt: float) -> None:
-        p = random.rand()
-        if 0 < p < 0.05:
-            self.entity.change_state("idle", self.entity.flipped)
-        if 3.1 < p < 3.125:
+        self.entity.wait_time -= dt
+        if self.can_see_player() and self.entity.wait_time <= 0:
             self.entity.change_state("shoot", self.entity.flipped)
         else:
-            if self.check_boundary():
-                self.entity.vx *= -1
-                self.entity.flipped = not self.entity.flipped
+            p = random.rand()
+            if 0 < p < 0.05:
+                self.entity.change_state("idle", self.entity.flipped)
+            else:
+                if self.check_boundary():
+                    self.entity.vx *= -1
+                    self.entity.flipped = not self.entity.flipped

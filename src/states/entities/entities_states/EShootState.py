@@ -31,15 +31,14 @@ class EShootState(BaseEntityState, IAEnemies):
             self.entity.flipped = not self.entity.flipped
         elif dif_x < 0 and not self.entity.flipped:
             self.entity.flipped = not self.entity.flipped
-        self.shot = False
         self.entity.change_animation("shoot")
 
     def exit(self) -> None:
-        self.entity.vx = enemies.Enemies[379]["walk_speed"]
+        pass
 
     def update(self, dt: float) -> None:
-        if not self.shot and self.entity.frame_index > 1 and self.entity.x - self.player.x < 300:
-            self.shot = True
+        if self.entity.frame_index >= 2:
+            self.entity.wait_time = self.entity.time_to_rest
             randomJumpSound = random.randint(1,4)
             settings.SOUNDS[f"gun{randomJumpSound}"].stop()
             settings.SOUNDS[f"gun{randomJumpSound}"].play()
@@ -49,11 +48,12 @@ class EShootState(BaseEntityState, IAEnemies):
                                 5, 5, vx, vy,
                                 settings.TEXTURES["bulletenemy"], self.entity.game_level.camera)
             self.entity.game_level.enemies_bullets.append(bullet)
-        elif self.shot:
+
             p = random.rand()
             if p < 0.3:
-                self.entity.change_state("walk", self.entity.flipped)
+                self.entity.change_state("idle", self.entity.flipped)
             else:
+                self.entity.vx = enemies.Enemies[379]["walk_speed"]
                 self.entity.change_state("walk", self.entity.flipped)
 
     def speed_to_shoot(self) -> Tuple[int, int]:

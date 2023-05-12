@@ -14,12 +14,31 @@ lewis8a@gmail.com
 This file contains the base class IAEnemies.
 """
 
+from numpy import sqrt
+
 from src.GameObject import GameObject
+
+import settings
 
 class IAEnemies():
     def __init__(self) -> None:
         pass
 
+    def can_see_player(self) -> bool:
+        player = self.entity.game_level.player
+        ex = self.entity.x + self.entity.width/2
+        ey = self.entity.y + self.entity.height/2
+
+        px = player.x + player.width/2
+        py = player.y + player.height/2
+
+        dif_x = px - ex
+        dif_y = py - ey
+        dist = sqrt(dif_x*dif_x + dif_y*dif_y)
+
+        return dist <= settings.RANGE_VISION
+
+    
     def check_boundary(self) -> bool:
         world_width = self.entity.tilemap.width
 

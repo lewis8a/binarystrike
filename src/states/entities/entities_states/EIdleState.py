@@ -31,13 +31,15 @@ class EIdleState(BaseEntityState, IAEnemies):
         pass
 
     def update(self, dt: float) -> None:
-        p = random.rand()
-        if p < 0.05:
-            self.entity.vx = enemies.Enemies[379]["walk_speed"]
-            self.entity.change_state("walk", self.entity.flipped)
-        if 0.1 < p < 0.125:
+        self.entity.wait_time -= dt
+        if self.can_see_player() and self.entity.wait_time <= 0:
             self.entity.change_state("shoot", self.entity.flipped)
         else:
             p = random.rand()
-            if 0.1 < p < 0.125:
-                self.entity.flipped = not self.entity.flipped 
+            if p < 0.05:
+                self.entity.vx = enemies.Enemies[379]["walk_speed"]
+                self.entity.change_state("walk", self.entity.flipped)
+            else:
+                p = random.rand()
+                if 0.1 < p < 0.125:
+                    self.entity.flipped = not self.entity.flipped 
