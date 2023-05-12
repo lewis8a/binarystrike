@@ -41,6 +41,8 @@ class PausaState(BaseState):
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         
+        if type(self.player.state_machine.current).__name__ == "WalkState":
+            self.player.change_state("idle")
         # Avoid entries
         InputHandler.unregister_listener(self.player.state_machine.current)
 
@@ -126,7 +128,7 @@ class PausaState(BaseState):
         surface.blit(self.screen_alpha_surface, (0, 0))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "pause" and input_data.pressed:
+        if input_id == "pause" and input_data.pressed and self.finish_tween:
             self.state_machine.change(
                 "play",
                 player=self.player,
