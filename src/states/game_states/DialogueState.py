@@ -36,11 +36,6 @@ class DialogueState(BaseState):
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )
         
-        # Camera position
-        self.camera = enter_params.get(
-            "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
-        )
-
         # Set the volumne for this sounds
         settings.SOUNDS["menu_play"].set_volume(0.3)
 
