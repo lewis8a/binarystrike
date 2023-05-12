@@ -14,7 +14,7 @@ from typing import Dict, Any
 
 import pygame
 
-from gale.input_handler import InputData
+from gale.input_handler import InputHandler, InputData
 from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
@@ -41,6 +41,9 @@ class PausaState(BaseState):
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         
+        # Avoid entries
+        InputHandler.unregister_listener(self.player.state_machine.current)
+
         # Entry sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
@@ -62,6 +65,9 @@ class PausaState(BaseState):
         )
 
     def exit(self) -> None:
+        # Registering for entries
+        InputHandler.register_listener(self.player.state_machine.current)
+
         # Detener música de pausa
         pygame.mixer.music.unload()
         pygame.mixer.music.stop()
