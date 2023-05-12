@@ -125,6 +125,16 @@ class PausaState(BaseState):
                 shadowed=True,
             )
 
+            render_text(
+                self.screen_alpha_surface,
+                f"Level {self.level}",
+                settings.FONTS["title_small"],
+                settings.VIRTUAL_WIDTH/2 - 20,
+                settings.VIRTUAL_HEIGHT/2 + 10,
+                (255, 255, 255),
+                shadowed=True,
+            )
+
         surface.blit(self.screen_alpha_surface, (0, 0))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
