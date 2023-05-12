@@ -18,6 +18,23 @@ from typing import Dict, Any
 from src.states.entities import entities_states
 
 Enemies: Dict[int, Dict[str, Any]] = {
+    380: {
+        "texture_id": "enemy1",
+        "walk_speed": 15,
+        "time_to_rest": 3,
+        "animation_defs": {
+            "walk": {"frames": [0, 1, 2, 3, 4, 5, 6], "interval": 0.15},
+            "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},
+            "idle": {"frames": [0, 1, 2, 3, 4, 5, 6], "interval": 0.15},
+            "dead": {"frames": [0, 1, 2, 3], "interval": 0.15},
+        },
+        "states": {
+            "idle": entities_states.EIdleState,
+            "walk": entities_states.EWalkState,
+            "shoot": entities_states.EShootState,
+            },
+        "first_state": "walk",
+    },
     379: {
         "texture_id": "enemy2",
         "walk_speed": 15,
@@ -35,4 +52,6 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
+    
+
 }
