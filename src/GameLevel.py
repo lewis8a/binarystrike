@@ -28,8 +28,10 @@ class GameLevel:
     def __init__(self, num_level: int, camera: Camera) -> None:
         self.tilemap = None
         self.enemies = []
+        self.enemies_bullets = []
         self.items = []
         self.camera = camera
+        self.player = None
         settings.LevelLoader().load(self, settings.TILEMAPS[num_level], num_level)
 
     def add_item(self, item_data: Dict[str, Any]) -> None:
@@ -59,8 +61,20 @@ class GameLevel:
             else:
                 del self.enemies[i]
 
+        for i in range(len(self.enemies_bullets) - 1, -1, -1):
+            if self.enemies_bullets[i].collides(self.player):
+                self.enemies_bullets[i].in_play = False
+                self.player.change_state("dead")
+                #play sound player deading 
+            if self.enemies_bullets[i].in_play:
+                self.enemies_bullets[i].update(dt)
+            else:
+                del self.enemies_bullets[i]
+
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)
+        for bullet in self.enemies_bullets:
+            bullet.render(surface)
         for enemy in self.enemies:
             enemy.render(surface)
         for item in self.items:

@@ -25,12 +25,15 @@ class EIdleState(BaseEntityState, IAEnemies):
         self.entity.change_animation("idle")
 
     def exit(self) -> None:
-        self.entity.vx = enemies.Enemies[379]["walk_speed"]
+        pass
 
     def update(self, dt: float) -> None:
         p = random.rand()
         if p < 0.05:
+            self.entity.vx = enemies.Enemies[379]["walk_speed"]
             self.entity.change_state("walk", self.entity.flipped)
+        if 0.1 < p < 4:
+            self.entity.change_state("shoot", self.entity.flipped)
         else:
             p = random.rand()
             if 0.1 < p < 0.125:

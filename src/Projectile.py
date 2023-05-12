@@ -19,7 +19,8 @@ import settings
 from src.Camera import Camera
 
 class Projectile:
-    def __init__(self, x: int, y: int, w: int, h: int, vx: int, vy: int, camera: Camera) -> None:
+    def __init__(self, x: int, y: int, w: int, h: int,
+                 vx: int, vy: int, texture, camera: Camera) -> None:
         self.x = x
         self.y = y
         self.width = w
@@ -30,7 +31,7 @@ class Projectile:
         
         self.camera = camera
 
-        self.texture = settings.TEXTURES["bullet1"]
+        self.texture = texture
         self.frame = 0
         self.in_play = True
 

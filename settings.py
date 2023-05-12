@@ -63,8 +63,9 @@ TEXTURES = {
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
     "bullet1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Bullet1.png"),
+    "bulletenemy": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "BulletEnemy.png"),
     "Enemy2-walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Walk.png"),
-    "Enemy2-shot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot_1.png"),
+    "Enemy2-shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot_1.png"),
     "Enemy2-idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
     "Enemy2-dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
 }
@@ -74,10 +75,11 @@ FRAMES = {
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
     "Enemy2-walk": frames.generate_frames(TEXTURES["Enemy2-walk"], 20, 34),
-    "Enemy2-shot": frames.generate_frames(TEXTURES["Enemy2-shot"], 51, 51),
+    "Enemy2-shoot": frames.generate_frames(TEXTURES["Enemy2-shoot"], 51, 51),
     "Enemy2-idle": frames.generate_frames(TEXTURES["Enemy2-idle"], 20, 34),
     "Enemy2-dead": frames.generate_frames(TEXTURES["Enemy2-dead"], 51, 51),
     "bullet1": frames.generate_frames(TEXTURES["bullet1"], 8, 8),
+    "bulletenemy": frames.generate_frames(TEXTURES["bulletenemy"], 6, 4),
 }
 
 TILEMAPS = {i: BASE_DIR / "tilemaps" / f"level_{i}" for i in range(1, NUM_LEVELS + 1)}
