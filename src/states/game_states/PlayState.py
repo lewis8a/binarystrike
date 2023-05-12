@@ -35,18 +35,42 @@ class PlayState(BaseState):
         )
         self.game_level = enter_params.get("game_level", GameLevel(self.level, self.camera))
         self.bullets = enter_params.get("bullets", [])
+        self.pos_music = enter_params.get("pos_music", 0.0)
 
         self.tilemap = self.game_level.tilemap
 
         if self.level == 1:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
-                pygame.mixer.music.unpause()
             else:
-                self.player = Player(0, settings.VIRTUAL_HEIGHT - 16 * 2, self.game_level)
+                self.player = Player(16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
+            pygame.mixer.music.set_volume(0.3)
+        elif self.level == 2:
+            if hasattr(self.player, "play_state"):
+                delattr(self.player, "play_state")
+            else:
+                self.player = Player(16 * 2, 16 * 2, self.game_level)
+                self.player.change_state("idle")
+                self.game_level.player = self.player
+            
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
+            pygame.mixer.music.set_volume(0.3)
+        elif self.level == 3:
+            if hasattr(self.player, "play_state"):
+                delattr(self.player, "play_state")
+            else:
+                self.player = Player(16 * 2, 16 * 5, self.game_level)
+                self.player.change_state("idle")
+                self.game_level.player = self.player
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
+            pygame.mixer.music.set_volume(0.3)
+            
+        pygame.mixer.music.play(loops=-1, start=self.pos_music)
+        
         self.player.play_state = self
 
         def countdown_timer():
@@ -62,6 +86,8 @@ class PlayState(BaseState):
 
     def exit(self) -> None:
         Timer.clear()
+        pygame.mixer.music.unload()
+        pygame.mixer.music.stop()
 
     def update(self, dt: float) -> None:
         if self.player.is_dead:
@@ -169,7 +195,17 @@ class PlayState(BaseState):
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "pause" and input_data.pressed:
-            pygame.mixer.music.pause()
+            music_pos =  pygame.mixer.music.get_pos() / 1000
+            if self.level == 1:
+                if music_pos > 120:
+                    music_pos = music_pos % 120
+            elif self.level == 2:
+                if music_pos > 56:
+                    music_pos = music_pos % 56
+            elif self.level == 3:
+                if music_pos > 32:
+                    music_pos = music_pos % 32
+            
             self.state_machine.change(
                 "pause",
                 timer = self.timer,
@@ -177,4 +213,5 @@ class PlayState(BaseState):
                 camera = self.camera,
                 game_level = self.game_level,
                 bullets = self.bullets,
+                pos_music = music_pos
             )

@@ -14,7 +14,7 @@ from typing import Dict, Any
 
 import pygame
 
-from gale.input_handler import InputData
+from gale.input_handler import InputHandler, InputData
 from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
@@ -37,14 +37,22 @@ class PausaState(BaseState):
         self.camera = enter_params.get("camera")
         self.game_level = enter_params.get("game_level")
         self.bullets = enter_params.get("bullets")
+        self.pos_music = enter_params.get("pos_music")
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         
+        if type(self.player.state_machine.current).__name__ == "WalkState":
+            self.player.change_state("idle")
+        # Avoid entries
+        InputHandler.unregister_listener(self.player.state_machine.current)
+
         # Entry sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
         # Pause music
-        settings.SOUNDS["pause"].play()
+        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/pause.ogg")
+        pygame.mixer.music.set_volume(0.8)
+        pygame.mixer.music.play(loops=-1)
 
         def arrive():
             self.finish_tween = True
@@ -59,14 +67,16 @@ class PausaState(BaseState):
         )
 
     def exit(self) -> None:
+        # Registering for entries
+        InputHandler.register_listener(self.player.state_machine.current)
+
         # Detener música de pausa
-        settings.SOUNDS["pause"].stop()
+        pygame.mixer.music.unload()
+        pygame.mixer.music.stop()
         # Exit sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
 
-    def update(self, dt: float) -> None:
-        pass
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
@@ -115,10 +125,20 @@ class PausaState(BaseState):
                 shadowed=True,
             )
 
+            render_text(
+                self.screen_alpha_surface,
+                f"Level {self.level}",
+                settings.FONTS["title_small"],
+                settings.VIRTUAL_WIDTH/2 - 20,
+                settings.VIRTUAL_HEIGHT/2 + 10,
+                (255, 255, 255),
+                shadowed=True,
+            )
+
         surface.blit(self.screen_alpha_surface, (0, 0))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "pause" and input_data.pressed:
+        if input_id == "pause" and input_data.pressed and self.finish_tween:
             self.state_machine.change(
                 "play",
                 player=self.player,
@@ -127,4 +147,5 @@ class PausaState(BaseState):
                 camera=self.camera,
                 game_level=self.game_level,
                 bullets=self.bullets,
+                pos_music = self.pos_music
             )

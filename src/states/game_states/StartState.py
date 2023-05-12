@@ -18,7 +18,6 @@ from gale.animation import Animation
 from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import Text, render_text
-from gale.timer import Timer
 
 
 class StartState(BaseState):
@@ -130,8 +129,8 @@ class StartState(BaseState):
             settings.VIRTUAL_WIDTH // 5 + margin1,
             settings.VIRTUAL_HEIGHT // 2 + 60,
             text_color,
-            center=True,
-            shadowed=True,
+            center = True,
+            shadowed = True,
         )
 
         # Text Play
@@ -148,8 +147,8 @@ class StartState(BaseState):
             settings.VIRTUAL_WIDTH // 1.9 + margin2,
             settings.VIRTUAL_HEIGHT // 2 + 60,
             text_color,
-            center=True,
-            shadowed=True,
+            center = True,
+            shadowed = True,
         )
 
         # Text Credits
@@ -166,8 +165,8 @@ class StartState(BaseState):
             settings.VIRTUAL_WIDTH // 1.2 + margin3,
             settings.VIRTUAL_HEIGHT // 2 + 60,
             text_color,
-            center=True,
-            shadowed=True,
+            center = True,
+            shadowed = True,
         )
     
     def on_input(self, input_id: str, input_data: InputData) -> None:
