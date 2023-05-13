@@ -37,6 +37,9 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_s, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_f, "shoot")
 
+# Tile size
+TILE_SIZE = 16
+
 # Size we want to emulate
 VIRTUAL_WIDTH = 300
 VIRTUAL_HEIGHT = 192

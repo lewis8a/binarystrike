@@ -54,6 +54,7 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         self.generate_animations(animation_defs)
         self.flipped = flipped
         self.is_dead = False
+        self.last_floor_position = ()
 
     def change_state(
         self, state_id: str, *args: Tuple[Any], **kwargs: Dict[str, Any]
@@ -157,9 +158,14 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         # Left and right columns
         left = self.tilemap.to_j(collision_rect.left)
         right = self.tilemap.to_j(collision_rect.right)
-        return self.tilemap.check_solidness_on(
-            i + 1, left, GameObject.TOP
-        ) or self.tilemap.check_solidness_on(i + 1, right, GameObject.TOP)
+        has_floor_left = self.tilemap.check_solidness_on(i + 1, left, GameObject.TOP)
+        has_floor_right = self.tilemap.check_solidness_on(i + 1, right, GameObject.TOP)
+        if has_floor_right:
+            self.last_floor_position = (right * settings.TILE_SIZE, i * settings.TILE_SIZE)
+        elif has_floor_left:
+            self.last_floor_position = (left * settings.TILE_SIZE, i * settings.TILE_SIZE)
+
+        return has_floor_left or has_floor_right
     
     def check_floor_on_jump(self) -> bool:
         """
