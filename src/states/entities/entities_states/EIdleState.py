@@ -37,7 +37,7 @@ class EIdleState(BaseEntityState, IAEnemies):
         else:
             p = random.rand()
             if p < 0.05:
-                self.entity.vx = enemies.Enemies[379]["walk_speed"]
+                self.entity.vx = enemies.Enemies[1]["walk_speed"]
                 self.entity.change_state("walk", self.entity.flipped)
             else:
                 p = random.rand()
