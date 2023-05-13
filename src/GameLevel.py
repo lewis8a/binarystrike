@@ -65,7 +65,6 @@ class GameLevel:
             if self.enemies_bullets[i].collides(self.player):
                 self.enemies_bullets[i].in_play = False
                 self.player.change_state("dead")
-                #play sound player deading 
             if self.enemies_bullets[i].in_play:
                 self.enemies_bullets[i].update(dt)
             else:
