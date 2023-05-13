@@ -80,6 +80,10 @@ TEXTURES = {
     "enemy2_shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Shot.png"),
     "enemy2_idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Idle.png"),
     "enemy2_dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy2" / "Dead.png"),
+    "enemy3_walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy3" / "Walk.png"),
+    "enemy3_shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy3" / "Shot.png"),
+    "enemy3_idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy3" / "Idle.png"),
+    "enemy3_dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy3" / "Dead.png"),
     "play_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "play_btn_0.png"),
     "play_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "play_btn_1.png"),
     "settings_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_0.png"),
@@ -105,6 +109,10 @@ FRAMES = {
     "enemy2_shoot": frames.generate_frames(TEXTURES["enemy2_shoot"], 20, 34),
     "enemy2_idle": frames.generate_frames(TEXTURES["enemy2_idle"], 20, 34),
     "enemy2_dead": frames.generate_frames(TEXTURES["enemy2_dead"], 51, 51),
+    "enemy3_walk": frames.generate_frames(TEXTURES["enemy3_walk"], 20, 34),
+    "enemy3_shoot": frames.generate_frames(TEXTURES["enemy3_shoot"], 20, 34),
+    "enemy3_idle": frames.generate_frames(TEXTURES["enemy3_idle"], 20, 34),
+    "enemy3_dead": frames.generate_frames(TEXTURES["enemy3_dead"], 51, 51),
 }
 
 # Tile maps of levels
