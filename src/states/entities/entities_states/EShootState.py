@@ -53,7 +53,7 @@ class EShootState(BaseEntityState, IAEnemies):
             if p < 0.3:
                 self.entity.change_state("idle", self.entity.flipped)
             else:
-                self.entity.vx = enemies.Enemies[379]["walk_speed"]
+                self.entity.vx = enemies.Enemies[1]["walk_speed"]
                 self.entity.change_state("walk", self.entity.flipped)
 
     def speed_to_shoot(self) -> Tuple[int, int]:

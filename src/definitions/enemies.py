@@ -69,6 +69,4 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
-    
-
 }

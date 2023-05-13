@@ -122,6 +122,7 @@ class PlayState(BaseState):
                 if self.bullets[i].collides(enemy):
                     self.bullets[i].in_play = False
                     enemy.is_dead = True
+                    enemy.change_animation("dead")
                     self.player.score += 150
                     #play sound deading 
             if self.bullets[i].in_play:

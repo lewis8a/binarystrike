@@ -102,7 +102,6 @@ class TmxLevelLoader:
                     continue
 
                 frame_index = value - self.first_ids["level_1"]
-                
                 if 0 < frame_index < 4:
                     height = 34
                     width = 20
