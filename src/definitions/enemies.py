@@ -18,7 +18,7 @@ from typing import Dict, Any
 from src.states.entities import entities_states
 
 Enemies: Dict[int, Dict[str, Any]] = {
-    377: {
+    1: {
         "texture_id": "enemy1",
         "walk_speed": 15,
         "time_to_rest": 3,
@@ -35,7 +35,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
-    378: {
+    2: {
         "texture_id": "enemy2",
         "walk_speed": 15,
         "time_to_rest": 3,
@@ -52,7 +52,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
-    379: {
+    3: {
         "texture_id": "enemy3",
         "walk_speed": 15,
         "time_to_rest": 3,
@@ -69,4 +69,6 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
+    
+
 }
