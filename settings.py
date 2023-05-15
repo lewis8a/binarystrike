@@ -44,7 +44,7 @@ TILE_SIZE = 16
 VIRTUAL_WIDTH = 300
 VIRTUAL_HEIGHT = 192
 
-# Size of our actual window (Ascpect ratio 16:9)
+# Size of our actual window (Aspect ratio 16:9)
 pygame.init()
 WINDOW_WIDTH = pygame.display.Info().current_w
 WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
@@ -52,7 +52,7 @@ WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
 # Basic game settings
 PLAYER_SPEED = 80
 PLAYER_COLOR = 1
-GRAVITY = 400
+GRAVITY = 350
 NUM_LEVELS = 4
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
@@ -72,6 +72,7 @@ TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "tile_3": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_3.png"),
+    "tile_4": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_4.png"),
     "khan1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
     "khan2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_2.png"),
     "khan3": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_3.png"),
@@ -117,6 +118,7 @@ FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "tile_3": frames.generate_frames(TEXTURES["tile_3"], 16, 16),
+    "tile_4": frames.generate_frames(TEXTURES["tile_4"], 16, 16),
     "khan1": frames.generate_frames(TEXTURES["khan1"], 20, 34),
     "khan2": frames.generate_frames(TEXTURES["khan2"], 20, 34),
     "khan3": frames.generate_frames(TEXTURES["khan3"], 20, 34),
@@ -158,6 +160,10 @@ SOUNDS = {
     "level_failed": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "level" / "level_failed.mp3"),
     "level_time": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "level" / "level_time.mp3"),
     "level_win": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "level" / "level_win.mp3"),
+    "boss1": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "boss1.ogg"),
+    "boss2": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "boss2.ogg"),
+    "boss3": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "boss3.ogg"),
+    "finalboss": pygame.mixer.Sound(BASE_DIR / "assets" / "music" / "finalboss.ogg"),
     "blood1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_1.mp3"),
     "blood2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_2.mp3"),
     "blood3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "blood" / "blood_3.mp3"),
