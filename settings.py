@@ -134,15 +134,15 @@ FRAMES = {
     "enemy1_walk": frames.generate_frames(TEXTURES["enemy1_walk"], 20, 34),
     "enemy1_shoot": frames.generate_frames(TEXTURES["enemy1_shoot"], 20, 34),
     "enemy1_idle": frames.generate_frames(TEXTURES["enemy1_idle"], 20, 34),
-    "enemy1_dead": frames.generate_frames(TEXTURES["enemy1_dead"], 51, 51),
+    "enemy1_dead": frames.generate_frames(TEXTURES["enemy1_dead"], 20, 34),
     "enemy2_walk": frames.generate_frames(TEXTURES["enemy2_walk"], 20, 34),
     "enemy2_shoot": frames.generate_frames(TEXTURES["enemy2_shoot"], 20, 34),
     "enemy2_idle": frames.generate_frames(TEXTURES["enemy2_idle"], 20, 34),
-    "enemy2_dead": frames.generate_frames(TEXTURES["enemy2_dead"], 51, 51),
+    "enemy2_dead": frames.generate_frames(TEXTURES["enemy2_dead"], 20, 34),
     "enemy3_walk": frames.generate_frames(TEXTURES["enemy3_walk"], 20, 34),
     "enemy3_shoot": frames.generate_frames(TEXTURES["enemy3_shoot"], 20, 34),
     "enemy3_idle": frames.generate_frames(TEXTURES["enemy3_idle"], 20, 34),
-    "enemy3_dead": frames.generate_frames(TEXTURES["enemy3_dead"], 51, 51),
+    "enemy3_dead": frames.generate_frames(TEXTURES["enemy3_dead"], 20, 34),
 }
 
 # Tile maps of levels

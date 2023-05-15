@@ -13,5 +13,6 @@ This module contains all of the entities states.
 from src.states.entities.entities_states.EWalkState import EWalkState
 from src.states.entities.entities_states.EIdleState import EIdleState
 from src.states.entities.entities_states.EShootState import EShootState
+from src.states.entities.entities_states.EDeadState import EDeadState
 
-(EWalkState, EIdleState, EShootState)
+(EWalkState, EIdleState, EShootState, EDeadState)
