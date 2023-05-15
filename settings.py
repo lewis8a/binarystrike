@@ -52,6 +52,7 @@ WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.5 #pygame.display.Info().current_h
 
 # Basic game settings
 PLAYER_SPEED = 80
+PLAYER_COLOR = 1
 GRAVITY = 400
 NUM_LEVELS = 3
 PROJECTILE_SPEED = 170
@@ -72,7 +73,16 @@ TEXTURES = {
     "tile_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_1.png"),
     "tile_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_2.png"),
     "tile_3": pygame.image.load(BASE_DIR / "assets" / "graphics" / "tilesets" / "tileset_3.png"),
-    "khan": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
+    "khan1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_1.png"),
+    "khan2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_2.png"),
+    "khan3": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_3.png"),
+    "khan4": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_4.png"),
+    "khan5": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_5.png"),
+    "khan6": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_6.png"),
+    "khan7": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_7.png"),
+    "khan8": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_8.png"),
+    "khan9": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_9.png"),
+    "khan10": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "khanlockwood" / "khan_10.png"),
     "bullet_player": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "BulletPlayer.png"),
     "bullet_enemy": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "BulletEnemy.png"),
     "enemy1_walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "enemies" / "enemy1" / "Walk.png"),
@@ -93,7 +103,14 @@ TEXTURES = {
     "settings_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_1.png"),
     "info_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "info_btn_0.png"),
     "info_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "info_btn_1.png"),
+    "ok_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "ok_btn_0.png"),
+    "ok_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "ok_btn_1.png"),
+    "backward_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "backward_btn_0.png"),
+    "backward_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "backward_btn_1.png"),
+    "forward_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "forward_btn_0.png"),
+    "forward_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "forward_btn_1.png"),
     "bar": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "bar.png"),
+    "window": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window.png"),
 }
 
 # Frames
@@ -101,7 +118,16 @@ FRAMES = {
     "tile_1": frames.generate_frames(TEXTURES["tile_1"], 16, 16),
     "tile_2": frames.generate_frames(TEXTURES["tile_2"], 16, 16),
     "tile_3": frames.generate_frames(TEXTURES["tile_3"], 16, 16),
-    "khan": frames.generate_frames(TEXTURES["khan"], 20, 34),
+    "khan1": frames.generate_frames(TEXTURES["khan1"], 20, 34),
+    "khan2": frames.generate_frames(TEXTURES["khan2"], 20, 34),
+    "khan3": frames.generate_frames(TEXTURES["khan3"], 20, 34),
+    "khan4": frames.generate_frames(TEXTURES["khan4"], 20, 34),
+    "khan5": frames.generate_frames(TEXTURES["khan5"], 20, 34),
+    "khan6": frames.generate_frames(TEXTURES["khan6"], 20, 34),
+    "khan7": frames.generate_frames(TEXTURES["khan7"], 20, 34),
+    "khan8": frames.generate_frames(TEXTURES["khan8"], 20, 34),
+    "khan9": frames.generate_frames(TEXTURES["khan9"], 20, 34),
+    "khan10": frames.generate_frames(TEXTURES["khan10"], 20, 34),
     "bullet_player": frames.generate_frames(TEXTURES["bullet_player"], 8, 8),
     "bullet_enemy": frames.generate_frames(TEXTURES["bullet_enemy"], 5, 5),
     "enemy1_walk": frames.generate_frames(TEXTURES["enemy1_walk"], 20, 34),
@@ -171,6 +197,7 @@ FONTS = {
     "text_medium": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",24),
     "text_medium_large": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",28),
     "text_large": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",32),
+    "title_xs": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",12),
     "title_small": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",16),
     "title_small_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",20),
     "title_medium": pygame.font.Font(BASE_DIR / "fonts" / "title.ttf",24),

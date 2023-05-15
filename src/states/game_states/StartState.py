@@ -35,15 +35,10 @@ class StartState(BaseState):
         pygame.mixer.music.load(settings.BASE_DIR / "assets/music/menu.ogg")
         pygame.mixer.music.play(loops=-1)
 
-        # Set the volumne for this sounds
+        # Set the volume for this sounds
         settings.SOUNDS["menu_select"].set_volume(0.3)
         settings.SOUNDS["menu_play"].set_volume(0.3)
         settings.SOUNDS["menu_enter"].set_volume(0.3)
-
-    def exit(self) -> None:
-        # Stop Menu Music
-        pygame.mixer.music.stop()
-        pygame.mixer.music.unload()
 
     def render(self, surface: pygame.Surface) -> None:
         # Colored Background
@@ -207,7 +202,7 @@ class StartState(BaseState):
             if self.current_menu_item == 2:
                 settings.SOUNDS["menu_play"].stop()
                 settings.SOUNDS["menu_play"].play()
-                self.state_machine.change("dialogue",previous="start",next="begin")
+                self.state_machine.change("color")
             if self.current_menu_item == 3:
                 settings.SOUNDS["menu_enter"].stop()
                 settings.SOUNDS["menu_enter"].play()

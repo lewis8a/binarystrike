@@ -12,5 +12,6 @@ from src.states.game_states.BeginState import BeginState
 from src.states.game_states.StartState import StartState
 from src.states.game_states.DialogueState import DialogueState
 from src.states.game_states.PausaState import PausaState
+from src.states.game_states.ColorState import ColorState
 
-(PlayState, BeginState, StartState, PausaState)
+(PlayState, BeginState, StartState, PausaState, ColorState)

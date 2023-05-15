@@ -14,10 +14,10 @@ lewis8a@gmail.com
 This file contains the class Player.
 """
 from typing import TypeVar
-
 from src.GameEntity import GameEntity
 from src.states.entities import player_states
 
+import settings
 
 class Player(GameEntity):
     def __init__(self, x: int, y: int, game_level: TypeVar("GameLevel")) -> None:
@@ -26,7 +26,7 @@ class Player(GameEntity):
             y,
             20,
             34,
-            "khan",
+            f"khan{settings.PLAYER_COLOR}",
             False,
             False,
             game_level,

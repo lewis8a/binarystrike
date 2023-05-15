@@ -57,7 +57,7 @@ class DialogueState(BaseState):
             self.font1 = settings.FONTS["large"]
             self.font2 = settings.FONTS["text_small"]
             self.font3 = settings.FONTS["text_small"]
-            self.timeEnd = 1
+            self.timeEnd = 10
         elif self.oldState == "start" and self.newState == "credits":
             # Play Menu Music
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/credits.ogg")
