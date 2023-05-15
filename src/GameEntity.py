@@ -54,7 +54,6 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         self.generate_animations(animation_defs)
         self.flipped = flipped
         self.is_dead = False
-        self.last_floor_position = ()
 
     def change_state(
         self, state_id: str, *args: Tuple[Any], **kwargs: Dict[str, Any]

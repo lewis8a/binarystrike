@@ -48,7 +48,7 @@ class DeadState(BaseEntityState):
     
     def exit(self) -> None:
         x, y = self.entity.last_floor_position
-        self.entity.y = y - 60
+        self.entity.y = y - settings.TILE_SIZE * 3
         self.entity.x = x
         self.entity.vy = -10
         self.entity.is_dead = False
