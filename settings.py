@@ -44,17 +44,16 @@ TILE_SIZE = 16
 VIRTUAL_WIDTH = 300
 VIRTUAL_HEIGHT = 192
 
-# Size of our actual window
+# Size of our actual window (Ascpect ratio 16:9)
 pygame.init()
-
-WINDOW_WIDTH = VIRTUAL_WIDTH * 3 # pygame.display.Info().current_w
-WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.5 #pygame.display.Info().current_h
+WINDOW_WIDTH = pygame.display.Info().current_w
+WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
 
 # Basic game settings
 PLAYER_SPEED = 80
 PLAYER_COLOR = 1
 GRAVITY = 400
-NUM_LEVELS = 3
+NUM_LEVELS = 4
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
