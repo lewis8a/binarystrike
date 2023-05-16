@@ -27,7 +27,7 @@ class Binarystrike(Game):
             "begin": game_states.BeginState,
             "play": game_states.PlayState,
             "dialogue": game_states.DialogueState,
-            "pause": game_states.PausaState,
+            "pause": game_states.PauseState,
             "start": game_states.StartState,
             "color": game_states.ColorState,
         })

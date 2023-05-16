@@ -8,7 +8,7 @@ marquezberriosk@gmail.com
 Author: Lewis Ochoa
 lewis8a@gmail.com
 
-This file contains the class PausaState.
+This file contains the class PauseState.
 """
 from typing import Dict, Any
 
@@ -22,7 +22,7 @@ from gale.timer import Timer
 import settings
 
 
-class PausaState(BaseState):
+class PauseState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.finish_tween = False
         self.circle = 0
@@ -66,6 +66,9 @@ class PausaState(BaseState):
             on_finish=arrive
         )
 
+        self.x_live = 7
+        self.y_live = 20
+
     def exit(self) -> None:
         # Registering for entries
         InputHandler.register_listener(self.player.state_machine.current)
@@ -76,7 +79,6 @@ class PausaState(BaseState):
         # Exit sound
         settings.SOUNDS["menu_play"].stop()
         settings.SOUNDS["menu_play"].play()
-
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
@@ -106,6 +108,11 @@ class PausaState(BaseState):
             (255, 255, 255),
             shadowed=True,
         )
+
+        stop = min(8, self.player.lives)
+        for i in range(0, stop):
+            surface.blit(settings.TEXTURES["lives"],
+                         (self.x_live + self.x_live*i, self.y_live))
 
         pygame.draw.circle(
             self.screen_alpha_surface,
