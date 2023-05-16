@@ -46,6 +46,7 @@ class Enemy(GameEntity):
             states = ss,
             animation_defs=definition["animation_defs"],
         )
+        self.points = definition["points"]
         self.time_to_rest = definition["time_to_rest"]
         self.wait_time = 0
         self.texture_base = definition["texture_id"]

@@ -22,6 +22,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
         "texture_id": "enemy1",
         "walk_speed": 15,
         "time_to_rest": 3,
+        "points": 100,
         "animation_defs": {
             "walk": {"frames": [0, 1, 2, 3, 4, 5, 6], "interval": 0.15},
             "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},
@@ -40,6 +41,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
         "texture_id": "enemy2",
         "walk_speed": 15,
         "time_to_rest": 3,
+        "points": 115,
         "animation_defs": {
             "walk": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15},
             "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},
@@ -58,6 +60,7 @@ Enemies: Dict[int, Dict[str, Any]] = {
         "texture_id": "enemy3",
         "walk_speed": 15,
         "time_to_rest": 3,
+        "points": 80,
         "animation_defs": {
             "walk": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15},
             "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},

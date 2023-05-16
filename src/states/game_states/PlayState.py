@@ -122,10 +122,10 @@ class PlayState(BaseState):
         
         for i in range(len(self.bullets) - 1, -1, -1):
             for enemy in self.game_level.enemies:
-                if self.bullets[i].collides(enemy):
+                if enemy.current_animation_id != "dead" and self.bullets[i].collides(enemy):
                     self.bullets[i].in_play = False
                     enemy.change_state("dead")
-                    self.player.score += 150
+                    self.player.score += enemy.points
             if self.bullets[i].in_play:
                 self.bullets[i].update(dt)
             else:
