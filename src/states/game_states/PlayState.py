@@ -96,7 +96,7 @@ class PlayState(BaseState):
             if self.timer == 0:
                 self.state_machine.change("end",
                 level = self.level,
-                game_level = self.game_level)
+                player = self.player)
 
         Timer.every(1, countdown_timer)
 
