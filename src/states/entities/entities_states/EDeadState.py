@@ -32,11 +32,11 @@ class EDeadState(BaseEntityState):
         # settings.SOUNDS[f"death{randomJumpSound}"].stop()
         # settings.SOUNDS[f"death{randomJumpSound}"].play()
         self.finish = False
-
         def arrive() -> None:
             self.finish = True
         
-        Timer.after(0.60, arrive)
+        len_frames = len(self.entity.animations["dead"].frames) / 10
+        Timer.after(len_frames, arrive)
         
         self.entity.change_animation("dead")
         self.entity.vx = 0
