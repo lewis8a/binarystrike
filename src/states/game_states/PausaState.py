@@ -119,9 +119,10 @@ class PausaState(BaseState):
                 self.screen_alpha_surface,
                 "Pause",
                 settings.FONTS["title_medium"],
-                settings.VIRTUAL_WIDTH/2 - 25,
-                settings.VIRTUAL_HEIGHT/2 - 10,
+                settings.VIRTUAL_WIDTH // 2,
+                settings.VIRTUAL_HEIGHT / 2 - 10,
                 (255, 255, 255),
+                center=True,
                 shadowed=True,
             )
 
@@ -129,9 +130,32 @@ class PausaState(BaseState):
                 self.screen_alpha_surface,
                 f"Level {self.level}",
                 settings.FONTS["title_small"],
-                settings.VIRTUAL_WIDTH/2 - 20,
+                settings.VIRTUAL_WIDTH //2,
+                settings.VIRTUAL_HEIGHT /2 + 10,
+                (255, 255, 255),
+                center=True,
+                shadowed=True,
+            )
+
+            render_text(
+                self.screen_alpha_surface,
+                f"Level {self.level}",
+                settings.FONTS["title_small"],
+                settings.VIRTUAL_WIDTH // 2,
                 settings.VIRTUAL_HEIGHT/2 + 10,
                 (255, 255, 255),
+                center=True,
+                shadowed=True,
+            )
+
+            render_text(
+                self.screen_alpha_surface,
+                settings.NAME[f"level_{self.level}"],
+                settings.FONTS["title_xs"],
+                settings.VIRTUAL_WIDTH // 2,
+                settings.VIRTUAL_HEIGHT/2 + 30,
+                (255, 255, 255),
+                center=True,
                 shadowed=True,
             )
 

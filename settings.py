@@ -57,7 +57,7 @@ NUM_LEVELS = 4
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
-TIME = 20
+TIME = 30
 
 # Path of resources
 BASE_DIR = pathlib.Path(__file__).parent
@@ -186,6 +186,7 @@ SOUNDS = {
     "jump2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_2.wav"),
     "jump3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_3.wav"),
     "jump4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_4.wav"),
+    "game_over": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "gameover.wav"),
     "menu_change": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_change.mp3"),
     "menu_character": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_character.mp3"),
     "menu_enter": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_enter.mp3"),

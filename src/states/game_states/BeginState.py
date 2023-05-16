@@ -22,7 +22,7 @@ import settings
 
 class BeginState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
-        self.level = enter_params.get("level", 3)
+        self.level = enter_params.get("level", 1)
         self.transition_alpha = 255
         self.display_text = True
         self.circle = max(settings.VIRTUAL_HEIGHT, settings.VIRTUAL_WIDTH) * 1.25

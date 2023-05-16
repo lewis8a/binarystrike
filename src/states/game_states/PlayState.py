@@ -80,8 +80,9 @@ class PlayState(BaseState):
                 settings.SOUNDS["level_time"].play()
 
             if self.timer == 0:
-                settings.SOUNDS["level_failed"].play()
-                self.player.change_state("dead")
+                self.state_machine.change("end",
+                level = self.level,
+                game_level = self.game_level)
 
         Timer.every(1, countdown_timer)
 
