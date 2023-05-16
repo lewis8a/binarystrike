@@ -82,6 +82,9 @@ class PlayState(BaseState):
 
         Timer.every(1, countdown_timer)
 
+        self.x_live = 7
+        self.y_live = 20
+
     def exit(self) -> None:
         Timer.clear()
         # Stop music
@@ -170,6 +173,7 @@ class PlayState(BaseState):
             bullet.render(world_surface)
 
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
+        
 
         render_text(
             surface,
@@ -190,6 +194,9 @@ class PlayState(BaseState):
             (255, 255, 255),
             shadowed=True,
         )
+        for i in range(self.player.lives):
+            surface.blit(settings.TEXTURES["lives"],
+                         (self.x_live + self.x_live*i, self.y_live))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "pause" and input_data.pressed:

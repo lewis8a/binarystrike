@@ -111,6 +111,7 @@ TEXTURES = {
     "forward_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "forward_btn_1.png"),
     "bar": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "bar.png"),
     "window": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window.png"),
+    "lives": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Lives.png"),
 }
 
 # Frames

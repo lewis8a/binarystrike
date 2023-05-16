@@ -47,6 +47,7 @@ class Player(GameEntity):
                 "dead": {"frames": [34, 35, 36, 37, 38], "interval": 0.25, "loops": 0},
             },
         )
+        self.lives = 3
         self.score = 0
         self.double_jump = False
         self.last_floor_position = (x, y - settings.TILE_SIZE * 3)
