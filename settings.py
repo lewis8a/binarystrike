@@ -57,7 +57,7 @@ NUM_LEVELS = 5
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
-TIME = 1000
+TIME = 100
 
 # Path of resources
 BASE_DIR = pathlib.Path(__file__).parent
