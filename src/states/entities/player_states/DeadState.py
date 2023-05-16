@@ -26,6 +26,7 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class DeadState(BaseEntityState):
     def enter(self) -> None:
+        # Play sound player die
         randomJumpSound = random.randint(1,3)
         settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)
         settings.SOUNDS[f"death{randomJumpSound}"].stop()

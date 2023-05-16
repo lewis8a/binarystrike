@@ -74,10 +74,13 @@ class PlayState(BaseState):
         def countdown_timer():
             self.timer -= 1
 
-            # if 0 < self.timer <= 5:
-            #     settings.SOUNDS["timer"].play()
+            if self.timer == 11:
+                self.endTime = False
+                settings.SOUNDS["level_time"].set_volume(0.5)
+                settings.SOUNDS["level_time"].play()
 
             if self.timer == 0:
+                settings.SOUNDS["level_failed"].play()
                 self.player.change_state("dead")
 
         Timer.every(1, countdown_timer)
@@ -189,7 +192,7 @@ class PlayState(BaseState):
             surface,
             f"Time: {self.timer}",
             settings.FONTS["xs"],
-            settings.VIRTUAL_WIDTH - 80,
+            settings.VIRTUAL_WIDTH - 50,
             5,
             (255, 255, 255),
             shadowed=True,
