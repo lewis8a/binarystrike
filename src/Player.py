@@ -47,7 +47,22 @@ class Player(GameEntity):
                 "dead": {"frames": [34, 35, 36, 37, 38], "interval": 0.25, "loops": 0},
             },
         )
+        self.invulnerable = False
+        self.invulnerable_time = 3
+        self.invulnerable_count = 0
         self.lives = 3
         self.score = 0
         self.double_jump = False
         self.last_floor_position = (x, y)
+
+    def go_invulnerable(self) -> None:
+        self.invulnerable = True
+        self.invulnerable_count = self.invulnerable_time
+
+    def update(self, dt: float) -> None:
+        if self.invulnerable:
+            self.invulnerable_count -= dt
+            if self.invulnerable_count <= 0:
+                self.invulnerable = False
+            
+        super().update(dt)

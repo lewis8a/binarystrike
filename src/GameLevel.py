@@ -62,9 +62,9 @@ class GameLevel:
                 del self.enemies[i]
 
         for i in range(len(self.enemies_bullets) - 1, -1, -1):
-            if self.enemies_bullets[i].collides(self.player):
+            if self.enemies_bullets[i].collides(self.player) and not self.player.invulnerable:
                 self.enemies_bullets[i].in_play = False
-                self.player.change_state("dead")
+                self.player.is_dead = True
             if self.enemies_bullets[i].in_play:
                 self.enemies_bullets[i].update(dt)
             else:

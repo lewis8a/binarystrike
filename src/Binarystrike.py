@@ -30,6 +30,7 @@ class Binarystrike(Game):
             "pause": game_states.PauseState,
             "start": game_states.StartState,
             "color": game_states.ColorState,
+            "reborn": game_states.RebornState,
         })
         self.state_machine.change("dialogue",previous="init",next="start")
 

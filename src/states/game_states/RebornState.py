@@ -14,7 +14,6 @@ from typing import Dict, Any
 
 import pygame
 
-from gale.input_handler import InputHandler, InputData
 from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
@@ -30,8 +29,8 @@ class RebornState(BaseState):
         # A surface that supports alpha for the screen
         self.screen_alpha_surface = pygame.Surface(
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
-        )        
-        
+        )
+
         self.timer = enter_params.get("timer")
         self.level = enter_params.get("level")
         self.camera = enter_params.get("camera")
@@ -40,15 +39,45 @@ class RebornState(BaseState):
         self.pos_music = enter_params.get("pos_music")
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
+        self.counter = 3
         
-        # Avoid entries
-        InputHandler.unregister_listener(self.player.state_machine.current)
+        self.player.lives -= 1
+        if self.player.lives <= 0:
+            # Debería ir a estado estadísticas
+            self.state_machine.change("begin")
 
-        # Entry sound
-        # settings.SOUNDS["menu_play"].stop()
+        def final_arrive():
+            self.player.change_state("idle")
 
-        def arrive():
+            self.state_machine.change(
+                "play",
+                player=self.player,
+                timer=self.timer,
+                level=self.level,
+                camera=self.camera,
+                game_level=self.game_level,
+                bullets=self.bullets,
+                pos_music = self.pos_music
+            )
+
+        def back_count_1():
+            # Entry sound
+            self.counter -= 1
+
+            Timer.after(0.35,final_arrive)
+
+        def back_count_2():
+            # Entry sound
+            self.counter -= 1
+
+            Timer.after(0.35,back_count_1)
+
+        def entry_arrive():
             self.finish_tween = True
+            settings.SOUNDS["reborn"].stop()
+            settings.SOUNDS["reborn"].play()
+
+            Timer.after(0.3, back_count_2)
 
         Timer.tween(
             1,
@@ -56,25 +85,18 @@ class RebornState(BaseState):
                 (self, {"transition_alpha": 175}),
                 (self, {"circle": max(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT)})
             ],
-            on_finish=arrive
+            on_finish=entry_arrive
         )
 
+        self.x_live = 7
+        self.y_live = 20
+
     def exit(self) -> None:
-        # Registering for entries
-        InputHandler.register_listener(self.player.state_machine.current)
-
-        # Stop music
-        pygame.mixer.music.unload()
-        pygame.mixer.music.stop()
-        # Exit sound
-        settings.SOUNDS["menu_play"].stop()
-        settings.SOUNDS["menu_play"].play()
-
+        Timer.clear()
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
-        
         for bullet in self.bullets:
             bullet.render(world_surface)
         
@@ -115,35 +137,12 @@ class RebornState(BaseState):
         if self.finish_tween:
             render_text(
                 self.screen_alpha_surface,
-                "Pause",
+                f"{self.counter}",
                 settings.FONTS["title_medium"],
                 settings.VIRTUAL_WIDTH/2 - 25,
-                settings.VIRTUAL_HEIGHT/2 - 10,
+                settings.VIRTUAL_HEIGHT/2 - 5,
                 (255, 255, 255),
                 shadowed=True,
             )
 
-            render_text(
-                self.screen_alpha_surface,
-                f"Level {self.level}",
-                settings.FONTS["title_small"],
-                settings.VIRTUAL_WIDTH/2 - 20,
-                settings.VIRTUAL_HEIGHT/2 + 10,
-                (255, 255, 255),
-                shadowed=True,
-            )
-
-        surface.blit(self.screen_alpha_surface, (0, 0))
-
-    def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "pause" and input_data.pressed and self.finish_tween:
-            self.state_machine.change(
-                "play",
-                player=self.player,
-                timer=self.timer,
-                level=self.level,
-                camera=self.camera,
-                game_level=self.game_level,
-                bullets=self.bullets,
-                pos_music = self.pos_music
-            )
+        surface.blit(self.screen_alpha_surface, (0, 0)) 

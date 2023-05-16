@@ -160,9 +160,9 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
         has_floor_left = self.tilemap.check_solidness_on(i + 1, left, GameObject.TOP)
         has_floor_right = self.tilemap.check_solidness_on(i + 1, right, GameObject.TOP)
         if has_floor_right:
-            self.last_floor_position = (right * settings.TILE_SIZE, i * settings.TILE_SIZE)
+            self.last_floor_position = (right * settings.TILE_SIZE, collision_rect.top)
         elif has_floor_left:
-            self.last_floor_position = (left * settings.TILE_SIZE, i * settings.TILE_SIZE)
+            self.last_floor_position = (left * settings.TILE_SIZE, collision_rect.top)
 
         return has_floor_left or has_floor_right
     

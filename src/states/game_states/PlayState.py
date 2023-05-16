@@ -77,8 +77,9 @@ class PlayState(BaseState):
             # if 0 < self.timer <= 5:
             #     settings.SOUNDS["timer"].play()
 
-            if self.timer == 0:
-                self.player.change_state("dead")
+            # if self.timer == 0:
+                # Debería llevar a estadisticas
+                # self.player.change_state("dead")
 
         Timer.every(1, countdown_timer)
 
@@ -96,8 +97,21 @@ class PlayState(BaseState):
         pygame.mixer.music.stop()
 
     def update(self, dt: float) -> None:
-        if self.player.y >= self.player.tilemap.height and not self.player.is_dead:
-            self.player.change_state("dead")
+        if self.player.is_dead:            
+            def after_die():
+                self.state_machine.change(
+                    "reborn",
+                    timer = self.timer,
+                    level = self.level,
+                    camera = self.camera,
+                    game_level = self.game_level,
+                    bullets = self.bullets,
+                    pos_music = self.position_music(),
+                )
+            self.player.change_state("dead", on_finish = after_die)
+
+        elif self.player.y >= self.player.tilemap.height:
+            self.player.is_dead = True
         else:
             self.player.update(dt)
 
@@ -197,18 +211,7 @@ class PlayState(BaseState):
                          (self.x_live + self.x_live*i, self.y_live))
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
-        if input_id == "pause" and input_data.pressed:
-            music_pos =  pygame.mixer.music.get_pos() / 1000
-            if self.level == 1:
-                if music_pos > 120:
-                    music_pos = music_pos % 120
-            elif self.level == 2:
-                if music_pos > 56:
-                    music_pos = music_pos % 56
-            elif self.level == 3:
-                if music_pos > 32:
-                    music_pos = music_pos % 32
-            
+        if input_id == "pause" and input_data.pressed:            
             self.state_machine.change(
                 "pause",
                 timer = self.timer,
@@ -216,5 +219,19 @@ class PlayState(BaseState):
                 camera = self.camera,
                 game_level = self.game_level,
                 bullets = self.bullets,
-                pos_music = music_pos
+                pos_music = self.position_music()
             )
+    
+    def position_music(self) -> float:
+        music_pos =  pygame.mixer.music.get_pos() / 1000
+        if self.level == 1:
+            if music_pos > 120:
+                music_pos = music_pos % 120
+        elif self.level == 2:
+            if music_pos > 56:
+                music_pos = music_pos % 56
+        elif self.level == 3:
+            if music_pos > 32:
+                music_pos = music_pos % 32
+        
+        return music_pos
