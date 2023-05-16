@@ -15,8 +15,8 @@ This file contains the definition for tiles.
 """
 from typing import Dict, Any
 
+#Ground Level 1
 TILES_1: Dict[int, Dict[str, Any]] = {
-    #Ground Level 1
     0: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     1: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     2: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
@@ -64,9 +64,8 @@ TILES_1: Dict[int, Dict[str, Any]] = {
     660: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     661: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
 }
-
+# Ground Level 2
 TILES_2: Dict[int, Dict[str, Any]] = {
-    # Ground Level 2
     6: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     7: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     8: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
@@ -243,25 +242,74 @@ TILES_2: Dict[int, Dict[str, Any]] = {
     306: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     307: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
 }
-
+# Ground Level 3
 TILES_3: Dict[int, Dict[str, Any]] = {
-    # Ground Level 3
-    0: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    1: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    2: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    39: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    0: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    1: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    2: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    10: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    11: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    12: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    17: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    18: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    19: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    27: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    28: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    37: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    38: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    39: {"solidness": dict(top=True, right=False, bottom=True, left=False)},
     51: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    52: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    53: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    52: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    53: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    54: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    55: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    63: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    65: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    66: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    67: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    70: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    71: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    72: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    74: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    75: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    78: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    79: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    91: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    92: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    93: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    95: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     143: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     144: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     145: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    149: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    149: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     150: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+    151: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    167: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
     193: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     194: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     195: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
     196: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    211: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
-    212: {"solidness": dict(top=True, right=False, bottom=False, left=False)},
+}
+
+# Ground Level 4
+TILES_4: Dict[int, Dict[str, Any]] = {
+    0: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    1: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    2: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    3: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    4: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    7: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    8: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    9: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    10: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    11: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    12: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    13: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    14: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    15: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    16: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    17: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    18: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    19: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
+    20: {"solidness": dict(top=True, right=True, bottom=True, left=True)},
 }

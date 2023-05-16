@@ -26,11 +26,11 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class EDeadState(BaseEntityState):
     def enter(self) -> None:
-        # play sound enemy die
-        # randomJumpSound = random.randint(1,3)
-        # settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)
-        # settings.SOUNDS[f"death{randomJumpSound}"].stop()
-        # settings.SOUNDS[f"death{randomJumpSound}"].play()
+        # Play sound enemy die
+        randomJumpSound = random.randint(4,8)
+        settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)
+        settings.SOUNDS[f"death{randomJumpSound}"].stop()
+        settings.SOUNDS[f"death{randomJumpSound}"].play()
         self.finish = False
         def arrive() -> None:
             self.finish = True

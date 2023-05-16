@@ -53,11 +53,11 @@ WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
 PLAYER_SPEED = 80
 PLAYER_COLOR = 1
 GRAVITY = 350
-NUM_LEVELS = 4
+NUM_LEVELS = 5
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
-TIME = 500
+TIME = 100
 
 # Path of resources
 BASE_DIR = pathlib.Path(__file__).parent
@@ -177,10 +177,24 @@ SOUNDS = {
     "death1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "death_1.wav"),
     "death2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "death_2.wav"),
     "death3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "death_3.wav"),
+    "death4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "enemies" / "death_1.wav"),
+    "death5": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "enemies" / "death_2.wav"),
+    "death6": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "enemies" / "death_3.wav"),
+    "death7": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "enemies" / "death_4.wav"),
+    "death8": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "enemies" / "death_5.wav"),
     "jump1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_1.wav"),
     "jump2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_2.wav"),
     "jump3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_3.wav"),
     "jump4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_4.wav"),
+    "start1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_1.wav"),
+    "start2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_2.wav"),
+    "start3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_3.wav"),
+    "start4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_4.wav"),
+    "start5": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_5.wav"),
+    "start6": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_6.wav"),
+    "start7": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_7.wav"),
+    "start8": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_8.wav"),
+    "game_over": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "gameover.wav"),
     "menu_change": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_change.mp3"),
     "menu_character": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_character.mp3"),
     "menu_enter": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_enter.mp3"),
@@ -199,6 +213,7 @@ FONTS = {
     "medium": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf",24),
     "medium_large": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf",28),
     "large": pygame.font.Font(BASE_DIR / "fonts" / "info.ttf",32),
+    "text_xs": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf", 12),
     "text_small": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf", 16),
     "text_small_medium": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",20),
     "text_medium": pygame.font.Font(BASE_DIR / "fonts" / "text.ttf",24),
@@ -292,4 +307,12 @@ DIALOGUE = {
     "credits11_3" : "Video Game Programming",
     "credits11_4" : "Venezuela 2023",
     "credits11_5" : "All Rights Reserved",
+}
+
+#Name of the levels
+NAME = {
+    "level_1" : "Shadow Forest",
+    "level_2" : "City Of Steel Craftsmen",
+    "level_3" : "Land Of Infinite Corrosion",
+    "level_4" : "Bash Corporation",
 }

@@ -51,13 +51,36 @@ class BeginState(BaseState):
         )
 
         if self.display_text:
-            render_text(
+            if self.level < 4:
+                render_text(
+                    self.screen_alpha_surface,
+                    f"Level {self.level}",
+                    settings.FONTS["medium"],
+                    settings.VIRTUAL_WIDTH / 2,
+                    settings.VIRTUAL_HEIGHT/ 2 - 20,
+                    (255, 255, 255),
+                    center=True,
+                    shadowed=False,
+                )
+            else:
+                render_text(
                 self.screen_alpha_surface,
-                f"Level {self.level}",
+                "Evil Dijkstra",
                 settings.FONTS["medium"],
-                settings.VIRTUAL_WIDTH / 2 - 50,
+                settings.VIRTUAL_WIDTH / 2,
                 settings.VIRTUAL_HEIGHT/ 2 - 10,
                 (255, 255, 255),
+                center=True,
+                shadowed=False,
+                )
+            render_text(
+                self.screen_alpha_surface,
+                settings.NAME[f"level_{self.level}"],
+                settings.FONTS["text_small"],
+                settings.VIRTUAL_WIDTH / 2,
+                settings.VIRTUAL_HEIGHT/ 2 + 10,
+                (255, 255, 255),
+                center=True,
                 shadowed=False,
             )
 

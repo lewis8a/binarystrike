@@ -48,11 +48,13 @@ class Tilemap:
             tile_def = tiles.TILES_2.get(frame_index)
         elif num_level == 3:
             tile_def = tiles.TILES_3.get(frame_index)
+        elif num_level == 4:
+            tile_def = tiles.TILES_4.get(frame_index)
         solidness = (
             tile_def["solidness"] if tile_def is not None else Tile.DEFAULT_SOLIDNESS
         )
         self.layers[-1][i][j] = Tile(
-            i, j, self.tilewidth, self.tileheight, frame_index, solidness,num_level
+            i, j, self.tilewidth, self.tileheight, frame_index, solidness, num_level
         )
 
     def set_render_boundaries(self, render_rect: pygame.Rect) -> None:
