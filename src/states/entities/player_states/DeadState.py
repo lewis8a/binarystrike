@@ -33,27 +33,22 @@ class DeadState(BaseEntityState):
         settings.SOUNDS[f"death{randomJumpSound}"].stop()
         settings.SOUNDS[f"death{randomJumpSound}"].play()
         self.finish = False
-
-        def arrive() -> None:
-            self.finish = True
-        
-        Timer.after(0.65, arrive)
-        
-        self.entity.change_animation("dead")
         self.entity.is_dead = False
         self.entity.vx = 0
         self.entity.vy = 0
-    
-    def update(self, dt: float) -> None:
-        if self.finish:
+
+        if self.entity.y >= self.entity.tilemap.height:
             self.on_finish()
+        else:            
+            Timer.after(0.65, self.on_finish)
+            
+            self.entity.change_animation("dead")
     
     def exit(self) -> None:
         Timer.clear()
         x, y = self.entity.last_floor_position
         self.entity.y = y
         self.entity.x = x
-        self.entity.is_dead = False
         self.entity.go_invulnerable()
     
     def render(self, surface: pygame.Surface) -> None:

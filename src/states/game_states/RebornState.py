@@ -40,56 +40,56 @@ class RebornState(BaseState):
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
         self.counter = 3
-        
+        self.x_live = 7
+        self.y_live = 20
+
         self.player.lives -= 1
         if self.player.lives <= 0:
             # Debería ir a estado estadísticas
             self.state_machine.change("begin")
+            self.player.lives = 3
+        else:
+            def final_arrive():
+                self.player.change_state("idle")
 
-        def final_arrive():
-            self.player.change_state("idle")
+                self.state_machine.change(
+                    "play",
+                    player=self.player,
+                    timer=self.timer,
+                    level=self.level,
+                    camera=self.camera,
+                    game_level=self.game_level,
+                    bullets=self.bullets,
+                    pos_music = self.pos_music
+                )
 
-            self.state_machine.change(
-                "play",
-                player=self.player,
-                timer=self.timer,
-                level=self.level,
-                camera=self.camera,
-                game_level=self.game_level,
-                bullets=self.bullets,
-                pos_music = self.pos_music
+            def back_count_1():
+                # Entry sound
+                self.counter -= 1
+
+                Timer.after(0.35,final_arrive)
+
+            def back_count_2():
+                # Entry sound
+                self.counter -= 1
+
+                Timer.after(0.35,back_count_1)
+
+            def entry_arrive():
+                self.finish_tween = True
+                settings.SOUNDS["reborn"].stop()
+                settings.SOUNDS["reborn"].play()
+
+                Timer.after(0.3, back_count_2)
+
+            Timer.tween(
+                1,
+                [
+                    (self, {"transition_alpha": 175}),
+                    (self, {"circle": max(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT)})
+                ],
+                on_finish=entry_arrive
             )
-
-        def back_count_1():
-            # Entry sound
-            self.counter -= 1
-
-            Timer.after(0.35,final_arrive)
-
-        def back_count_2():
-            # Entry sound
-            self.counter -= 1
-
-            Timer.after(0.35,back_count_1)
-
-        def entry_arrive():
-            self.finish_tween = True
-            settings.SOUNDS["reborn"].stop()
-            settings.SOUNDS["reborn"].play()
-
-            Timer.after(0.3, back_count_2)
-
-        Timer.tween(
-            1,
-            [
-                (self, {"transition_alpha": 175}),
-                (self, {"circle": max(settings.WINDOW_WIDTH, settings.WINDOW_HEIGHT)})
-            ],
-            on_finish=entry_arrive
-        )
-
-        self.x_live = 7
-        self.y_live = 20
 
     def exit(self) -> None:
         Timer.clear()

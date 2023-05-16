@@ -108,6 +108,7 @@ class PlayState(BaseState):
                     bullets = self.bullets,
                     pos_music = self.position_music(),
                 )
+
             self.player.change_state("dead", on_finish = after_die)
 
         elif self.player.y >= self.player.tilemap.height:
