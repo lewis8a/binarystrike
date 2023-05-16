@@ -65,7 +65,7 @@ class BeginState(BaseState):
             else:
                 render_text(
                 self.screen_alpha_surface,
-                "Dijkstra",
+                "Evil Dijkstra",
                 settings.FONTS["medium"],
                 settings.VIRTUAL_WIDTH / 2,
                 settings.VIRTUAL_HEIGHT/ 2 - 10,

@@ -53,11 +53,11 @@ WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
 PLAYER_SPEED = 80
 PLAYER_COLOR = 1
 GRAVITY = 350
-NUM_LEVELS = 4
+NUM_LEVELS = 5
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
-TIME = 30
+TIME = 1000
 
 # Path of resources
 BASE_DIR = pathlib.Path(__file__).parent
@@ -186,6 +186,14 @@ SOUNDS = {
     "jump2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_2.wav"),
     "jump3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_3.wav"),
     "jump4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "jumping_4.wav"),
+    "start1": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_1.wav"),
+    "start2": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_2.wav"),
+    "start3": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_3.wav"),
+    "start4": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_4.wav"),
+    "start5": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_5.wav"),
+    "start6": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_6.wav"),
+    "start7": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_7.wav"),
+    "start8": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "start_8.wav"),
     "game_over": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "gameover.wav"),
     "menu_change": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_change.mp3"),
     "menu_character": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_character.mp3"),

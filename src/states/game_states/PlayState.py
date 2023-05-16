@@ -13,13 +13,13 @@ This file contains the class PlayState.
 from typing import Dict, Any
 
 import pygame
+import settings
 
 from gale.input_handler import InputData
 from gale.state import BaseState
 from gale.text import render_text
 from gale.timer import Timer
-
-import settings
+from numpy import random
 from src.Camera import Camera
 from src.GameLevel import GameLevel
 from src.Player import Player
@@ -39,6 +39,12 @@ class PlayState(BaseState):
         pygame.mixer.music.set_volume(0.3)
 
         self.tilemap = self.game_level.tilemap
+
+        # Play sound player voice
+        randomStartSound = random.randint(1,8)
+        settings.SOUNDS[f"start{randomStartSound}"].set_volume(0.8)
+        settings.SOUNDS[f"start{randomStartSound}"].stop()
+        settings.SOUNDS[f"start{randomStartSound}"].play()
 
         if self.level == 1:
             if hasattr(self.player, "play_state"):
@@ -62,10 +68,18 @@ class PlayState(BaseState):
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
             else:
-                self.player = Player(16 * 2, 16 * 5, self.game_level)
+                self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
+        elif self.level == 4:
+            if hasattr(self.player, "play_state"):
+                delattr(self.player, "play_state")
+            else:
+                self.player = Player(16 * 2, 16 * 2, self.game_level)
+                self.player.change_state("idle")
+                self.game_level.player = self.player
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/finalboss.ogg")
             
         pygame.mixer.music.play(loops=-1, start=self.pos_music)
         
@@ -214,6 +228,9 @@ class PlayState(BaseState):
                 if music_pos > 56:
                     music_pos = music_pos % 56
             elif self.level == 3:
+                if music_pos > 32:
+                    music_pos = music_pos % 32
+            elif self.level == 4:
                 if music_pos > 32:
                     music_pos = music_pos % 32
             
