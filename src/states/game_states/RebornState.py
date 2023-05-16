@@ -116,7 +116,7 @@ class RebornState(BaseState):
             surface,
             f"Time: {self.timer}",
             settings.FONTS["xs"],
-            settings.VIRTUAL_WIDTH - 80,
+            settings.VIRTUAL_WIDTH - 50,
             5,
             (255, 255, 255),
             shadowed=True,

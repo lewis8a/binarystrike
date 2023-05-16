@@ -103,7 +103,7 @@ class PauseState(BaseState):
             surface,
             f"Time: {self.timer}",
             settings.FONTS["xs"],
-            settings.VIRTUAL_WIDTH - 80,
+            settings.VIRTUAL_WIDTH - 50,
             5,
             (255, 255, 255),
             shadowed=True,
@@ -128,17 +128,6 @@ class PauseState(BaseState):
                 settings.FONTS["title_medium"],
                 settings.VIRTUAL_WIDTH // 2,
                 settings.VIRTUAL_HEIGHT / 2 - 10,
-                (255, 255, 255),
-                center=True,
-                shadowed=True,
-            )
-
-            render_text(
-                self.screen_alpha_surface,
-                f"Level {self.level}",
-                settings.FONTS["title_small"],
-                settings.VIRTUAL_WIDTH //2,
-                settings.VIRTUAL_HEIGHT /2 + 10,
                 (255, 255, 255),
                 center=True,
                 shadowed=True,
