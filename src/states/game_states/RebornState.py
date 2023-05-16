@@ -89,9 +89,6 @@ class RebornState(BaseState):
                 on_finish=entry_arrive
             )
 
-    def exit(self) -> None:
-        Timer.clear()
-
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)

@@ -45,7 +45,6 @@ class DeadState(BaseEntityState):
             self.entity.change_animation("dead")
     
     def exit(self) -> None:
-        Timer.clear()
         x, y = self.entity.last_floor_position
         self.entity.y = y
         self.entity.x = x

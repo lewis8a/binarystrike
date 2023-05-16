@@ -13,6 +13,9 @@ lewis8a@gmail.com
 
 This file contains the class Player.
 """
+
+from gale.timer import Timer
+
 from typing import TypeVar
 from src.GameEntity import GameEntity
 from src.states.entities import player_states
@@ -48,21 +51,31 @@ class Player(GameEntity):
             },
         )
         self.invulnerable = False
-        self.invulnerable_time = 3
+        self.invulnerable_time = 5
         self.invulnerable_count = 0
         self.lives = 3
         self.score = 0
         self.double_jump = False
         self.last_floor_position = (x, y)
+        self.alpha_value = 255
+        self.flash_time = 0
+        self.set_flash_time = 0.15
 
     def go_invulnerable(self) -> None:
         self.invulnerable = True
         self.invulnerable_count = self.invulnerable_time
+        self.flash_time = self.set_flash_time
+        self.alpha_value = 100
 
     def update(self, dt: float) -> None:
         if self.invulnerable:
             self.invulnerable_count -= dt
+            self.flash_time -= dt
             if self.invulnerable_count <= 0:
                 self.invulnerable = False
+                self.alpha_value = 255
+            elif self.flash_time <= 0:
+                self.alpha_value = 200 if self.alpha_value == 100 else 100
+                self.flash_time = self.set_flash_time
             
         super().update(dt)

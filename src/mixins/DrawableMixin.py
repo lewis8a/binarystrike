@@ -23,9 +23,9 @@ class DrawableMixin:
         texture = settings.TEXTURES[self.texture_id]
         frame = settings.FRAMES[self.texture_id][self.frame_index]
         image = pygame.Surface((frame.width, frame.height), pygame.SRCALPHA)
-        image.fill((0, 0, 0, 0))
         image.blit(texture, (0, 0), frame)
-
+        alpha = getattr(self, "alpha_value", 255)
+        image.set_alpha(alpha)
         if self.flipped:
             image = pygame.transform.flip(image, True, False)
 
