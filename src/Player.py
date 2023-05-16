@@ -50,4 +50,4 @@ class Player(GameEntity):
         self.lives = 3
         self.score = 0
         self.double_jump = False
-        self.last_floor_position = (x, y - settings.TILE_SIZE * 3)
+        self.last_floor_position = (x, y)

@@ -194,7 +194,9 @@ class PlayState(BaseState):
             (255, 255, 255),
             shadowed=True,
         )
-        for i in range(self.player.lives):
+
+        stop = min(8, self.player.lives)
+        for i in range(0, stop):
             surface.blit(settings.TEXTURES["lives"],
                          (self.x_live + self.x_live*i, self.y_live))
 
