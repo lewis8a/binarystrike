@@ -13,6 +13,9 @@ lewis8a@gmail.com
 
 This file contains the class FallState for player.
 """
+
+from typing import Dict, Any
+
 from gale.input_handler import InputHandler, InputData
 
 import settings
@@ -20,12 +23,12 @@ from src.states.entities.BaseEntityState import BaseEntityState
 from src.Projectile import Projectile
 
 class FallState(BaseEntityState):
-    def enter(self) -> None:
+    def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.entity.change_animation("jump")
-        self.looking_up = False
-        self.looking_down = False
-        self.looking_left = False
-        self.looking_right = True
+        self.looking_up = enter_params.get("up", False)
+        self.looking_down = enter_params.get("down", False)
+        self.looking_left = enter_params.get("left", False)
+        self.looking_right = enter_params.get("right", False)
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
@@ -40,11 +43,25 @@ class FallState(BaseEntityState):
         if self.entity.handle_tilemap_collision_on_bottom():
             self.entity.vy = 0
             if self.entity.vx > 0:
-                self.entity.change_state("walk", "right")
+                self.entity.change_state(
+                    "walk",
+                    direction="right",
+                    up=self.looking_up,
+                    down=self.looking_down,
+                    left=self.looking_left,
+                    right=self.looking_right,
+                )
             elif self.entity.vx < 0:
-                self.entity.change_state("walk", "left")
+                self.entity.change_state(
+                    "walk",
+                    direction="left",
+                    up=self.looking_up,
+                    down=self.looking_down,
+                    left=self.looking_left,
+                    right=self.looking_right,
+                )
             else:
-                self.entity.change_state("idle")
+                self.entity.change_state("idle",up=self.looking_up)
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_left":
@@ -67,7 +84,13 @@ class FallState(BaseEntityState):
         
         elif input_id == "jump" and input_data.pressed:
             if not self.entity.double_jump and self.entity.vy <= 0:
-                self.entity.change_state("jump")
+                self.entity.change_state(
+                    "jump",
+                    up=self.looking_up,
+                    down=self.looking_down,
+                    left=self.looking_left,
+                    right=self.looking_right,
+                )
                 self.entity.double_jump = True
         
         elif input_id == "look_up":
@@ -103,7 +126,7 @@ class FallState(BaseEntityState):
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_down and self.looking_right: # Down and right
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
-                                    self.entity.y + self.entity.height,
+                                    self.entity.y,
                                     8, 8, settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.looking_up:

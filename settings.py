@@ -35,7 +35,9 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_w, "look_up")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_s, "look_down")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "jump")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_j, "jump")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_f, "shoot")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_k, "shoot")
 
 # Tile size
 TILE_SIZE = 16

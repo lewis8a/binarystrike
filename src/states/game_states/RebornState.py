@@ -134,7 +134,7 @@ class RebornState(BaseState):
                 self.screen_alpha_surface,
                 f"{self.counter}",
                 settings.FONTS["title_medium"],
-                settings.VIRTUAL_WIDTH/2 - 25,
+                settings.VIRTUAL_WIDTH/2 - 5,
                 settings.VIRTUAL_HEIGHT/2 - 5,
                 (255, 255, 255),
                 shadowed=True,

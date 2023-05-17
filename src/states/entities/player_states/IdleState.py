@@ -13,6 +13,9 @@ lewis8a@gmail.com
 
 This file contains the class IdleState for player.
 """
+
+from typing import Dict, Any
+
 from gale.input_handler import InputHandler, InputData
 
 from src.states.entities.BaseEntityState import BaseEntityState
@@ -21,11 +24,16 @@ from src.Projectile import Projectile
 import settings
 
 class IdleState(BaseEntityState):
-    def enter(self) -> None:
+    def enter(self, **enter_params: Dict[str, Any]) -> None:
+        self.looking_up = enter_params.get("up", False)
         self.entity.vx = 0
         self.entity.vy = 0
         self.entity.double_jump = False
-        self.entity.change_animation("idle")
+        if self.looking_up:
+            self.entity.change_animation("idle-up")
+        else:
+            self.entity.change_animation("idle")
+            
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
@@ -38,17 +46,39 @@ class IdleState(BaseEntityState):
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id == "move_left" and input_data.pressed:
             self.entity.flipped = True
-            self.entity.change_state("walk", "left")
+            self.entity.change_state(
+                "walk",
+                direction="left",
+                up=self.looking_up,
+                down=False,
+                left=True,
+                right=False,
+                )
         elif input_id == "move_right" and input_data.pressed:
             self.entity.flipped = True
-            self.entity.change_state("walk", "right")
+            self.entity.change_state(
+                "walk",
+                direction="right",
+                up=self.looking_up,
+                down=False,
+                left=False,
+                right=True,
+                )
         elif input_id == "look_up":
             if input_data.pressed:
                 self.entity.change_animation("idle-up")
+                self.looking_up = True
             else:
                 self.entity.change_animation("idle")
+                self.looking_up = False
         elif input_id == "jump" and input_data.pressed:
-            self.entity.change_state("jump")
+            self.entity.change_state(
+                "jump",
+                up=self.looking_up,
+                down=False,
+                left=False,
+                right=False,
+                )
         elif input_id == "shoot" and input_data.pressed:
             bullet = ""
             settings.SOUNDS["gun5"].stop()
