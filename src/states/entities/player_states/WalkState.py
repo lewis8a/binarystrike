@@ -104,7 +104,7 @@ class WalkState(BaseEntityState):
             settings.SOUNDS["gun5"].stop()
             settings.SOUNDS["gun5"].play()
             if self.entity.current_animation_id == "walk-up":
-                if self.entity.flipped == True:
+                if self.entity.flipped:
                     bullet = Projectile(self.entity.x,
                                         self.entity.y + self.entity.height/3,
                                         8, 8, -settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
@@ -115,7 +115,7 @@ class WalkState(BaseEntityState):
                                         8, 8, settings.PROJECTILE_SPEED, -settings.PROJECTILE_SPEED,
                                         settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             elif self.entity.current_animation_id == "walk-down":
-                if self.entity.flipped == True:
+                if self.entity.flipped:
                     bullet = Projectile(self.entity.x,
                                         self.entity.y + self.entity.height/3,
                                         8, 8, -settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
@@ -125,7 +125,7 @@ class WalkState(BaseEntityState):
                                         self.entity.y + self.entity.height/3,
                                         8, 8, settings.PROJECTILE_SPEED, settings.PROJECTILE_SPEED,
                                         settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
-            elif self.entity.flipped == True:
+            elif self.entity.flipped:
                 bullet = Projectile(self.entity.x,
                                     self.entity.y + self.entity.height/4,
                                     8, 8, -settings.PROJECTILE_SPEED, 0,

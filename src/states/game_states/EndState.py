@@ -23,8 +23,8 @@ from typing import Dict, Any
 class EndState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.level = enter_params.get("level")
-        self.player = enter_params.get("player")
-
+        self.score = enter_params.get("score")
+        
         #Khan texture
         self.khan_texture = settings.TEXTURES[f"khan{settings.PLAYER_COLOR}"]
 
@@ -77,7 +77,7 @@ class EndState(BaseState):
 
         render_text(
             surface,
-            f"Final Score: {self.player.score}",
+            f"Final Score: {self.score}",
             settings.FONTS["small"],
             settings.VIRTUAL_WIDTH // 2,
             settings.VIRTUAL_HEIGHT - 50,

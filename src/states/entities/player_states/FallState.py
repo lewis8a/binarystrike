@@ -84,6 +84,7 @@ class FallState(BaseEntityState):
         
         elif input_id == "jump" and input_data.pressed:
             if not self.entity.double_jump and self.entity.vy <= 0:
+                self.entity.double_jump = True
                 self.entity.change_state(
                     "jump",
                     up=self.looking_up,
@@ -91,7 +92,6 @@ class FallState(BaseEntityState):
                     left=self.looking_left,
                     right=self.looking_right,
                 )
-                self.entity.double_jump = True
         
         elif input_id == "look_up":
             if input_data.pressed:
@@ -146,7 +146,7 @@ class FallState(BaseEntityState):
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             else:
                 bullet = Projectile(self.entity.x + self.entity.width/4,
-                                    self.entity.y + self.entity.height/5,
+                                    self.entity.y + self.entity.height/2 - 4,
                                     8, 8, settings.PROJECTILE_SPEED, 0,
                                     settings.TEXTURES["bullet_player"], self.entity.play_state.camera)
             self.entity.play_state.bullets.append(bullet)

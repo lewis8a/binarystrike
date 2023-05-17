@@ -94,9 +94,11 @@ class PlayState(BaseState):
                 settings.SOUNDS["level_time"].play()
 
             if self.timer == 0:
-                self.state_machine.change("end",
-                level = self.level,
-                player = self.player)
+                self.state_machine.change(
+                    "end",
+                    level = self.level,
+                    score = self.player.score,
+                )
 
         Timer.every(1, countdown_timer)
 

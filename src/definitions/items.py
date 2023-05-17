@@ -61,7 +61,7 @@ def pickup_key(key: GameItem, player: Player, **kwargs: Dict[str,Any]):
     else:
         kwargs.get("state_machine").change(
             "end",
-            player=player,
+            score=player.score,
             level=kwargs.get("level"))
 
 def hit_key_box_without_action(key_bloc: GameItem, player: Any):

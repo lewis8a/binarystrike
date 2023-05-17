@@ -45,9 +45,14 @@ class RebornState(BaseState):
 
         self.player.lives -= 1
         if self.player.lives <= 0:
-            self.state_machine.change("end", player=self.player, level=self.level)
+            self.state_machine.change(
+                "end",
+                score=self.player.score,
+                level=self.level
+            )
         else:
             def final_arrive():
+                
                 self.player.change_state("idle")
 
                 self.state_machine.change(
