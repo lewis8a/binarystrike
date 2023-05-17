@@ -26,6 +26,7 @@ from src.states.entities.BaseEntityState import BaseEntityState
 
 class EDeadState(BaseEntityState):
     def enter(self) -> None:
+        self.entity.collidable = False
         # Play sound enemy die
         randomJumpSound = random.randint(4,8)
         settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)

@@ -58,7 +58,7 @@ class GameLevel:
         for i in range(len(self.enemies) - 1, -1, -1):
             if not self.enemies[i].is_dead:
                 self.enemies[i].update(dt)
-                if self.enemies[i].collides(self.player) and not self.player.invulnerable:
+                if self.enemies[i].collides(self.player) and self.enemies[i].collidable and not self.player.invulnerable:
                     self.player.is_dead = True
             else:
                 del self.enemies[i]

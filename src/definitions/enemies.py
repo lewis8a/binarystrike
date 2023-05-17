@@ -75,6 +75,23 @@ Enemies: Dict[int, Dict[str, Any]] = {
             },
         "first_state": "walk",
     },
-    
-
+    2: {
+        "texture_id": "enemy3",
+        "walk_speed": 15,
+        "time_to_rest": 3,
+        "points": 80,
+        "animation_defs": {
+            "walk": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15},
+            "shoot": {"frames": [0, 1, 2, 3], "interval": 0.15},
+            "idle": {"frames": [0, 1, 2, 3, 4, 5], "interval": 0.15},
+            "dead": {"frames": [0, 1, 2, 3,4], "interval": 0.15},
+        },
+        "states": {
+            "idle": entities_states.EIdleState,
+            "walk": entities_states.EWalkState,
+            "shoot": entities_states.EShootState,
+            "dead": entities_states.EDeadState,
+            },
+        "first_state": "walk",
+    },
 }
