@@ -81,7 +81,8 @@ class RebornState(BaseState):
             def entry_arrive():
                 self.finish_tween = True
                 settings.SOUNDS["reborn"].stop()
-                settings.SOUNDS["reborn"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["reborn"].play()
 
                 Timer.after(0.3, back_count_2)
 

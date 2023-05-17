@@ -48,11 +48,13 @@ class PauseState(BaseState):
 
         # Entry sound
         settings.SOUNDS["menu_play"].stop()
-        settings.SOUNDS["menu_play"].play()
-        # Pause music
-        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/pause.ogg")
-        pygame.mixer.music.set_volume(0.8)
-        pygame.mixer.music.play(loops=-1)
+        if settings.SOUND:
+            settings.SOUNDS["menu_play"].play()
+        # Play Pause music
+        if settings.MUSIC:
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/pause.ogg")
+            pygame.mixer.music.set_volume(0.8)
+            pygame.mixer.music.play(loops=-1)
 
         def arrive():
             self.finish_tween = True
@@ -73,12 +75,14 @@ class PauseState(BaseState):
         # Registering for entries
         InputHandler.register_listener(self.player.state_machine.current)
 
-        # Stop music
-        pygame.mixer.music.unload()
-        pygame.mixer.music.stop()
+        # Stop music and unload
+        if settings.MUSIC:
+            pygame.mixer.music.unload()
+            pygame.mixer.music.stop()
         # Exit sound
         settings.SOUNDS["menu_play"].stop()
-        settings.SOUNDS["menu_play"].play()
+        if settings.SOUND:
+            settings.SOUNDS["menu_play"].play()
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))

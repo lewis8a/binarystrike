@@ -32,8 +32,9 @@ class StartState(BaseState):
         self.current_menu_item = 2
 
         # Play Menu Music
-        pygame.mixer.music.load(settings.BASE_DIR / "assets/music/menu.ogg")
-        pygame.mixer.music.play(loops=-1)
+        if settings.MUSIC:
+            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/menu.ogg")
+            pygame.mixer.music.play(loops=-1)
 
         # Set the volume for this sounds
         settings.SOUNDS["menu_select"].set_volume(0.3)
@@ -174,36 +175,45 @@ class StartState(BaseState):
             if self.current_menu_item == 3:
                 self.current_menu_item = 2
                 settings.SOUNDS["menu_select"].stop()
-                settings.SOUNDS["menu_select"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_select"].play()
             elif self.current_menu_item == 2:
                 self.current_menu_item = 1
                 settings.SOUNDS["menu_select"].stop()
-                settings.SOUNDS["menu_select"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_select"].play()
             elif self.current_menu_item == 1:
                 settings.SOUNDS["menu_change"].stop()
-                settings.SOUNDS["menu_change"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_change"].play()
         if input_id in ("move_right") and input_data.pressed:
             if self.current_menu_item == 1:
                 self.current_menu_item = 2
                 settings.SOUNDS["menu_select"].stop()
-                settings.SOUNDS["menu_select"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_select"].play()
             elif self.current_menu_item == 2:
                 self.current_menu_item = 3
                 settings.SOUNDS["menu_select"].stop()
-                settings.SOUNDS["menu_select"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_select"].play()
             elif self.current_menu_item == 3:
                 settings.SOUNDS["menu_change"].stop()
-                settings.SOUNDS["menu_change"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_change"].play()
         elif input_id == "enter" and input_data.pressed:
             if self.current_menu_item == 1:
                 settings.SOUNDS["menu_enter"].stop()
-                settings.SOUNDS["menu_enter"].play()
-                #self.state_machine.change("options")
+                if settings.SOUND:
+                    settings.SOUNDS["menu_enter"].play()
+                self.state_machine.change("setting")
             if self.current_menu_item == 2:
                 settings.SOUNDS["menu_play"].stop()
-                settings.SOUNDS["menu_play"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_play"].play()
                 self.state_machine.change("color")
             if self.current_menu_item == 3:
                 settings.SOUNDS["menu_enter"].stop()
-                settings.SOUNDS["menu_enter"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["menu_enter"].play()
                 self.state_machine.change("dialogue",previous="start",next="credits",part=1)

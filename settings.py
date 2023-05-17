@@ -55,11 +55,13 @@ WINDOW_HEIGHT = (9/16) * pygame.display.Info().current_w
 PLAYER_SPEED = 80
 PLAYER_COLOR = 1
 GRAVITY = 350
-NUM_LEVELS = 5
+NUM_LEVELS = 4
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
 TIME = 100
+MUSIC = 1
+SOUND = 1
 
 # Path of resources
 BASE_DIR = pathlib.Path(__file__).parent
@@ -111,8 +113,16 @@ TEXTURES = {
     "backward_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "backward_btn_1.png"),
     "forward_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "forward_btn_0.png"),
     "forward_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "forward_btn_1.png"),
+    "music_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "music_btn_0.png"),
+    "music_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "music_btn_1.png"),
+    "sound_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "sound_btn_0.png"),
+    "sound_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "sound_btn_1.png"),
+    "settings_btn_0": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_0.png"),
+    "settings_btn_1": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "settings_btn_1.png"),
     "bar": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "bar.png"),
+    "bar_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "bar_2.png"),
     "window": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window.png"),
+    "window_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window_2.png"),
     "lives": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Lives.png"),
 }
 

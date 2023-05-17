@@ -15,5 +15,6 @@ from src.states.game_states.PauseState import PauseState
 from src.states.game_states.ColorState import ColorState
 from src.states.game_states.RebornState import RebornState 
 from src.states.game_states.EndState import EndState
+from src.states.game_states.SettingState import SettingState
 
 (PlayState, BeginState, StartState, PauseState, ColorState, DialogueState, RebornState, EndState)

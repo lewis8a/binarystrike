@@ -117,9 +117,10 @@ class ColorState(BaseState):
         self.khan_animation.update(dt)
 
     def exit(self) -> None:
-        # Stop Menu Music
-        pygame.mixer.music.stop()
-        pygame.mixer.music.unload()
+        # Stop Menu Music nad unload
+        if settings.MUSIC:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.unload()
 
     def on_input(self, input_id: str, input_data: InputData) -> None:
         if input_id in ("move_left") and input_data.pressed:    
@@ -129,7 +130,8 @@ class ColorState(BaseState):
             else:
                 self.current_color = 10
             settings.SOUNDS["menu_character"].stop()
-            settings.SOUNDS["menu_character"].play()
+            if settings.SOUND:
+                settings.SOUNDS["menu_character"].play()
             Timer.tween(
                 0.2,
                 [(self, {"current_menu_item": 2})],
@@ -141,13 +143,15 @@ class ColorState(BaseState):
             else:
                 self.current_color = 1
             settings.SOUNDS["menu_character"].stop()
-            settings.SOUNDS["menu_character"].play()
+            if settings.SOUND:
+                settings.SOUNDS["menu_character"].play()
             Timer.tween(
                 0.2,
                 [(self, {"current_menu_item": 2})],
             )
         elif input_id == "enter" and input_data.pressed:
             settings.SOUNDS["menu_play"].stop()
-            settings.SOUNDS["menu_play"].play()
+            if settings.SOUND:
+                settings.SOUNDS["menu_play"].play()
             settings.PLAYER_COLOR = self.current_color
             self.state_machine.change("dialogue",previous="start",next="begin")

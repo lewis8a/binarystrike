@@ -48,7 +48,8 @@ class DialogueState(BaseState):
             self.font2 = settings.FONTS["title_medium"]
             self.font3 = settings.FONTS["title_medium"]
             settings.SOUNDS["menu_play"].stop()
-            settings.SOUNDS["menu_play"].play()
+            if settings.SOUND:
+                settings.SOUNDS["menu_play"].play()
             self.timeEnd = 1
         elif self.oldState == "start" and self.newState == "begin":
             self.dialogue = "predialogue"
@@ -59,9 +60,10 @@ class DialogueState(BaseState):
             self.font3 = settings.FONTS["text_small"]
             self.timeEnd = 10
         elif self.oldState == "start" and self.newState == "credits":
-            # Play Menu Music
-            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/credits.ogg")
-            pygame.mixer.music.play(loops=-1)
+            # Play Dialog Music
+            if settings.MUSIC:
+                pygame.mixer.music.load(settings.BASE_DIR / "assets/music/credits.ogg")
+                pygame.mixer.music.play(loops=-1)
             self.oldState = "credits"
             self.newState = "dialogue"
             self.dialogue = f"credits{self.part}"

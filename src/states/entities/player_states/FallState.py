@@ -108,7 +108,8 @@ class FallState(BaseEntityState):
         elif input_id == "shoot" and input_data.pressed:
             bullet = ""
             settings.SOUNDS["gun5"].stop()
-            settings.SOUNDS["gun5"].play()
+            if settings.SOUND:
+                settings.SOUNDS["gun5"].play()
             if self.looking_up and self.looking_left: # Up and letf
                 bullet = Projectile(self.entity.x + self.entity.width/2 - 4,
                                     self.entity.y,

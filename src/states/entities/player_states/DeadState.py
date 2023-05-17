@@ -31,7 +31,8 @@ class DeadState(BaseEntityState):
         randomJumpSound = random.randint(1,3)
         settings.SOUNDS[f"death{randomJumpSound}"].set_volume(0.4)
         settings.SOUNDS[f"death{randomJumpSound}"].stop()
-        settings.SOUNDS[f"death{randomJumpSound}"].play()
+        if settings.SOUND:
+            settings.SOUNDS[f"death{randomJumpSound}"].play()
         self.finish = False
         self.entity.is_dead = False
         self.entity.vx = 0

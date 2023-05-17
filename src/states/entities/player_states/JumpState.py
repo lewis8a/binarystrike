@@ -35,7 +35,8 @@ class JumpState(BaseEntityState):
         randomJumpSound = random.randint(1,4)
         settings.SOUNDS[f"jump{randomJumpSound}"].set_volume(0.3)
         settings.SOUNDS[f"jump{randomJumpSound}"].stop()
-        settings.SOUNDS[f"jump{randomJumpSound}"].play()
+        if settings.SOUND:
+            settings.SOUNDS[f"jump{randomJumpSound}"].play()
 
     def exit(self) -> None:
         InputHandler.unregister_listener(self)

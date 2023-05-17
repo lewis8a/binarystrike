@@ -41,7 +41,8 @@ class EShootState(BaseEntityState, IAEnemies):
             self.entity.wait_time = self.entity.time_to_rest
             randomJumpSound = random.randint(1,4)
             settings.SOUNDS[f"gun{randomJumpSound}"].stop()
-            settings.SOUNDS[f"gun{randomJumpSound}"].play()
+            if settings.SOUND:
+                settings.SOUNDS[f"gun{randomJumpSound}"].play()
             vx, vy = self.speed_to_shoot()
             bullet = Projectile(self.entity.x,
                                 self.entity.y + self.entity.height/3,

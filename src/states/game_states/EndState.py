@@ -29,10 +29,12 @@ class EndState(BaseState):
         self.khan_texture = settings.TEXTURES[f"khan{settings.PLAYER_COLOR}"]
 
         # Stop music and unload
-        pygame.mixer.music.stop()
-        pygame.mixer.music.unload()
+        if settings.MUSIC:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.unload()
         
-        settings.SOUNDS["level_failed"].play()
+        if settings.SOUND:
+            settings.SOUNDS["level_failed"].play()
         
         Timer.tween(
             4,
@@ -105,4 +107,5 @@ class EndState(BaseState):
         )
 
     def arrive(self):
+        if settings.SOUND:
             settings.SOUNDS["game_over"].play()

@@ -44,7 +44,8 @@ class PlayState(BaseState):
         randomStartSound = random.randint(1,8)
         settings.SOUNDS[f"start{randomStartSound}"].set_volume(0.8)
         settings.SOUNDS[f"start{randomStartSound}"].stop()
-        settings.SOUNDS[f"start{randomStartSound}"].play()
+        if settings.SOUND:
+            settings.SOUNDS[f"start{randomStartSound}"].play()
 
         if self.level == 1:
             if hasattr(self.player, "play_state"):
@@ -53,8 +54,8 @@ class PlayState(BaseState):
                 self.player = Player(16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
-            
-            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
+            if settings.MUSIC:
+                pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
         elif self.level == 2:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
@@ -62,8 +63,8 @@ class PlayState(BaseState):
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
-            
-            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
+            if settings.MUSIC:
+                pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
         elif self.level == 3:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
@@ -71,7 +72,8 @@ class PlayState(BaseState):
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
-            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
+            if settings.MUSIC:
+                pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
         elif self.level == 4:
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
@@ -79,9 +81,10 @@ class PlayState(BaseState):
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
-            pygame.mixer.music.load(settings.BASE_DIR / "assets/music/finalboss.ogg")
-            
-        pygame.mixer.music.play(loops=-1, start=self.pos_music)
+            if settings.MUSIC:
+                pygame.mixer.music.load(settings.BASE_DIR / "assets/music/finalboss.ogg")
+        if settings.MUSIC:
+            pygame.mixer.music.play(loops=-1, start=self.pos_music)
         
         self.player.play_state = self
 
@@ -91,7 +94,8 @@ class PlayState(BaseState):
             if self.timer == 11:
                 self.endTime = False
                 settings.SOUNDS["level_time"].set_volume(0.5)
-                settings.SOUNDS["level_time"].play()
+                if settings.SOUND:
+                    settings.SOUNDS["level_time"].play()
 
             if self.timer == 0:
                 self.state_machine.change(
@@ -111,9 +115,10 @@ class PlayState(BaseState):
             if self.game_level.enemies[i].current_animation_id == "dead":
                 del self.game_level.enemies[i]
 
-        # Stop music
-        pygame.mixer.music.unload()
-        pygame.mixer.music.stop()
+        # Stop music and unload
+        if settings.MUSIC:
+            pygame.mixer.music.unload()
+            pygame.mixer.music.stop()
 
     def update(self, dt: float) -> None:
         if self.player.is_dead:            
@@ -187,9 +192,10 @@ class PlayState(BaseState):
         #     Timer.clear()
         #     self.timer = time
         #     # Play sound
-        #     settings.SOUNDS["goal_score"].stop()
-        #     settings.SOUNDS["goal_score"].play()
-        #     settings.SOUNDS["timer"].play()
+        #     if settings.SOUND:
+        #       settings.SOUNDS["goal_score"].stop()
+        #       settings.SOUNDS["goal_score"].play()
+        #       settings.SOUNDS["timer"].play()
         #     # Spawn key block
         #     keys_objects = [key for key in self.game_level.items if key.type == "key_block"]
         #     for key_object in keys_objects:

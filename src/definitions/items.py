@@ -28,7 +28,8 @@ def pickup_coin(
     coin: GameItem, player: Player, points: int, color: int, time: float
 ) -> None:
     settings.SOUNDS["pickup_coin"].stop()
-    settings.SOUNDS["pickup_coin"].play()
+    if settings.SOUND:
+        settings.SOUNDS["pickup_coin"].play()
     player.score += points
     player.coins_counter[color] += 1
     Timer.after(time, lambda: coin.respawn())
@@ -51,7 +52,8 @@ def pickup_yellow_coin(coin: GameItem, player: Player, **kwargs: Dict[str,Any]):
     
 def pickup_key(key: GameItem, player: Player, **kwargs: Dict[str,Any]):
     settings.SOUNDS["key"].stop()
-    settings.SOUNDS["key"].play()
+    if settings.SOUND:
+        settings.SOUNDS["key"].play()
     if(kwargs.get("level") <= settings.NUM_LEVELS):
         kwargs.get("state_machine").change(
             "begind",
@@ -87,7 +89,8 @@ def hit_key_box_jumping(key_bloc: GameItem, player: Any, **enter_params: Dict[st
     if not key_bloc.activate:
         key_bloc.activate = True
         settings.SOUNDS["box"].stop()
-        settings.SOUNDS["box"].play()
+        if settings.SOUND:
+            settings.SOUNDS["box"].play()
 
         def arrive():
             key.collidable = True

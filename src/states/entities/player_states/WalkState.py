@@ -102,7 +102,8 @@ class WalkState(BaseEntityState):
         elif input_id == "shoot" and input_data.pressed:
             bullet = ""
             settings.SOUNDS["gun5"].stop()
-            settings.SOUNDS["gun5"].play()
+            if settings.SOUND:
+                settings.SOUNDS["gun5"].play()
             if self.entity.current_animation_id == "walk-up":
                 if self.entity.flipped:
                     bullet = Projectile(self.entity.x,
