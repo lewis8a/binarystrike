@@ -194,6 +194,17 @@ class SettingState(BaseState):
             shadowed = True,
         )
 
+        render_text(
+            surface,
+            f"Safe Zone  {settings.SAFEZONE}",
+            settings.FONTS["title_small"],
+            settings.VIRTUAL_WIDTH // 2,
+            settings.VIRTUAL_HEIGHT // 1.5,
+            (255, 255, 255, 255),
+            center = True,
+            shadowed = True,
+        )
+
         # Icons
         if self.music_menu_item:
             music_btn = pygame.transform.scale(settings.TEXTURES["music_btn_1"],(20,20))
@@ -280,3 +291,9 @@ class SettingState(BaseState):
                 settings.GRAVITY = settings.GRAVITY - 50
             if settings.GRAVITY < 10000 and self.select_menu_item > 0:
                 settings.GRAVITY = settings.GRAVITY + 50
+        if self.current_menu_item == 4:
+            if settings.SAFEZONE > 0 and self.select_menu_item < 1:
+                settings.SAFEZONE = settings.SAFEZONE - 10
+            if settings.SAFEZONE < 500 and self.select_menu_item > 0:
+                settings.SAFEZONE = settings.SAFEZONE + 10
+            pygame.display.set_mode((settings.WINDOW_WIDTH-settings.SAFEZONE, settings.WINDOW_HEIGHT-settings.SAFEZONE))
