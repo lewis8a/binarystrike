@@ -128,7 +128,7 @@ class ColorState(BaseState):
             if self.current_color > 1:
                 self.current_color = self.current_color - 1
             else:
-                self.current_color = 10
+                self.current_color = 20
             settings.SOUNDS["menu_character"].stop()
             if settings.SOUND:
                 settings.SOUNDS["menu_character"].play()
@@ -138,7 +138,7 @@ class ColorState(BaseState):
             )
         if input_id in ("move_right") and input_data.pressed:
             self.current_menu_item = 3
-            if self.current_color < 10:
+            if self.current_color < 20:
                 self.current_color = self.current_color + 1
             else:
                 self.current_color = 1
