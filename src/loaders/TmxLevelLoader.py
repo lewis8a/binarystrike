@@ -115,3 +115,23 @@ class TmxLevelLoader:
                         "height": height,
                     }
                 )
+    
+    def load_boss(self, level: Any, group: ET.Element) -> None:
+        layer = group.find("layer")
+        data = [line for line in layer.find("data").text.splitlines() if len(line) > 0]
+        for i in range(self.height):
+            line = [s for s in data[i].split(",") if len(s) > 0]
+            for j in range(self.width):
+                value = int(line[j])
+
+                if value == 0:
+                    continue
+
+                frame_index = value - self.first_ids["level_1"]
+                level.add_boss(
+                    {
+                        "tile_index": frame_index,
+                        "x": j * self.tilewidth,
+                        "y": (i-1) * self.tileheight,
+                    }
+                )

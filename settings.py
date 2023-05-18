@@ -60,7 +60,7 @@ NUM_LEVELS = 4
 PROJECTILE_SPEED = 170
 RANGE_VISION = 100
 GOAL_SCORE = 35
-TIME = 240
+TIME = 300
 MUSIC = 1
 SOUND = 1
 
@@ -145,6 +145,11 @@ TEXTURES = {
     "window": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window.png"),
     "window_2": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ui" / "window_2.png"),
     "lives": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Lives.png"),
+    "boss1_dead": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Dead.png"),
+    "boss1_idle": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Idle.png"),
+    "boss1_immune": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Immune.png"),
+    "boss1_shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Shot.png"),
+    "boss1_walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Walk.png"),
 }
 
 # Frames
@@ -197,6 +202,11 @@ FRAMES = {
     "enemy3_shoot": frames.generate_frames(TEXTURES["enemy3_shoot"], 20, 34),
     "enemy3_idle": frames.generate_frames(TEXTURES["enemy3_idle"], 20, 34),
     "enemy3_dead": frames.generate_frames(TEXTURES["enemy3_dead"], 20, 34),
+    "boss1_dead": frames.generate_frames(TEXTURES["boss1_dead"], 40, 50),
+    "boss1_idle": frames.generate_frames(TEXTURES["boss1_idle"], 40, 50),
+    "boss1_immune": frames.generate_frames(TEXTURES["boss1_immune"], 40, 50),
+    "boss1_shoot": frames.generate_frames(TEXTURES["boss1_shoot"], 40, 50),
+    "boss1_walk": frames.generate_frames(TEXTURES["boss1_walk"], 40, 50),
 }
 
 # Tile maps of levels

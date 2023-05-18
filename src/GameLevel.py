@@ -13,13 +13,16 @@ lewis8a@gmail.com
 
 This file contains the class GameLevel.
 """
+
 from typing import Any, Dict
+from numpy import sqrt
 
 import pygame
 
 import settings
 from src.Camera import Camera
 from src.Enemy import Enemy
+from src.Boss import Boss
 from src.GameItem import GameItem
 from src.definitions import enemies, items
 
@@ -28,6 +31,7 @@ class GameLevel:
     def __init__(self, num_level: int, camera: Camera) -> None:
         self.tilemap = None
         self.enemies = []
+        self.boss = None
         self.enemies_bullets = []
         self.items = []
         self.camera = camera
@@ -51,6 +55,15 @@ class GameLevel:
                 **definition,
             )
         )
+    
+    def add_boss(self, Enemy_data: Dict[str, Any]) -> None:
+        definition = enemies.Enemies[Enemy_data["tile_index"]]
+        self.boss = Boss(
+                Enemy_data["x"],
+                Enemy_data["y"],
+                self,
+                **definition,
+            )
 
     def update(self, dt: float) -> None:
         self.tilemap.set_render_boundaries(self.camera.get_rect())
@@ -71,6 +84,13 @@ class GameLevel:
                 self.enemies_bullets[i].update(dt)
             else:
                 del self.enemies_bullets[i]
+        
+        dif_x = self.player.x - self.boss.x
+        dif_y = self.player.y - self.boss.y
+        r = sqrt(dif_x*dif_x + dif_y*dif_y)
+        
+        if r < settings.VIRTUAL_WIDTH:
+            self.boss.update(dt)
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)
@@ -81,3 +101,5 @@ class GameLevel:
         for item in self.items:
             if item.in_play:
                 item.render(surface)
+        
+        self.boss.render(surface)
