@@ -51,3 +51,12 @@ class Boss(GameEntity):
         self.texture_base = definition["texture_id"]
         self.walk_speed = definition["walk_speed"]
         self.state_machine.change(definition["first_state"], self.flipped)
+
+    def receive_damage(self, hit_points: int) -> int:
+        self.live_points -= hit_points
+
+        if self.live_points <= 0:
+            self.change_state('dead')
+            return self.points
+
+        return 5

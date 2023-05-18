@@ -101,7 +101,7 @@ class TmxLevelLoader:
                 if value == 0:
                     continue
 
-                frame_index = value - self.first_ids["level_1"]
+                frame_index = value - self.first_ids[f"level_{self.num_level}"]
                 if 0 < frame_index < 4:
                     height = 34
                     width = 20
@@ -127,7 +127,7 @@ class TmxLevelLoader:
                 if value == 0:
                     continue
 
-                frame_index = value - self.first_ids["level_1"]
+                frame_index = value - self.first_ids[f"level_{self.num_level}"]
                 level.add_boss(
                     {
                         "tile_index": frame_index,

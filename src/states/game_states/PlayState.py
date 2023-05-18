@@ -51,7 +51,7 @@ class PlayState(BaseState):
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
             else:
-                self.player = Player(16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
+                self.player = Player(416 * 16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             if settings.MUSIC:
@@ -162,10 +162,21 @@ class PlayState(BaseState):
                     self.bullets[i].in_play = False
                     enemy.change_state("dead")
                     self.player.score += enemy.points
+            
+            if self.game_level.boss.current_animation_id != "dead" and self.bullets[i].collides(self.game_level.boss):
+                    self.bullets[i].in_play = False
+                    self.player.score += self.game_level.boss.receive_damage(1)
+            
             if self.bullets[i].in_play:
                 self.bullets[i].update(dt)
             else:
                 del self.bullets[i]
+        
+        if self.game_level.boss.is_dead:
+            self.state_machine.change(
+                "begin",
+                level = self.level + 1,
+            )
 
         self.game_level.update(dt)
 
