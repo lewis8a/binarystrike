@@ -11,20 +11,23 @@ marquezberriosk@gmail.com
 Author: Lewis Ochoa
 lewis8a@gmail.com
 
-This file contains the class GameItem.
+This file contains the class AnimatedGameItem.
 """
 from typing import Dict, Callable, TypeVar, Any, Optional
 
 from src.GameObject import GameObject
+from src import mixins
 
-class GameItem(GameObject):
+class AnimatedGameItem(GameObject, mixins.AnimatedMixin):
     def __init__(
         self,
         collidable: bool,
         consumable: bool,
         item_name: str,
-        on_collide: Optional[Callable[[TypeVar("GameItem"), Any], Any]] = None,
-        on_consume: Optional[Callable[[TypeVar("GameItem"), Any], Any]] = None,
+
+        animation_defs: Dict[str, Any],
+        on_collide: Optional[Callable[[TypeVar("AnimatedGameItem"), Any], Any]] = None,
+        on_consume: Optional[Callable[[TypeVar("AnimatedGameItem"), Any], Any]] = None,
         *args,
         **kwargs
     ) -> None:
@@ -35,13 +38,24 @@ class GameItem(GameObject):
         self._on_consume = on_consume
         self.in_play = True
         self.type = item_name
+        self.current_animation = None
+        self.current_animation_id = ""
+        self.animations = {}
+        self.generate_animations(animation_defs)
+        self.frame = 0
+        self.multi_texture = False
+        self.y -= 9
+        self.powerup = None
         
         if self.type == "key":
             self.in_play = False
         
         elif self.type == "boxpowerup":
-            self.in_play = False
+            self.in_play = True
             self.activate = False
+
+        self.change_animation("idle")
+
 
 
     # def respawn(self, x: Optional[float] = None, y: Optional[float] = None) -> None:

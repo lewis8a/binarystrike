@@ -23,7 +23,7 @@ import settings
 from src.Camera import Camera
 from src.Enemy import Enemy
 from src.Boss import Boss
-from src.GameItem import GameItem
+from src.AnimatedGameItem import AnimatedGameItem
 from src.definitions import enemies, items
 
 
@@ -41,7 +41,16 @@ class GameLevel:
     def add_item(self, item_data: Dict[str, Any]) -> None:
         definition = items.ITEMS[item_data["item_name"]][item_data["frame_index"]]
         definition.update(item_data)
-        self.items.append(GameItem(**definition))
+        self.items.append(AnimatedGameItem(**definition))
+
+    def link_key_to_box(self) -> None:
+        for box in self.items:
+            if box.type == "boxpowerup":
+                for powerup in self.items:
+                    if powerup.type == "key" and powerup.x == box.x and powerup.y == box.y:
+                        box.powerup = powerup
+                        break
+
 
     def add_enemy(self, Enemy_data: Dict[str, Any]) -> None:
         definition = enemies.Enemies[Enemy_data["tile_index"]]
@@ -100,6 +109,8 @@ class GameLevel:
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)
+        for item in self.items:
+            item.render(surface)
         for bullet in self.enemies_bullets:
             bullet.render(surface)
         for enemy in self.enemies:

@@ -83,10 +83,10 @@ class TmxLevelLoader:
                             "frame_index": frame_index,
                             "x": j * self.tilewidth,
                             "y": i * self.tileheight,
-                            "width": self.tilewidth,
-                            "height": self.tileheight,
                         }
                     )
+
+        level.link_key_to_box()
 
     def load_enemies(self, level: Any, group: ET.Element) -> None:
         width = 0

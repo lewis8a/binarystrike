@@ -17,7 +17,6 @@ from typing import Dict
 
 from src import mixins
 
-
 class GameObject(mixins.DrawableMixin, mixins.CollidableMixin):
     # Object sides
     TOP = "top"

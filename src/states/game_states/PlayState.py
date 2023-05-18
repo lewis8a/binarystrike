@@ -51,7 +51,7 @@ class PlayState(BaseState):
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
             else:
-                self.player = Player(410 * 16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
+                self.player = Player(16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             if settings.MUSIC:
@@ -181,37 +181,15 @@ class PlayState(BaseState):
         self.game_level.update(dt)
 
 
-        # for item in self.game_level.items:
-        #     if not item.in_play or not item.collidable:
-        #         continue
+        for item in self.game_level.items:
+            if not item.in_play or not item.collidable:
+                continue
             
-        #     if self.player.collides(item):
-        #         if item.type == "key":
-        #             item.on_consume(self.player, level = self.level + 1, state_machine = self.state_machine)
-        #         elif item.type == "key_block" and not item.activate:
-        #             key_object = [key for key in self.game_level.items if  key.type == "key" and key.y == item.y and key.x == item.x]
-        #             item.on_collide(self.player, item_key = key_object[0])
-        #         else:
-        #             item.on_collide(self.player)
-        #             item.on_consume(self.player)
-        # goal_score_by_level = settings.GOAL_SCORE * self.level
-        # if self.player.score >= goal_score_by_level and not self.key:
-        #     self.key = True
-        #     # Clean coins of world
-        #     self.game_level.items = [key for key in self.game_level.items if key.type == "key" or key.type == "key_block"]
-        #     # Frezzing time
-        #     time = self.timer
-        #     Timer.clear()
-        #     self.timer = time
-        #     # Play sound
-        #     if settings.SOUND:
-        #       settings.SOUNDS["goal_score"].stop()
-        #       settings.SOUNDS["goal_score"].play()
-        #       settings.SOUNDS["timer"].play()
-        #     # Spawn key block
-        #     keys_objects = [key for key in self.game_level.items if key.type == "key_block"]
-        #     for key_object in keys_objects:
-        #         key_object.in_play = True
+            if self.player.collides(item):
+                if item.type == "key":
+                    item.on_consume(self.player)
+                elif item.type == "boxpowerup" and not item.activate:
+                    item.on_collide(self.player, powerup = item.powerup)
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))

@@ -150,6 +150,8 @@ TEXTURES = {
     "boss1_immune": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Immune.png"),
     "boss1_shoot": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Shot.png"),
     "boss1_walk": pygame.image.load(BASE_DIR / "assets" / "graphics" / "characters" / "boss" / "boss1" / "Walk.png"),
+    "live_powerup": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Card.png"),
+    "box_powerup": pygame.image.load(BASE_DIR / "assets" / "graphics" / "objects" / "Chest.png"),
 }
 
 # Frames
@@ -207,6 +209,8 @@ FRAMES = {
     "boss1_immune": frames.generate_frames(TEXTURES["boss1_immune"], 40, 50),
     "boss1_shoot": frames.generate_frames(TEXTURES["boss1_shoot"], 40, 50),
     "boss1_walk": frames.generate_frames(TEXTURES["boss1_walk"], 40, 50),
+    "live_powerup": frames.generate_frames(TEXTURES["live_powerup"], 12, 14),
+    "box_powerup": frames.generate_frames(TEXTURES["box_powerup"], 32, 26),
 }
 
 # Tile maps of levels

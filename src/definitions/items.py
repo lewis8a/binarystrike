@@ -13,44 +13,16 @@ lewis8a@gmail.com
 
 This file contains the definition for items.
 """
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
-import random
 from gale.timer import Timer
 
 import settings
-from src.GameItem import GameItem
+from src.AnimatedGameItem import AnimatedGameItem
 from src.Player import Player
-from src.states.entities.player_states import JumpState, WalkState, FallState
+from src.states.entities import player_states
 
-
-def pickup_coin(
-    coin: GameItem, player: Player, points: int, color: int, time: float
-) -> None:
-    settings.SOUNDS["pickup_coin"].stop()
-    if settings.SOUND:
-        settings.SOUNDS["pickup_coin"].play()
-    player.score += points
-    player.coins_counter[color] += 1
-    Timer.after(time, lambda: coin.respawn())
-
-
-def pickup_green_coin(coin: GameItem, player: Player, **kwargs: Dict[str,Any]):
-    pickup_coin(coin, player, 1, 62, random.uniform(2, 4))
-
-
-def pickup_blue_coin(coin: GameItem, player: Player, **kwargs: Dict[str,Any]):
-    pickup_coin(coin, player, 5, 61, random.uniform(5, 8))
-
-
-def pickup_red_coin(coin: GameItem, player: Player, **kwargs: Dict[str,Any]):
-    pickup_coin(coin, player, 20, 55, random.uniform(10, 18))
-
-
-def pickup_yellow_coin(coin: GameItem, player: Player, **kwargs: Dict[str,Any]):
-    pickup_coin(coin, player, 50, 54, random.uniform(20, 25))
-    
-def pickup_key(key: GameItem, player: Player, **kwargs: Dict[str,Any]):
+def pickup_key(key: AnimatedGameItem, player: Player, **kwargs: Dict[str,Any]):
     settings.SOUNDS["key"].stop()
     if settings.SOUND:
         settings.SOUNDS["key"].play()
@@ -66,106 +38,111 @@ def pickup_key(key: GameItem, player: Player, **kwargs: Dict[str,Any]):
             score=player.score,
             level=kwargs.get("level"))
 
-def hit_key_box_without_action(key_bloc: GameItem, player: Any):
-    player.y = key_bloc.y - 18
-    player.vy = player.vx = 0
-    player.change_state("idle")
+def pickup_live_8(key: AnimatedGameItem, player: Player, **kwargs: Optional[Dict[str, Any]]):
+    # settings.SOUNDS["key"].stop()
+    # if settings.SOUND:
+    #     settings.SOUNDS["key"].play()
+    player.lives += 8
 
-def hit_key_box_falling(key_bloc: GameItem, player: Any):
-    player.vy = 0
-    if player.x < key_bloc.x + 16 and key_bloc.x < player.x + player.width:
-        player.y = key_bloc.y - 18
-        if player.vx == 0:
-            player.change_state("idle")
-        elif player.vx > 0:
-            player.change_state("walk", "right")
-        else:
-            player.change_state("walk", "left")
+def pickup_live_16(key: AnimatedGameItem, player: Player, **kwargs: Optional[Dict[str, Any]]):
+    # settings.SOUNDS["key"].stop()
+    # if settings.SOUND:
+    #     settings.SOUNDS["key"].play()
+    player.lives += 16 
 
-def hit_key_box_jumping(key_bloc: GameItem, player: Any, **enter_params: Dict[str,Any]):
-    player.vy = 0
-    player.y = key_bloc.y + player.height
+def activate_powerup(box_powerup: AnimatedGameItem, powerup: AnimatedGameItem) -> None:
+    box_powerup.activate = True
+    # play sound open powerup box
+    # settings.SOUNDS["box"].stop()
+    # if settings.SOUND:
+    #     settings.SOUNDS["box"].play()
+    def arrive():
+        powerup.change_animation("dance")
+        powerup.collidable = True
     
-    if not key_bloc.activate:
-        key_bloc.activate = True
-        settings.SOUNDS["box"].stop()
-        if settings.SOUND:
-            settings.SOUNDS["box"].play()
+    powerup.in_play = True
+    powerup.collidable = False
+    final_y_key = powerup.y - 32
+    Timer.tween(2, [ (powerup, {"y": final_y_key}) ], on_finish=arrive)
 
-        def arrive():
-            key.collidable = True
-        
-        key = enter_params.get("item_key")
-        key.in_play = True
-        key.collidable = False
-        final_y_key = key.y - 16
-        Timer.tween(2, [ (key, {"y": final_y_key}) ], on_finish=arrive)
-
-def hit_key_box_walking(key_bloc: GameItem, player: Any):
-    player.vx = 0
+def hit_key_box_falling(box_powerup: AnimatedGameItem, powerup: AnimatedGameItem, player: Any):
+    player.vy = 0
+    player.y = box_powerup.y + player.height
     
-    if player.x < key_bloc.x + 16:
-        player.x = key_bloc.x + 17
-    else:
-        player.x = key_bloc.x - player.width - 1
+    if not box_powerup.activate:
+        activate_powerup(box_powerup, powerup)
 
-def spawn_key(key_bloc: GameItem, player: Any, **enter_params: Dict[str,Any]):
-    if isinstance(player.state_machine.current, JumpState):
-        hit_key_box_jumping(key_bloc, player, **enter_params)
-    elif isinstance(player.state_machine.current, WalkState):
-        hit_key_box_walking(key_bloc, player)
-    elif isinstance(player.state_machine.current, FallState):
-        hit_key_box_falling(key_bloc, player)
+def hit_key_box_jumping(box_powerup: AnimatedGameItem, powerup: AnimatedGameItem, player: Any):
+    player.vy = 0
+    player.y = box_powerup.y + box_powerup.height
+    
+    if not box_powerup.activate:
+        activate_powerup(box_powerup, powerup)
+
+def spawn_key(box_powerup: AnimatedGameItem, player: Any, **kwargs: Optional[Dict[str, Any]]):
+    box_powerup.change_animation("open")
+    if isinstance(player.state_machine.current, player_states.FallState):
+        hit_key_box_falling(box_powerup, kwargs.get("powerup"), player)
+    elif isinstance(player.state_machine.current, player_states.JumpState):
+        hit_key_box_jumping(box_powerup, kwargs.get("powerup"), player)
     else:
-        hit_key_box_without_action(key_bloc, player)
+        player.handle_tilemap_collision_on_right() or player.handle_tilemap_collision_on_left()
+        if not box_powerup.activate:
+            activate_powerup(box_powerup, kwargs.get("powerup"))
     
 ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
-    "coins": {
-        62: {
-            "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
-            "consumable": True,
-            "collidable": True,
-            "on_consume": pickup_green_coin,
-        },
-        61: {
-            "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
-            "consumable": True,
-            "collidable": True,
-            "on_consume": pickup_blue_coin,
-        },
-        55: {
-            "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
-            "consumable": True,
-            "collidable": True,
-            "on_consume": pickup_red_coin,
-        },
-        54: {
-            "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
-            "consumable": True,
-            "collidable": True,
-            "on_consume": pickup_yellow_coin,
-        },
-    },
-    "key": {
-        56: {
-            "texture_id": "tiles",
-            "solidness": dict(top=False, right=False, bottom=False, left=False),
-            "consumable": True,
-            "collidable": True,
-            "on_consume": pickup_key,
-        }
-    },
-    "key_block": {
-        49: {
-            "texture_id": "tiles",
+    "boxpowerup": {
+        10: {
+            "texture_id": "box_powerup",
             "solidness": dict(top=True, right=True, bottom=True, left=True),
             "consumable": False,
             "collidable": True,
             "on_collide": spawn_key,
+            #"final_height": 16,
+            #"original_height": 25,
+            "height": 25,
+            "width": 32,
+            "animation_defs": {
+                "open": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15, "loops": 1},
+                "idle": {"frames": [0]},
+            },
         }
-    }
+    },
+    "key": {
+        11: {
+            "texture_id": "live_powerup",
+            "solidness": dict(top=False, right=False, bottom=False, left=False),
+            "consumable": True,
+            "collidable": True,
+            "on_consume": pickup_live_8,
+            "height": 14,
+            "width": 12,
+            "animation_defs": {
+                "dance": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15},
+                "idle": {"frames": [0]},
+            },
+        },
+        12: {
+            "texture_id": "live_powerup",
+            "solidness": dict(top=False, right=False, bottom=False, left=False),
+            "consumable": True,
+            "collidable": True, 
+            "on_consume": pickup_live_16,
+            "height": 14,
+            "width": 12,
+            "animation_defs": {
+                "dance": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15},
+                "idle": {"frames": [0]},
+            },
+        }
+    },  
+    # "coins": {
+    #     62: {
+    #         "texture_id": "tiles",
+    #         "solidness": dict(top=False, right=False, bottom=False, left=False),
+    #         "consumable": True,
+    #         "collidable": True,
+    #         "on_consume": pickup_green_coin,
+    #     },
+    # },
 }
