@@ -53,7 +53,8 @@ class Player(GameEntity):
         self.invulnerable = False
         self.invulnerable_time = 5
         self.invulnerable_count = 0
-        self.lives = 300
+        self.touch_boss = False
+        self.lives = 10
         self.score = 0
         self.double_jump = False
         self.last_floor_position = (x, y)

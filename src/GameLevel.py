@@ -85,12 +85,18 @@ class GameLevel:
             else:
                 del self.enemies_bullets[i]
         
-        dif_x = self.player.x - self.boss.x
-        dif_y = self.player.y - self.boss.y
-        r = sqrt(dif_x*dif_x + dif_y*dif_y)
+        if not self.boss.is_dead:
+            dif_x = self.player.x - self.boss.x
+            dif_y = self.player.y - self.boss.y
+            r = sqrt(dif_x*dif_x + dif_y*dif_y)
         
-        if r < settings.VIRTUAL_WIDTH:
-            self.boss.update(dt)
+            if r < settings.VIRTUAL_WIDTH:
+                self.boss.update(dt)
+                if self.boss.collides(self.player) and self.boss.collidable and not self.player.invulnerable:
+                    self.player.is_dead = True
+                    self.player.touch_boss = True
+        
+        
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)

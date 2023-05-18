@@ -43,7 +43,12 @@ class RebornState(BaseState):
         self.x_live = 7
         self.y_live = 20
 
-        self.player.lives -= 1
+        if self.player.touch_boss:
+            self.player.lives -= 5
+            self.player.touch_boss = False
+        else:
+            self.player.lives -= 1
+
         if self.player.lives <= 0:
             self.state_machine.change(
                 "end",

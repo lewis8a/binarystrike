@@ -51,7 +51,7 @@ class PlayState(BaseState):
             if hasattr(self.player, "play_state"):
                 delattr(self.player, "play_state")
             else:
-                self.player = Player(416 * 16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
+                self.player = Player(410 * 16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             if settings.MUSIC:
