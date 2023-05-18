@@ -77,6 +77,12 @@ class GameLevel:
     def update(self, dt: float) -> None:
         self.tilemap.set_render_boundaries(self.camera.get_rect())
 
+        for i in range(len(self.items) - 1, -1, -1):
+            if not self.items[i].in_play:
+                self.items[i].update(dt)
+                if self.items[i].collides(self.player) and self.items[i].type == "key":
+                    self.items[i].in_play = False
+
         for i in range(len(self.enemies) - 1, -1, -1):
             if not self.enemies[i].is_dead:
                 self.enemies[i].update(dt)
@@ -104,13 +110,9 @@ class GameLevel:
                 if self.boss.collides(self.player) and self.boss.collidable and not self.player.invulnerable:
                     self.player.is_dead = True
                     self.player.touch_boss = True
-        
-        
 
     def render(self, surface: pygame.Surface) -> None:
         self.tilemap.render(surface)
-        for item in self.items:
-            item.render(surface)
         for bullet in self.enemies_bullets:
             bullet.render(surface)
         for enemy in self.enemies:

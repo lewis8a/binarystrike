@@ -24,7 +24,6 @@ class AnimatedGameItem(GameObject, mixins.AnimatedMixin):
         collidable: bool,
         consumable: bool,
         item_name: str,
-
         animation_defs: Dict[str, Any],
         on_collide: Optional[Callable[[TypeVar("AnimatedGameItem"), Any], Any]] = None,
         on_consume: Optional[Callable[[TypeVar("AnimatedGameItem"), Any], Any]] = None,
@@ -36,13 +35,12 @@ class AnimatedGameItem(GameObject, mixins.AnimatedMixin):
         self.consumable = consumable
         self._on_collide = on_collide
         self._on_consume = on_consume
-        self.in_play = True
         self.type = item_name
         self.current_animation = None
         self.current_animation_id = ""
         self.animations = {}
         self.generate_animations(animation_defs)
-        self.frame = 0
+        self.frame_index = -1
         self.multi_texture = False
         self.y -= 9
         self.powerup = None
