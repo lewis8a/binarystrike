@@ -23,7 +23,7 @@ Binary Strike is an action game Run and Gun style, this is centered on the battl
 
 ## Developers
 - @Lewis8a
-- @K-markez
+- @K-marquez
 - @R3mmurd
 
 ## Power by
