@@ -29,12 +29,11 @@ class PlayState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.player = enter_params.get("player")
         self.timer = enter_params.get("timer", settings.TIME)
-        self.level = enter_params.get("level", 1)
+        self.level = enter_params.get("level", 2)
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
         self.game_level = enter_params.get("game_level", GameLevel(self.level, self.camera))
-        self.bullets = enter_params.get("bullets", [])
         self.pos_music = enter_params.get("pos_music", 0.0)
         pygame.mixer.music.set_volume(0.3)
 
@@ -48,45 +47,42 @@ class PlayState(BaseState):
             settings.SOUNDS[f"start{randomStartSound}"].play()
 
         if self.level == 1:
-            if hasattr(self.player, "play_state"):
-                delattr(self.player, "play_state")
-            else:
-                self.player = Player(16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
+            if self.player == None:
+                self.player = Player(410*16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
                 self.player.change_state("idle")
                 self.game_level.player = self.player
+            
             if settings.MUSIC:
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
         elif self.level == 2:
-            if hasattr(self.player, "play_state"):
-                delattr(self.player, "play_state")
-            else:
+            if self.player == None:
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
+                self.player.score = enter_params.get("score", 0)
+                self.player.lives = enter_params.get("lives", 3)
                 self.game_level.player = self.player
             if settings.MUSIC:
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
         elif self.level == 3:
-            if hasattr(self.player, "play_state"):
-                delattr(self.player, "play_state")
-            else:
+            if self.player == None:
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
+                self.player.score = enter_params.get("score", 0)
+                self.player.lives = enter_params.get("lives", 3)
                 self.game_level.player = self.player
             if settings.MUSIC:
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
         elif self.level == 4:
-            if hasattr(self.player, "play_state"):
-                delattr(self.player, "play_state")
-            else:
+            if self.player == None:
                 self.player = Player(16 * 2, 16 * 2, self.game_level)
                 self.player.change_state("idle")
+                self.player.score = enter_params.get("score", 0)
+                self.player.lives = enter_params.get("lives", 3)
                 self.game_level.player = self.player
             if settings.MUSIC:
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/finalboss.ogg")
         if settings.MUSIC:
             pygame.mixer.music.play(loops=-1, start=self.pos_music)
-        
-        self.player.play_state = self
 
         def countdown_timer():
             self.timer -= 1
@@ -130,7 +126,6 @@ class PlayState(BaseState):
                     level = self.level,
                     camera = self.camera,
                     game_level = self.game_level,
-                    bullets = self.bullets,
                     pos_music = self.position_music(),
                 )
 
@@ -156,26 +151,28 @@ class PlayState(BaseState):
             ),
         )
         
-        for i in range(len(self.bullets) - 1, -1, -1):
+        for i in range(len(self.player.bullets) - 1, -1, -1):
             for enemy in self.game_level.enemies:
-                if enemy.current_animation_id != "dead" and self.bullets[i].collides(enemy):
-                    self.bullets[i].in_play = False
+                if enemy.current_animation_id != "dead" and self.player.bullets[i].collides(enemy):
+                    self.player.bullets[i].in_play = False
                     enemy.change_state("dead")
                     self.player.score += enemy.points
             
-            if self.game_level.boss.current_animation_id != "dead" and self.bullets[i].collides(self.game_level.boss):
-                    self.bullets[i].in_play = False
+            if self.game_level.boss.current_animation_id != "dead" and self.player.bullets[i].collides(self.game_level.boss):
+                    self.player.bullets[i].in_play = False
                     self.player.score += self.game_level.boss.receive_damage(1)
             
-            if self.bullets[i].in_play:
-                self.bullets[i].update(dt)
+            if self.player.bullets[i].in_play:
+                self.player.bullets[i].update(dt)
             else:
-                del self.bullets[i]
+                del self.player.bullets[i]
         
         if self.game_level.boss.is_dead:
             self.state_machine.change(
                 "begin",
                 level = self.level + 1,
+                score = self.player.score,
+                lives = self.player.lives,
             )
 
         self.game_level.update(dt)
@@ -195,7 +192,7 @@ class PlayState(BaseState):
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
         self.player.render(world_surface)
-        for bullet in self.bullets:
+        for bullet in self.player.bullets:
             bullet.render(world_surface)
 
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
@@ -234,7 +231,6 @@ class PlayState(BaseState):
                 level = self.level,
                 camera = self.camera,
                 game_level = self.game_level,
-                bullets = self.bullets,
                 pos_music = self.position_music()
             )
     

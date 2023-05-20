@@ -36,7 +36,6 @@ class PauseState(BaseState):
         self.level = enter_params.get("level")
         self.camera = enter_params.get("camera")
         self.game_level = enter_params.get("game_level")
-        self.bullets = enter_params.get("bullets")
         self.pos_music = enter_params.get("pos_music")
         self.player = self.game_level.player
         self.tilemap = self.game_level.tilemap
@@ -88,7 +87,7 @@ class PauseState(BaseState):
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
         self.player.render(world_surface)
-        for bullet in self.bullets:
+        for bullet in self.player.bullets:
             bullet.render(world_surface)
         
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
@@ -170,6 +169,5 @@ class PauseState(BaseState):
                 level=self.level,
                 camera=self.camera,
                 game_level=self.game_level,
-                bullets=self.bullets,
                 pos_music = self.pos_music
             )

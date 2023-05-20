@@ -61,6 +61,7 @@ class Player(GameEntity):
         self.alpha_value = 255
         self.flash_time = 0
         self.set_flash_time = 0.15
+        self.bullets = []
 
     def go_invulnerable(self) -> None:
         self.invulnerable = True
