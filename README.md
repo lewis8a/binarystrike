@@ -34,9 +34,9 @@ Binary Strike is an action game Run and Gun style, this is centered on the battl
 ALKELE GAMES All Rights Reserved - Venezuela 2023
 
 ## Credits
-● Level Design: Derwins Ochoa, Kevin Marquez and Lewis Ochoa
-● Art: Anokolisa, BDragon1727, Craftpix, Fightswithbears and Kenney Vleugels.
-● Soundtrack: Luis Zuno (Ansimuz)
-● SFX: Fesliyanstudio, Jurij Kornukov, Snake F8 (F8 Studio) and Universfield
-● Text Fonts: Glitter Dazed, Jayde Garrow and Spideray’s Fonts
-● Voice Actors: Alex Brodie, Dillon Becker, Ian Lampert and Meghan Christian
+- Level Design: Derwins Ochoa, Kevin Marquez and Lewis Ochoa
+- Art: Anokolisa, BDragon1727, Craftpix, Fightswithbears and Kenney Vleugels.
+- Soundtrack: Luis Zuno (Ansimuz)
+- SFX: Fesliyanstudio, Jurij Kornukov, Snake F8 (F8 Studio) and Universfield
+- Text Fonts: Glitter Dazed, Jayde Garrow and Spideray’s Fonts
+- Voice Actors: Alex Brodie, Dillon Becker, Ian Lampert and Meghan Christian
