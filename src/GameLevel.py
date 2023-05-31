@@ -23,7 +23,8 @@ import settings
 from src.Camera import Camera
 from src.Enemy import Enemy
 from src.Boss import Boss
-from src.AnimatedGameItem import AnimatedGameItem
+from src.GamePowerup import GamePowerup
+from src.GameBox import GameBox
 from src.definitions import enemies, items
 
 
@@ -41,16 +42,25 @@ class GameLevel:
     def add_item(self, item_data: Dict[str, Any]) -> None:
         definition = items.ITEMS[item_data["item_name"]][item_data["frame_index"]]
         definition.update(item_data)
-        self.items.append(AnimatedGameItem(**definition))
-
+        if item_data["item_name"] == "boxpowerup":
+            item = GameBox(**definition)
+        elif item_data["item_name"] == "key":
+            item = GamePowerup(**definition)
+            
+        self.items.append(item)
+    
     def link_key_to_box(self) -> None:
         for box in self.items:
-            if box.type == "boxpowerup":
-                for powerup in self.items:
-                    if powerup.type == "key" and powerup.x == box.x and powerup.y == box.y:
-                        box.powerup = powerup
-                        break
-
+            if not isinstance(box, GameBox):
+                continue
+            
+            for powerup in self.items:
+                if not isinstance(powerup, GamePowerup):
+                    continue
+                if powerup.x == box.x:
+                    box.powerup = powerup
+                    powerup.box = box
+                    break
 
     def add_enemy(self, Enemy_data: Dict[str, Any]) -> None:
         definition = enemies.Enemies[Enemy_data["tile_index"]]
@@ -78,9 +88,10 @@ class GameLevel:
         self.tilemap.set_render_boundaries(self.camera.get_rect())
 
         for i in range(len(self.items) - 1, -1, -1):
+            self.items[i].update(dt)
             if not self.items[i].in_play:
-                self.items[i].update(dt)
-                if self.items[i].collides(self.player) and self.items[i].type == "key":
+                if self.items[i].collides(self.player) and isinstance(self.items[i],GamePowerup):
+                    self.items[i].box.change_animation("close")
                     self.items[i].in_play = False
 
         for i in range(len(self.enemies) - 1, -1, -1):

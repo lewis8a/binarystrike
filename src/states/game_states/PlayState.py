@@ -23,13 +23,14 @@ from numpy import random
 from src.Camera import Camera
 from src.GameLevel import GameLevel
 from src.Player import Player
-
+from src.GameBox import GameBox
+from src.GamePowerup import GamePowerup
 
 class PlayState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.player = enter_params.get("player")
         self.timer = enter_params.get("timer", settings.TIME)
-        self.level = enter_params.get("level", 2)
+        self.level = enter_params.get("level", 1)
         self.camera = enter_params.get(
             "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
         )
@@ -38,6 +39,9 @@ class PlayState(BaseState):
         pygame.mixer.music.set_volume(0.3)
 
         self.tilemap = self.game_level.tilemap
+
+        self.x_live = 7
+        self.y_live = 20
 
         # Play sound player voice
         randomStartSound = random.randint(1,8)
@@ -48,7 +52,7 @@ class PlayState(BaseState):
 
         if self.level == 1:
             if self.player == None:
-                self.player = Player(410*16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level)
+                self.player = Player(2 * 16, settings.VIRTUAL_HEIGHT - 16*2, self.game_level, {"dead": self.after_die})
                 self.player.change_state("idle")
                 self.game_level.player = self.player
             
@@ -56,7 +60,7 @@ class PlayState(BaseState):
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level1.ogg")
         elif self.level == 2:
             if self.player == None:
-                self.player = Player(16 * 2, 16 * 2, self.game_level)
+                self.player = Player(16 * 2, 16 * 2, self.game_level, {"dead": self.after_die})
                 self.player.change_state("idle")
                 self.player.score = enter_params.get("score", 0)
                 self.player.lives = enter_params.get("lives", 3)
@@ -65,7 +69,7 @@ class PlayState(BaseState):
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level2.ogg")
         elif self.level == 3:
             if self.player == None:
-                self.player = Player(16 * 2, 16 * 2, self.game_level)
+                self.player = Player(16 * 2, 16 * 2, self.game_level, {"dead": self.after_die})
                 self.player.change_state("idle")
                 self.player.score = enter_params.get("score", 0)
                 self.player.lives = enter_params.get("lives", 3)
@@ -74,7 +78,7 @@ class PlayState(BaseState):
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/level3.ogg")
         elif self.level == 4:
             if self.player == None:
-                self.player = Player(16 * 2, 16 * 2, self.game_level)
+                self.player = Player(16 * 2, 16 * 2, self.game_level, {"dead": self.after_die})
                 self.player.change_state("idle")
                 self.player.score = enter_params.get("score", 0)
                 self.player.lives = enter_params.get("lives", 3)
@@ -103,9 +107,6 @@ class PlayState(BaseState):
 
         Timer.every(1, countdown_timer)
 
-        self.x_live = 7
-        self.y_live = 20
-
     def exit(self) -> None:
         Timer.clear()
         for i in range(len(self.game_level.enemies) - 1, -1, -1):
@@ -118,18 +119,8 @@ class PlayState(BaseState):
             pygame.mixer.music.stop()
 
     def update(self, dt: float) -> None:
-        if self.player.is_dead:            
-            def after_die():
-                self.state_machine.change(
-                    "reborn",
-                    timer = self.timer,
-                    level = self.level,
-                    camera = self.camera,
-                    game_level = self.game_level,
-                    pos_music = self.position_music(),
-                )
-
-            self.player.change_state("dead", on_finish = after_die)
+        if self.player.is_dead:
+            self.player.change_state("dead", on_finish=self.after_die)
 
         elif self.player.y >= self.player.tilemap.height:
             self.player.is_dead = True
@@ -183,10 +174,10 @@ class PlayState(BaseState):
                 continue
             
             if self.player.collides(item):
-                if item.type == "key":
+                if isinstance(item, GamePowerup):
                     item.on_consume(self.player)
-                elif item.type == "boxpowerup" and not item.activate:
-                    item.on_collide(self.player, powerup = item.powerup)
+                elif isinstance(item, GameBox) and not item.activate:
+                    item.on_collide(self.player)
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
@@ -196,7 +187,6 @@ class PlayState(BaseState):
             bullet.render(world_surface)
 
         surface.blit(world_surface, (-self.camera.x, -self.camera.y))
-        
 
         render_text(
             surface,
@@ -247,3 +237,14 @@ class PlayState(BaseState):
                 music_pos = music_pos % 32
         
         return music_pos
+
+    # Callback after die player
+    def after_die(self):
+        self.state_machine.change(
+            "reborn",
+            timer = self.timer,
+            level = self.level,
+            camera = self.camera,
+            game_level = self.game_level,
+            pos_music = self.position_music(),
+        )

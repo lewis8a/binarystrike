@@ -25,6 +25,7 @@ class AnimatedMixin:
                 values["frames"],
                 values.get("interval", 0),  # Given interval or zero
                 loops=values.get("loops"),  # Given loops or None
+                on_finish=values.get("on_finish"),  # Given callback or None
             )
             self.animations[animation_id] = animation
 

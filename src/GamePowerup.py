@@ -11,20 +11,22 @@ marquezberriosk@gmail.com
 Author: Lewis Ochoa
 lewis8a@gmail.com
 
-This file contains the class GameItem.
+This file contains the class GamePowerup.
 """
 from typing import Dict, Callable, TypeVar, Any, Optional
 
+from src import mixins
 from src.GameObject import GameObject
 
-class GameItem(GameObject):
+class GamePowerup(GameObject, mixins.AnimatedMixin):
     def __init__(
         self,
         collidable: bool,
         consumable: bool,
         item_name: str,
-        on_collide: Optional[Callable[[TypeVar("GameItem"), Any], Any]] = None,
-        on_consume: Optional[Callable[[TypeVar("GameItem"), Any], Any]] = None,
+        animation_defs: Dict[str, Any],
+        on_collide: Optional[Callable[[TypeVar("GamePowerup"), Any], Any]] = None,
+        on_consume: Optional[Callable[[TypeVar("GamePowerup"), Any], Any]] = None,
         *args,
         **kwargs
     ) -> None:
@@ -33,23 +35,15 @@ class GameItem(GameObject):
         self.consumable = consumable
         self._on_collide = on_collide
         self._on_consume = on_consume
-        self.in_play = True
-        self.type = item_name
-        
-        if self.type == "key":
-            self.in_play = False
-        
-        elif self.type == "boxpowerup":
-            self.in_play = False
-            self.activate = False
+        self.current_animation = None
+        self.current_animation_id = ""
+        self.animations = {}
+        self.generate_animations(animation_defs)
+        self.multi_texture = False
+        self.box = None
+        self.in_play = False
 
-
-    # def respawn(self, x: Optional[float] = None, y: Optional[float] = None) -> None:
-    #     if x is not None:
-    #         self.x = x
-    #     if y is not None:
-    #         self.y = y
-    #     self.in_play = True
+        self.change_animation("idle")
 
     def on_collide(self, another: Any, **kwargs: Optional[Dict[str, Any]]) -> Any:
         if not self.collidable or self._on_collide is None:

@@ -16,14 +16,29 @@ This file contains the class Player.
 
 from gale.timer import Timer
 
-from typing import TypeVar
+from typing import TypeVar, Dict, Callable
 from src.GameEntity import GameEntity
 from src.states.entities import player_states
 
 import settings
 
 class Player(GameEntity):
-    def __init__(self, x: int, y: int, game_level: TypeVar("GameLevel")) -> None:
+    def __init__(
+            self,
+            x: int,
+            y: int,
+            game_level: TypeVar("GameLevel"),
+            anim_callbacks: Dict[str,Callable[[], None]]
+     ) -> None:
+        animations = {
+                "idle": {"frames": [0]},
+                "idle-up": {"frames": [1]},
+                "walk": {"frames": [2, 3, 4, 5, 6, 7, 8, 9], "interval": 0.06},
+                "walk-up": {"frames": [10, 11, 12, 13, 14, 15, 16, 17], "interval": 0.06,},
+                "walk-down": {"frames": [18, 19, 20, 21, 22, 23, 24, 25], "interval": 0.06},
+                "jump": {"frames": [26, 27, 29, 30, 32], "interval": 0.08},
+                "dead": {"frames": [34, 35, 36, 37, 38], "interval": 0.1, "loops": 1, "on_finish": anim_callbacks.get("dead")},
+            }
         super().__init__(
             x,
             y,
@@ -40,15 +55,7 @@ class Player(GameEntity):
                 "fall": lambda sm: player_states.FallState(self, sm),
                 "dead": lambda sm: player_states.DeadState(self, sm),
             },
-            animation_defs={
-                "idle": {"frames": [0]},
-                "idle-up": {"frames": [1]},
-                "walk": {"frames": [2, 3, 4, 5, 6, 7, 8, 9], "interval": 0.06},
-                "walk-up": {"frames": [10, 11, 12, 13, 14, 15, 16, 17], "interval": 0.06},
-                "walk-down": {"frames": [18, 19, 20, 21, 22, 23, 24, 25], "interval": 0.06},
-                "jump": {"frames": [26, 27, 29, 30, 32], "interval": 0.08},
-                "dead": {"frames": [34, 35, 36, 37, 38], "interval": 0.25, "loops": 0},
-            },
+            animation_defs=animations
         )
         self.invulnerable = False
         self.invulnerable_time = 5

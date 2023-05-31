@@ -98,6 +98,14 @@ class RebornState(BaseState):
                 on_finish=entry_arrive
             )
 
+    def exit(self) -> None:
+        x, y = self.player.last_floor_position
+        self.player.vy = 0
+        self.player.vx = 0
+        self.player.y = y
+        self.player.x = x
+        self.player.go_invulnerable()
+
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
         self.game_level.render(world_surface)
