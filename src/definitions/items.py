@@ -21,18 +21,17 @@ import settings
 from src.GamePowerup import GamePowerup
 from src.GameBox import GameBox
 from src.Player import Player
-from src.states.entities import player_states
 
 def pickup_live_8(key: GamePowerup, player: Player, **kwargs: Optional[Dict[str, Any]]):
-    # settings.SOUNDS["key"].stop()
-    # if settings.SOUND:
-    #     settings.SOUNDS["key"].play()
+    if settings.SOUND:
+        settings.SOUNDS["take-lives"].stop()
+        settings.SOUNDS["take-lives"].play()
     player.lives += 8
 
 def pickup_live_16(key: GamePowerup, player: Player, **kwargs: Optional[Dict[str, Any]]):
-    # settings.SOUNDS["key"].stop()
-    # if settings.SOUND:
-    #     settings.SOUNDS["key"].play()
+    if settings.SOUND:
+        settings.SOUNDS["take-lives"].stop()
+        settings.SOUNDS["take-lives"].play()
     player.lives += 16 
 
 def activate_powerup(box_powerup: GameBox, powerup: GamePowerup) -> None:
@@ -42,10 +41,10 @@ def activate_powerup(box_powerup: GameBox, powerup: GamePowerup) -> None:
     # if settings.SOUND:
     #     settings.SOUNDS["box"].play()
     def arrive():
-        powerup.change_animation("dance")
         powerup.collidable = True
 
     def after():
+        powerup.change_animation("dance")
         Timer.tween(1, [ (powerup, {"y": final_y_key}) ], on_finish=arrive)
     
     powerup.in_play = True
@@ -105,14 +104,5 @@ ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
             },
             "frame_index": -1,
         }
-    },  
-    # "coins": {
-    #     62: {
-    #         "texture_id": "tiles",
-    #         "solidness": dict(top=False, right=False, bottom=False, left=False),
-    #         "consumable": True,
-    #         "collidable": True,
-    #         "on_consume": pickup_green_coin,
-    #     },
-    # },
+    },
 }

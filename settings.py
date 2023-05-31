@@ -269,6 +269,7 @@ SOUNDS = {
     "menu_return": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_return.mp3"),
     "menu_select": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "menu" / "menu_select.mp3"),
     "reborn": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "khanlockwood" / "321go.wav"),
+    "take-lives": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "powerup" / "powerup_3.mp3"),
 }
 
 # Fonts
