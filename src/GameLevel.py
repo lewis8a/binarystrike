@@ -97,8 +97,14 @@ class GameLevel:
         for i in range(len(self.enemies) - 1, -1, -1):
             if not self.enemies[i].is_dead:
                 self.enemies[i].update(dt)
-                if self.enemies[i].collides(self.player) and self.enemies[i].collidable and not self.player.invulnerable:
-                    self.player.is_dead = True
+                if (
+                    self.enemies[i].collides(self.player) and
+                    self.enemies[i].collidable and not
+                    self.player.invulnerable and not
+                    self.player.is_dead):
+                        self.player.is_dead = True
+                        self.player.score += self.enemies[i].points
+                        self.enemies[i].change_state("dead")
             else:
                 del self.enemies[i]
 
