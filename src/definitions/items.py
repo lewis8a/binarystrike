@@ -69,8 +69,8 @@ ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
             "height": 25,
             "width": 32,
             "animation_defs": {
-                "open": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15, "loops": 1},
-                "close": {"frames": [7, 6, 5, 4, 3, 2, 1, 0], "interval": 0.15, "loops": 1},
+                "open": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "interval": 0.15, "loops": 0},
+                "close": {"frames": [7, 6, 5, 4, 3, 2, 1, 0], "interval": 0.15, "loops": 0},
                 "idle": {"frames": [0]},
             },
             "frame_index": -1,
