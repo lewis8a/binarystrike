@@ -60,6 +60,7 @@ class GameLevel:
                 if powerup.x == box.x:
                     box.powerup = powerup
                     powerup.box = box
+                    powerup.x += (box.width - powerup.width) / 2
                     break
 
     def add_enemy(self, Enemy_data: Dict[str, Any]) -> None:
