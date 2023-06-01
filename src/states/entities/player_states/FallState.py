@@ -29,9 +29,17 @@ class FallState(BaseEntityState):
         self.looking_down = enter_params.get("down", False)
         self.looking_left = enter_params.get("left", False)
         self.looking_right = enter_params.get("right", False)
+        self.entity.padding_x_left = 5
+        self.entity.padding_x_right = 0
+        self.entity.padding_y_up = 5
+        self.entity.padding_y_down = 15
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
+        self.entity.padding_x_left = 0
+        self.entity.padding_x_right = 0
+        self.entity.padding_y_up = 0
+        self.entity.padding_y_down = 0
         InputHandler.unregister_listener(self)
 
     def update(self, dt: float) -> None:

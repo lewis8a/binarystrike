@@ -26,6 +26,8 @@ import settings
 class IdleState(BaseEntityState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.looking_up = enter_params.get("up", False)
+        self.entity.padding_x_left = 5
+        self.entity.padding_y_up = 5
         self.entity.vx = 0
         self.entity.vy = 0
         self.entity.double_jump = False
@@ -38,6 +40,8 @@ class IdleState(BaseEntityState):
 
     def exit(self) -> None:
         InputHandler.unregister_listener(self)
+        self.entity.padding_x_left = 0
+        self.entity.padding_y_up = 0
 
     def update(self, dt: float) -> None:
         if self.entity.handle_tilemap_collision_on_bottom():

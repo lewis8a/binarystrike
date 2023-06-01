@@ -31,6 +31,9 @@ class WalkState(BaseEntityState):
         self.looking_right = enter_params.get("right", False)
         self.entity.flipped = enter_params.get("direction") == "left"
         self.entity.vx = settings.PLAYER_SPEED
+        self.entity.padding_x_left = 5
+        self.entity.padding_y_up = 5
+
         if self.entity.flipped:
             self.entity.vx *= -1
 
@@ -44,6 +47,8 @@ class WalkState(BaseEntityState):
         InputHandler.register_listener(self)
 
     def exit(self) -> None:
+        self.entity.padding_x_left = 0
+        self.entity.padding_y_up = 0
         InputHandler.unregister_listener(self)
 
     def update(self, dt: float) -> None:

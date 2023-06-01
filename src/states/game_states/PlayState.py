@@ -18,7 +18,7 @@ import settings
 from gale.input_handler import InputHandler, InputData
 from gale.state import BaseState
 from gale.text import render_text
-from gale.timer import Every, After, Tween
+from gale.timer import Every
 from numpy import random
 from src.Camera import Camera
 from src.GameLevel import GameLevel
@@ -42,19 +42,7 @@ class State:
 class PlayState(BaseState):
     def enter(self, **enter_params: Dict[str, Any]) -> None:
         self.state = enter_params.get("ss")
-        #self.state.player = enter_params.get("player")
-        #self.timer = enter_params.get("timer")#, settings.TIME)
-        #self.state.level = enter_params.get("level", 1)
-        #self.camera = enter_params.get(
-        #    "camera", Camera(0, 0, settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT)
-        #)
-        #self.state.game_level = enter_params.get("game_level", GameLevel(self.state.level, self.camera))
-        #self.pos_music = enter_params.get("pos_music", 0.0)
-        #self.tilemap = self.state.game_level.tilemap
-        #self.x_live = 7
-        #self.y_live = 20
         pygame.mixer.music.set_volume(0.3)
-
 
         if self.state is None:
             self.state = State()
@@ -109,7 +97,6 @@ class PlayState(BaseState):
                 pygame.mixer.music.load(settings.BASE_DIR / "assets/music/finalboself.state.ogg")
         if settings.MUSIC:
             pygame.mixer.music.play(loops=-1, start=self.state.pos_music)
-
 
         if self.state.timer is None:
             self.state.timer = settings.TIME

@@ -42,8 +42,8 @@ class Player(GameEntity):
         super().__init__(
             x,
             y,
-            20,
-            34,
+            10,
+            28,
             f"khan{settings.PLAYER_COLOR}",
             False,
             False,

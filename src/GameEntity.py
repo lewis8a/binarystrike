@@ -93,9 +93,9 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
 
     def handle_tilemap_collision_on_bottom(self) -> bool:
         collision_rect = self.get_collision_rect()
-
+        pu_y = getattr(self, "padding_y_up", 0)
         # Row for the center of the player
-        i = self.tilemap.to_i(collision_rect.bottom - 8)
+        i = self.tilemap.to_i(collision_rect.bottom - 10)
 
         # Left and right columns
         left = self.tilemap.to_j(collision_rect.left)
@@ -105,7 +105,7 @@ class GameEntity(mixins.DrawableMixin, mixins.AnimatedMixin, mixins.CollidableMi
             i + 1, left, self, GameObject.TOP
         ) or self.tilemap.collides_tile_on(i + 1, right, self, GameObject.TOP):
             # Fix the entity position
-            self.y = self.tilemap.to_y(i + 1) - self.height
+            self.y = self.tilemap.to_y(i + 1) - self.height - pu_y
             return True
 
         return False
