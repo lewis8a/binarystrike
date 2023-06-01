@@ -193,7 +193,6 @@ class PlayState(BaseState):
 
         self.state.game_level.update(dt)
 
-
         for item in self.state.game_level.items:
             if not item.in_play or not item.collidable:
                 continue
@@ -202,7 +201,7 @@ class PlayState(BaseState):
                 if isinstance(item, GamePowerup):
                     item.on_consume(self.state.player)
                 elif isinstance(item, GameBox) and not item.activate:
-                    item.on_collide(self.state.player)
+                    item.on_collide(self.state.player, timers=self.state.timers)
 
     def render(self, surface: pygame.Surface) -> None:
         world_surface = pygame.Surface((self.state.tilemap.width, self.state.tilemap.height))

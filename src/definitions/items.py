@@ -15,7 +15,7 @@ This file contains the definition for items.
 """
 from typing import Dict, Any, Optional
 
-from gale.timer import Timer
+from gale.timer import After, Tween
 
 import settings
 from src.GamePowerup import GamePowerup
@@ -34,7 +34,7 @@ def pickup_live_16(key: GamePowerup, player: Player, **kwargs: Optional[Dict[str
         settings.SOUNDS["take-lives"].play()
     player.lives += 16 
 
-def activate_powerup(box_powerup: GameBox, powerup: GamePowerup) -> None:
+def activate_powerup(box_powerup: GameBox, powerup: GamePowerup, timers: list) -> None:
     box_powerup.activate = True
     # play sound open powerup box
     # settings.SOUNDS["box"].stop()
@@ -45,17 +45,17 @@ def activate_powerup(box_powerup: GameBox, powerup: GamePowerup) -> None:
 
     def after():
         powerup.change_animation("dance")
-        Timer.tween(1, [ (powerup, {"y": final_y_key}) ], on_finish=arrive)
+        timers.append(Tween(1, [ (powerup, {"y": final_y_key}) ], on_finish=arrive))
     
     powerup.in_play = True
     powerup.collidable = False
     final_y_key = powerup.y - 32
-    Timer.after(1.2, after)
+    timers.append(After(1.2, after))
 
-def spawn_key(box_powerup: GameBox, player: Any):
+def spawn_key(box_powerup: GameBox, player: Any, **kwargs: Optional[Dict[str, Any]]):
     box_powerup.change_animation("open")
     if not box_powerup.activate:
-            activate_powerup(box_powerup, box_powerup.powerup)
+        activate_powerup(box_powerup, box_powerup.powerup, kwargs.get("timers"))
     
 ITEMS: Dict[str, Dict[int, Dict[str, Any]]] = {
     "boxpowerup": {
