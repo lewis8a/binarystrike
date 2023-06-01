@@ -23,12 +23,14 @@ from src.GameBox import GameBox
 from src.Player import Player
 
 def pickup_live_8(key: GamePowerup, player: Player, **kwargs: Optional[Dict[str, Any]]):
+    key.box.change_animation("open")
     if settings.SOUND:
         settings.SOUNDS["take-lives"].stop()
         settings.SOUNDS["take-lives"].play()
     player.lives += 8
 
 def pickup_live_16(key: GamePowerup, player: Player, **kwargs: Optional[Dict[str, Any]]):
+    key.box.change_animation("open")
     if settings.SOUND:
         settings.SOUNDS["take-lives"].stop()
         settings.SOUNDS["take-lives"].play()

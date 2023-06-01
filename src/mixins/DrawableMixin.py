@@ -28,12 +28,13 @@ class DrawableMixin:
         if self.flipped:
             image = pygame.transform.flip(image, True, False)
 
-        pl_x = getattr(self, "padding_x_left", 0)
-        pr_x = getattr(self, "padding_x_right", 0)
-        pu_y = getattr(self, "padding_y_up", 0)
-        pd_y = getattr(self, "padding_y_down", 0)
-        if hasattr(self, "alpha_value"):
-            pygame.draw.rect(surface, (255, 0, 0), (self.x, self.y, self.width, self.height), 1)
-            pygame.draw.rect(surface, (0, 255, 0), (self.x + pl_x, self.y + pu_y, self.width - pr_x, self.height - pd_y), 1)
+        # pl_x = getattr(self, "padding_x_left", 0)
+        # pr_x = getattr(self, "padding_x_right", 0)
+        # pu_y = getattr(self, "padding_y_up", 0)
+        # pd_y = getattr(self, "padding_y_down", 0)
+
+        # if hasattr(self, "alpha_value"):
+        #     pygame.draw.rect(surface, (255, 0, 0), (self.x, self.y, self.width, self.height), 1)
+        #     pygame.draw.rect(surface, (0, 255, 0), (self.x + pl_x, self.y + pu_y, self.width - pr_x, self.height - pd_y), 1)
 
         surface.blit(image, (self.x, self.y))
