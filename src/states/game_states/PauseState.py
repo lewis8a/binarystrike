@@ -32,12 +32,12 @@ class PauseState(BaseState):
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )        
         
-        self.timer = enter_params.get("timer")
-        self.level = enter_params.get("level")
-        self.camera = enter_params.get("camera")
-        self.game_level = enter_params.get("game_level")
-        self.pos_music = enter_params.get("pos_music")
-        self.player = self.game_level.player
+        self.state = enter_params.get("ss")
+        self.timer = self.state.timer
+        self.level = self.state.level
+        self.camera = self.state.camera
+        self.game_level = self.state.game_level
+        self.player = self.state.player
         self.tilemap = self.game_level.tilemap
         
         if type(self.player.state_machine.current).__name__ == "WalkState":
@@ -104,7 +104,7 @@ class PauseState(BaseState):
 
         render_text(
             surface,
-            f"Time: {self.timer}",
+            f"Time: {self.state.timer}",
             settings.FONTS["xs"],
             settings.VIRTUAL_WIDTH - 50,
             5,
@@ -164,10 +164,5 @@ class PauseState(BaseState):
         if input_id == "pause" and input_data.pressed and self.finish_tween:
             self.state_machine.change(
                 "play",
-                player=self.player,
-                timer=self.timer,
-                level=self.level,
-                camera=self.camera,
-                game_level=self.game_level,
-                pos_music = self.pos_music
+                ss=self.state
             )

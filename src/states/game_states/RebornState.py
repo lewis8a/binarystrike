@@ -31,55 +31,45 @@ class RebornState(BaseState):
             (settings.VIRTUAL_WIDTH, settings.VIRTUAL_HEIGHT), pygame.SRCALPHA
         )
 
-        self.timer = enter_params.get("timer")
-        self.level = enter_params.get("level")
-        self.camera = enter_params.get("camera")
-        self.game_level = enter_params.get("game_level")
-        self.pos_music = enter_params.get("pos_music")
-        self.player = self.game_level.player
-        self.tilemap = self.game_level.tilemap
+        self.state = enter_params.get("ss")
         self.counter = 3
         self.x_live = 7
         self.y_live = 20
 
-        if self.player.touch_boss:
-            self.player.lives -= 5
-            self.player.touch_boss = False
+        if self.state.player.touch_boss:
+            self.state.player.lives -= 5
+            self.state.player.touch_boss = False
         else:
-            self.player.lives -= 1
+            self.state.player.lives -= 1
 
-        if self.player.lives <= 0:
+        if self.state.player.lives <= 0:
             self.state_machine.change(
                 "end",
-                score=self.player.score,
-                level=self.level
+                score=self.state.player.score,
+                level=self.state.level
             )
         else:
-            def final_arrive():
-                
-                self.player.change_state("idle")
-
+            def final_call():
+                self.state.player.change_state("idle")
                 self.state_machine.change(
                     "play",
-                    player=self.player,
-                    timer=self.timer,
-                    level=self.level,
-                    camera=self.camera,
-                    game_level=self.game_level,
-                    pos_music = self.pos_music
+                    ss=self.state
                 )
 
             def back_count_1():
                 # Entry sound
-                self.counter -= 1
-
-                Timer.after(0.35,final_arrive)
+                self.counter = "Go!"
+                Timer.after(0.35,final_call)
 
             def back_count_2():
                 # Entry sound
                 self.counter -= 1
-
                 Timer.after(0.35,back_count_1)
+
+            def back_count_3():
+                # Entry sound
+                self.counter -= 1
+                Timer.after(0.35,back_count_2)
 
             def entry_arrive():
                 self.finish_tween = True
@@ -87,7 +77,7 @@ class RebornState(BaseState):
                 if settings.SOUND:
                     settings.SOUNDS["reborn"].play()
 
-                Timer.after(0.3, back_count_2)
+                Timer.after(0.3, back_count_3)
 
             Timer.tween(
                 1,
@@ -99,24 +89,24 @@ class RebornState(BaseState):
             )
 
     def exit(self) -> None:
-        x, y = self.player.last_floor_position
-        self.player.vy = 0
-        self.player.vx = 0
-        self.player.y = y
-        self.player.x = x
-        self.player.go_invulnerable()
+        x, y = self.state.player.last_floor_position
+        self.state.player.vy = 0
+        self.state.player.vx = 0
+        self.state.player.y = y
+        self.state.player.x = x
+        self.state.player.go_invulnerable()
 
     def render(self, surface: pygame.Surface) -> None:
-        world_surface = pygame.Surface((self.tilemap.width, self.tilemap.height))
-        self.game_level.render(world_surface)
-        for bullet in self.player.bullets:
+        world_surface = pygame.Surface((self.state.tilemap.width, self.state.tilemap.height))
+        self.state.game_level.render(world_surface)
+        for bullet in self.state.player.bullets:
             bullet.render(world_surface)
         
-        surface.blit(world_surface, (-self.camera.x, -self.camera.y))
+        surface.blit(world_surface, (-self.state.camera.x, -self.state.camera.y))
 
         render_text(
             surface,
-            f"Score: {self.player.score}",
+            f"Score: {self.state.player.score}",
             settings.FONTS["xs"],
             5,
             5,
@@ -126,7 +116,7 @@ class RebornState(BaseState):
 
         render_text(
             surface,
-            f"Time: {self.timer}",
+            f"Time: {self.state.timer}",
             settings.FONTS["xs"],
             settings.VIRTUAL_WIDTH - 50,
             5,
@@ -134,7 +124,7 @@ class RebornState(BaseState):
             shadowed=True,
         )
 
-        stop = min(8, self.player.lives)
+        stop = min(8, self.state.player.lives)
         for i in range(0, stop):
             surface.blit(settings.TEXTURES["lives"],
                          (self.x_live + self.x_live*i, self.y_live))
